@@ -9,6 +9,9 @@ export default function Account({ session }: { session: Session }) {
   const [nickname, setNickname] = useState('')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+  const [age, setAge] = useState('')
+  const [weight, setWeight] = useState('')
+
 
   useEffect(() => {
     if (session) getProfile()
@@ -21,7 +24,7 @@ export default function Account({ session }: { session: Session }) {
 
       const { data, error, status } = await supabase
         .from('profiles')
-        .select(`nickname, first_name, last_name`)
+        .select(`nickname, first_name, last_name, age, weight`)
         .eq('id', session?.user.id)
         .single()
       if (error && status !== 406) {
@@ -32,6 +35,8 @@ export default function Account({ session }: { session: Session }) {
         setNickname(data.nickname)
         setFirstName(data.first_name)
         setLastName(data.last_name)
+        setAge(data.age)
+        setWeight(data.weight)
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -46,10 +51,14 @@ export default function Account({ session }: { session: Session }) {
     nickname,
     first_name,
     last_name,
+    age,
+    weight
   }: {
     nickname: string
     first_name: string
     last_name: string
+    age: string
+    weight: string
   }) {
     try {
       setLoading(true)
@@ -60,6 +69,8 @@ export default function Account({ session }: { session: Session }) {
         nickname,
         first_name,
         last_name,
+        age,
+        weight,
         updated_at: new Date(),
       }
 
@@ -91,11 +102,17 @@ export default function Account({ session }: { session: Session }) {
       <View style={styles.verticallySpaced}>
         <Input label="Last name" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
       </View>
+      <View style={styles.verticallySpaced}>
+        <Input label="Age" value={age || ''} onChangeText={(text) => setAge(text)} />
+      </View>
+      <View style={styles.verticallySpaced}>
+        <Input label="Weight" value={weight || ''} onChangeText={(text) => setWeight(text)} />
+      </View>
 
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Button
           title={loading ? 'Loading ...' : 'Update'}
-          onPress={() => updateProfile({ nickname, first_name: firstName, last_name: lastName })}
+          onPress={() => updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight })}
           disabled={loading}
         />
       </View>
