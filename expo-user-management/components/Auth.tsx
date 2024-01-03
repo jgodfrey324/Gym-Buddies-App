@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Alert, StyleSheet, View } from 'react-native'
 import { supabase } from '../lib/supabase'
-import { Button, Input } from 'react-native-elements'
+import { Button, Input, Text } from 'react-native-elements'
 
 export default function Auth() {
   const [email, setEmail] = useState('')
@@ -36,6 +36,8 @@ export default function Auth() {
 
   return (
     <View style={styles.container}>
+      <Text style={[styles.heading, styles.container]}>IronBonds</Text>
+      <Text style={styles.motto}>Motivation through community</Text>
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Input
           label="Email"
@@ -80,4 +82,14 @@ const styles = StyleSheet.create({
   mt20: {
     marginTop: 20,
   },
+  heading: {
+    // marginTop: 20,
+    fontSize: 50,
+    color: '#C7C588',
+  },
+  motto: {
+    fontSize: 14,
+    paddingLeft: 12,
+    marginBottom: 40
+  }
 })
