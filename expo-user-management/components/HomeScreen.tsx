@@ -20,8 +20,8 @@ export default function HomeScreen() {
             </TouchableOpacity>
             </View>
             <View style={styles.verticallySpaced}>
-            <TouchableOpacity style={styles.buttons} disabled={loading} onPress={() => navigation.navigate('Auth')} >
-                <Text style={styles.buttonsText} >Sign Up</Text>
+            <TouchableOpacity style={[styles.buttons, styles.buttonTwo]} disabled={loading} onPress={() => navigation.navigate('Auth')} >
+                <Text style={[styles.buttonsText, styles.buttonsTextTwo]} >Sign Up</Text>
             </TouchableOpacity>
             </View>
         </View>
@@ -70,7 +70,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  buttonTwo: {
+    backgroundColor: 'white'
+  },
   buttonsText: {
-    color: 'white'
+    color: 'white',
+    fontSize: 16
+  },
+  buttonsTextTwo: {
+    color: '#242424'
   },
 })
