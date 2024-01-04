@@ -14,10 +14,10 @@ export default function HomeScreen() {
       <Text style={styles.motto}>Motivation through community</Text>
 
       <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Button title="Sign in" disabled={loading} onPress={() => navigation.navigate('Auth')} />
+        <Button style={styles.buttons} title="Sign in" disabled={loading} onPress={() => navigation.navigate('Auth')} />
       </View>
       <View style={styles.verticallySpaced}>
-        <Button title="Sign up" disabled={loading} onPress={() => navigation.navigate('Auth')} />
+        <Button style={styles.buttons} title="Sign up" disabled={loading} onPress={() => navigation.navigate('Auth')} />
       </View>
     </View>
   )
@@ -25,7 +25,7 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
+    marginTop: 30,
     padding: 12,
   },
   verticallySpaced: {
@@ -48,5 +48,10 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     marginBottom: 40,
     marginLeft: 20
+  },
+  buttons: {
+    marginTop: 5,
+    overflow: 'hidden',
+    borderRadius: 20
   }
 })
