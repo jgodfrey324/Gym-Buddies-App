@@ -84,12 +84,15 @@ const styles = StyleSheet.create({
   },
   heading: {
     // marginTop: 20,
-    fontSize: 50,
+    fontSize: 60,
     color: '#C7C588',
+    marginLeft: 20,
+    paddingBottom: 0
   },
   motto: {
-    fontSize: 14,
+    fontSize: 17,
     paddingLeft: 12,
-    marginBottom: 40
+    marginBottom: 40,
+    marginLeft: 20
   }
 })
