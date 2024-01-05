@@ -89,32 +89,13 @@ export default function Account({ session }: { session: Session }) {
   }
 
   return (
-<<<<<<< HEAD:expo-user-management/components/Signup/Account.tsx
-    <View>
-      <View style={[styles.verticallySpaced, styles.container]}>
-=======
     <View style={styles.container}>
       {/* <View style={[styles.verticallySpaced, styles.mt20]}>
->>>>>>> main:expo-user-management/components/Account.tsx
         <Input label="Email" value={session?.user?.email} disabled />
       </View> */}
       <View style={styles.verticallySpaced}>
         <Input label="Nickname" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
       </View>
-<<<<<<< HEAD:expo-user-management/components/Signup/Account.tsx
-      <View style={[styles.verticallySpaced, styles.container]}>
-        <Input label="Username" value={username || ''} onChangeText={(text) => setUsername(text)} />
-      </View>
-      <View style={[styles.verticallySpaced, styles.container]}>
-        <Input label="Website" value={website || ''} onChangeText={(text) => setWebsite(text)} />
-      </View>
-
-      <View style={[styles.verticallySpaced, styles.container]}>
-        <TouchableOpacity
-          style={styles.customButton}
-          // title={loading ? 'Loading ...' : 'Update'}
-          onPress={() => updateProfile({ username, website, avatar_url: avatarUrl })}
-=======
       <View style={styles.verticallySpaced}>
         <Input label="First name" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
       </View>
@@ -128,11 +109,9 @@ export default function Account({ session }: { session: Session }) {
         <Input label="Weight" value={weight || ''} onChangeText={(text) => setWeight(text)} />
       </View>
 
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Button
-          title={loading ? 'Loading ...' : 'Update'}
+      <View style={[styles.verticallySpaced]}>
+        <TouchableOpacity
           onPress={() => updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight })}
->>>>>>> main:expo-user-management/components/Account.tsx
           disabled={loading}
         >
           <Text style={styles.buttonText}>Update</Text>
