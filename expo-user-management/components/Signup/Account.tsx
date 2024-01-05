@@ -6,9 +6,12 @@ import { Session } from '@supabase/supabase-js'
 
 export default function Account({ session }: { session: Session }) {
   const [loading, setLoading] = useState(true)
-  const [username, setUsername] = useState('')
-  const [website, setWebsite] = useState('')
-  const [avatarUrl, setAvatarUrl] = useState('')
+  const [nickname, setNickname] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [age, setAge] = useState('')
+  const [weight, setWeight] = useState('')
+
 
   useEffect(() => {
     if (session) getProfile()
@@ -21,7 +24,7 @@ export default function Account({ session }: { session: Session }) {
 
       const { data, error, status } = await supabase
         .from('profiles')
-        .select(`username, website, avatar_url`)
+        .select(`nickname, first_name, last_name, age, weight`)
         .eq('id', session?.user.id)
         .single()
       if (error && status !== 406) {
@@ -29,9 +32,11 @@ export default function Account({ session }: { session: Session }) {
       }
 
       if (data) {
-        setUsername(data.username)
-        setWebsite(data.website)
-        setAvatarUrl(data.avatar_url)
+        setNickname(data.nickname)
+        setFirstName(data.first_name)
+        setLastName(data.last_name)
+        setAge(data.age)
+        setWeight(data.weight)
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -43,13 +48,17 @@ export default function Account({ session }: { session: Session }) {
   }
 
   async function updateProfile({
-    username,
-    website,
-    avatar_url,
+    nickname,
+    first_name,
+    last_name,
+    age,
+    weight
   }: {
-    username: string
-    website: string
-    avatar_url: string
+    nickname: string
+    first_name: string
+    last_name: string
+    age: string
+    weight: string
   }) {
     try {
       setLoading(true)
@@ -57,9 +66,11 @@ export default function Account({ session }: { session: Session }) {
 
       const updates = {
         id: session?.user.id,
-        username,
-        website,
-        avatar_url,
+        nickname,
+        first_name,
+        last_name,
+        age,
+        weight,
         updated_at: new Date(),
       }
 
@@ -78,10 +89,19 @@ export default function Account({ session }: { session: Session }) {
   }
 
   return (
+<<<<<<< HEAD:expo-user-management/components/Signup/Account.tsx
     <View>
       <View style={[styles.verticallySpaced, styles.container]}>
+=======
+    <View style={styles.container}>
+      {/* <View style={[styles.verticallySpaced, styles.mt20]}>
+>>>>>>> main:expo-user-management/components/Account.tsx
         <Input label="Email" value={session?.user?.email} disabled />
+      </View> */}
+      <View style={styles.verticallySpaced}>
+        <Input label="Nickname" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
       </View>
+<<<<<<< HEAD:expo-user-management/components/Signup/Account.tsx
       <View style={[styles.verticallySpaced, styles.container]}>
         <Input label="Username" value={username || ''} onChangeText={(text) => setUsername(text)} />
       </View>
@@ -94,6 +114,25 @@ export default function Account({ session }: { session: Session }) {
           style={styles.customButton}
           // title={loading ? 'Loading ...' : 'Update'}
           onPress={() => updateProfile({ username, website, avatar_url: avatarUrl })}
+=======
+      <View style={styles.verticallySpaced}>
+        <Input label="First name" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
+      </View>
+      <View style={styles.verticallySpaced}>
+        <Input label="Last name" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
+      </View>
+      <View style={styles.verticallySpaced}>
+        <Input label="Age" value={age || ''} onChangeText={(text) => setAge(text)} />
+      </View>
+      <View style={styles.verticallySpaced}>
+        <Input label="Weight" value={weight || ''} onChangeText={(text) => setWeight(text)} />
+      </View>
+
+      <View style={[styles.verticallySpaced, styles.mt20]}>
+        <Button
+          title={loading ? 'Loading ...' : 'Update'}
+          onPress={() => updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight })}
+>>>>>>> main:expo-user-management/components/Account.tsx
           disabled={loading}
         >
           <Text style={styles.buttonText}>Update</Text>
