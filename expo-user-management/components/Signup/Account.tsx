@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '../lib/supabase'
-import { StyleSheet, View, Alert } from 'react-native'
+import { supabase } from '../../lib/supabase'
+import { StyleSheet, View, Alert, TouchableOpacity, Text} from 'react-native'
 import { Button, Input } from 'react-native-elements'
 import { Session } from '@supabase/supabase-js'
 
@@ -89,13 +89,32 @@ export default function Account({ session }: { session: Session }) {
   }
 
   return (
+<<<<<<< HEAD:expo-user-management/components/Signup/Account.tsx
+    <View>
+      <View style={[styles.verticallySpaced, styles.container]}>
+=======
     <View style={styles.container}>
       {/* <View style={[styles.verticallySpaced, styles.mt20]}>
+>>>>>>> main:expo-user-management/components/Account.tsx
         <Input label="Email" value={session?.user?.email} disabled />
       </View> */}
       <View style={styles.verticallySpaced}>
         <Input label="Nickname" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
       </View>
+<<<<<<< HEAD:expo-user-management/components/Signup/Account.tsx
+      <View style={[styles.verticallySpaced, styles.container]}>
+        <Input label="Username" value={username || ''} onChangeText={(text) => setUsername(text)} />
+      </View>
+      <View style={[styles.verticallySpaced, styles.container]}>
+        <Input label="Website" value={website || ''} onChangeText={(text) => setWebsite(text)} />
+      </View>
+
+      <View style={[styles.verticallySpaced, styles.container]}>
+        <TouchableOpacity
+          style={styles.customButton}
+          // title={loading ? 'Loading ...' : 'Update'}
+          onPress={() => updateProfile({ username, website, avatar_url: avatarUrl })}
+=======
       <View style={styles.verticallySpaced}>
         <Input label="First name" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
       </View>
@@ -113,12 +132,19 @@ export default function Account({ session }: { session: Session }) {
         <Button
           title={loading ? 'Loading ...' : 'Update'}
           onPress={() => updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight })}
+>>>>>>> main:expo-user-management/components/Account.tsx
           disabled={loading}
-        />
+        >
+          <Text style={styles.buttonText}>Update</Text>
+        </TouchableOpacity>
       </View>
 
-      <View style={styles.verticallySpaced}>
-        <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
+      <View style={[styles.verticallySpaced, styles.container]}>
+        <TouchableOpacity
+          style={styles.customButton}
+          onPress={() => supabase.auth.signOut()}>
+          <Text style={styles.buttonText}>Sign Out</Text>
+        </TouchableOpacity>
       </View>
     </View>
   )
@@ -134,7 +160,15 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
     alignSelf: 'stretch',
   },
-  mt20: {
-    marginTop: 20,
+  customButton: {
+    backgroundColor: '#242424',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
   },
 })

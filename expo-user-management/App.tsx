@@ -5,9 +5,9 @@ import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import { View } from 'react-native';
 import HomeScreen from './components/HomeScreen'
-import Account from './components/Account'
+import Account from './components/Signup/Account';
 import { Session } from '@supabase/supabase-js'
-import Auth from './components/Auth';
+import Auth from './components/Signup/Auth';
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
