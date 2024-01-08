@@ -50,7 +50,10 @@ export default function HomeScreen() {
               onPress={() => setModalVisible(!modalVisible)}>
               <Text>G</Text>
             </Pressable>
-          {modalState === 'sign in' ? <SignInIndex /> : <Auth />}
+            {modalState === 'sign in' ? <SignInIndex /> : <Auth />}
+            <View style={styles.switchModalViewHouse}>
+              <Text style={styles.switchModalViewText}>Don't have an account? </Text><Text onPress={() => setModalState('sign up')} style={styles.signUpText}> Sign up</Text>
+            </View>
         </Modal>
     </View>
   )
@@ -118,5 +121,20 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingHorizontal: 12,
     borderRadius: 30
+  },
+  signUpText: {
+    textDecorationStyle: 'solid',
+    textDecorationLine: 'underline',
+    color: '#242424',
+    alignSelf: 'baseline'
+  },
+  switchModalViewText: {
+    color: '#929292',
+    alignSelf: 'baseline'
+  },
+  switchModalViewHouse: {
+    flexDirection: 'row',
+    top: 100,
+    alignSelf: 'center'
   }
 })
