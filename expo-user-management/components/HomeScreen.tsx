@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Alert, StyleSheet, Touchable, TouchableOpacity, View } from 'react-native'
+import { Alert, StyleSheet, Touchable, TouchableOpacity, View, Modal, Pressable } from 'react-native'
 import { supabase } from '../lib/supabase'
 import { Button, Input, Text } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
+import SignInIndex from './SignIn'
+import Auth from './Signup/Auth'
 
 export default function HomeScreen() {
   const [loading, setLoading] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalState, setModalState] = useState('');
   const navigation = useNavigation()
 
   return (
@@ -14,17 +18,40 @@ export default function HomeScreen() {
         <Text style={styles.motto}>Motivation through community</Text>
 
         <View style={styles.buttonContainer}>
-            <View style={[styles.verticallySpaced, styles.mt20]}>
-            <TouchableOpacity style={styles.buttons} disabled={loading} onPress={() => navigation.navigate('Auth')} >
-                <Text style={styles.buttonsText} >Sign In</Text>
-            </TouchableOpacity>
-            </View>
-            <View style={styles.verticallySpaced}>
-            <TouchableOpacity style={[styles.buttons, styles.buttonTwo]} disabled={loading} onPress={() => navigation.navigate('Auth')} >
-                <Text style={[styles.buttonsText, styles.buttonsTextTwo]} >Sign Up</Text>
-            </TouchableOpacity>
-            </View>
+              <View style={[styles.verticallySpaced, styles.mt20]}>
+              <TouchableOpacity style={styles.buttons} disabled={loading} onPress={function() {
+                // navigation.navigate('Auth');
+                setModalState('sign in')
+                setModalVisible(true)
+                }} >
+                  <Text style={styles.buttonsText} >Sign In</Text>
+              </TouchableOpacity>
+              </View>
+              <View style={styles.verticallySpaced}>
+              <TouchableOpacity style={[styles.buttons, styles.buttonTwo]} disabled={loading} onPress={function () {
+                //  navigation.navigate('Auth');
+                setModalState('sign up')
+                setModalVisible(true)
+                 }} >
+                  <Text style={[styles.buttonsText, styles.buttonsTextTwo]} >Sign Up</Text>
+              </TouchableOpacity>
+              </View>
         </View>
+
+        <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+            <Pressable
+              style={styles.goBackButton}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Text>G</Text>
+            </Pressable>
+          {modalState === 'sign in' ? <SignInIndex /> : <Auth />}
+        </Modal>
     </View>
   )
 }
@@ -80,4 +107,16 @@ const styles = StyleSheet.create({
   buttonsTextTwo: {
     color: '#242424'
   },
+  goBackButton: {
+    margin: 20,
+    top: 60,
+    zIndex: 2,
+    borderColor: 'black',
+    borderWidth: 2,
+    // width: '10%',
+    alignSelf: 'baseline',
+    padding: 10,
+    paddingHorizontal: 12,
+    borderRadius: 30
+  }
 })
