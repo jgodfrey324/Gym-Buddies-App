@@ -51,9 +51,14 @@ export default function HomeScreen() {
               <Text>G</Text>
             </Pressable>
             {modalState === 'sign in' ? <SignInIndex /> : <Auth />}
+
+            {modalState === 'sign in' ?
             <View style={styles.switchModalViewHouse}>
               <Text style={styles.switchModalViewText}>Don't have an account? </Text><Text onPress={() => setModalState('sign up')} style={styles.signUpText}> Sign up</Text>
             </View>
+             :
+            null}
+
         </Modal>
     </View>
   )
