@@ -70,6 +70,9 @@ export default function SignInIndex() {
             <View style={styles.password}>
                 <Text>Forgot Password?</Text>
             </View>
+            <View style={styles.signup}>
+                <Text>Don't have an account? Sign Up</Text>
+            </View>
         </View>
     )
 }
@@ -114,5 +117,10 @@ const styles = StyleSheet.create({
        marginLeft: 'auto',
        marginRight: 'auto',
        marginTop: 20
+    },
+    signup: {
+       marginLeft: 'auto',
+       marginRight: 'auto',
+       marginTop: 150
     }
   });

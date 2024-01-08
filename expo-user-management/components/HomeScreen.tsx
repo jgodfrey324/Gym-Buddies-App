@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 60,
     color: '#C7C588',
     marginLeft: 20,
-    paddingBottom: 0
+    paddingBottom: 0,
   },
   motto: {
     fontSize: 17,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     // width: '10%',
     alignSelf: 'baseline',
-    padding: 10,
+    padding: 5,
     paddingHorizontal: 12,
     borderRadius: 30
   },
