@@ -39,7 +39,6 @@ export default function Auth() {
       {/* <View>
         <AuthBanner />
       </View> */}
-
     </View>
   );
 }
