@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Alert, StyleSheet, Touchable, TouchableOpacity, View, Modal, Pressable } from 'react-native'
+import { Alert, StyleSheet, Touchable, TouchableOpacity, View, Modal, Pressable, Image } from 'react-native'
 // import { supabase } from '../lib/supabase'
 import { Button, Input, Text } from 'react-native-elements'
 // import { useNavigation } from '@react-navigation/native'
 import SignInIndex from './SignIn'
 import Auth from './Signup/Auth'
+import LeftArrow from '../assets/arrow.svg'
+import { SvgUri } from 'react-native-svg'
 
 export default function HomeScreen() {
   const [loading, setLoading] = useState(false)
@@ -48,7 +50,7 @@ export default function HomeScreen() {
             <Pressable
               style={styles.goBackButton}
               onPress={() => setModalVisible(!modalVisible)}>
-              <Text>G</Text>
+              <Text>Back</Text>
             </Pressable>
             {modalState === 'sign in' ? <SignInIndex /> : <Auth />}
 
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     fontSize: 60,
     color: '#C7C588',
     marginLeft: 20,
-    paddingBottom: 0
+    paddingBottom: 0,
   },
   motto: {
     fontSize: 17,
@@ -123,10 +125,15 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     // width: '10%',
     alignSelf: 'baseline',
-    padding: 10,
+    padding: 5,
     paddingHorizontal: 12,
     borderRadius: 30
   },
+
+  arrow: {
+    height: 50,
+    width: 50,
+
   signUpText: {
     textDecorationStyle: 'solid',
     textDecorationLine: 'underline',

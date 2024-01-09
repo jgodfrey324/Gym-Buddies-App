@@ -38,21 +38,23 @@ export default function SignInIndex() {
 
     return (
         <View style={styles.container}>
-            <View style={[styles.verticallySpaced]}>
+            <View style={[styles.inputStyle, styles.emailMargin]}>
                 <TextInput
                     onChangeText={(text) => setEmail(text)}
                     value={email}
                     placeholder="Email"
+                    placeholderTextColor={'#929292'}
                     autoCapitalize={'none'}
                 />
             </View>
-            <View style={[styles.verticallySpaced]}>
+            <View style={[styles.inputStyle]}>
                 <TextInput
 
                     secureTextEntry={true}
                     onChangeText={(text) => setPassword(text)}
                     value={password}
                     placeholder="Password"
+                    placeholderTextColor={'#929292'}
                     autoCapitalize={'none'}
                 />
             </View>
@@ -65,27 +67,36 @@ export default function SignInIndex() {
                     <Text style={styles.buttonText}>Sign in</Text>
                 </TouchableOpacity>
             </View>
+            <View style={styles.password}>
+                <Text>Forgot Password?</Text>
+            </View>
+            <View style={styles.signup}>
+                <Text>Don't have an account? Sign Up</Text>
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-      // width: '85%',
-      // marginLeft: 'auto',
-      // marginRight: 'auto',
-      backgroundColor: 'green',
-      borderTopLeftRadius: 50
+      backgroundColor: 'white',
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      height: '100%',
+      paddingTop: 150,
     },
-    verticallySpaced: {
-      marginTop: 50,
+    inputStyle: {
       padding: 10,
-      // paddingBottom: 4,
+      marginLeft: 'auto',
+      marginRight: 'auto',
       alignSelf: 'stretch',
-      borderWidth: 5,
-      borderColor: 'red',
       backgroundColor: '#E1E1E1',
       borderRadius: 50,
+      paddingLeft: 50,
+      width: '85%',
+    },
+    emailMargin: {
+      marginBottom: 20
     },
     customButton: {
       backgroundColor: '#242424',
@@ -96,10 +107,20 @@ const styles = StyleSheet.create({
       marginLeft: 'auto',
       marginRight: 'auto',
       width: '85%',
-      marginTop: 40
+      marginTop: 40,
     },
     buttonText: {
       color: 'white',
       fontSize: 16,
     },
+    password: {
+       marginLeft: 'auto',
+       marginRight: 'auto',
+       marginTop: 20
+    },
+    signup: {
+       marginLeft: 'auto',
+       marginRight: 'auto',
+       marginTop: 150
+    }
   });
