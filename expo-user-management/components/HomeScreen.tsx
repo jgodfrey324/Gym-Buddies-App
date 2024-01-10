@@ -69,8 +69,9 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: '18%',
+    paddingTop: '18%',
     padding: 12,
+    backgroundColor: '#242424'
   },
   verticallySpaced: {
     paddingTop: 4,
@@ -91,7 +92,8 @@ const styles = StyleSheet.create({
     fontSize: 17,
     paddingLeft: 12,
     marginBottom: 40,
-    marginLeft: 20
+    marginLeft: 20,
+    color: '#FFFFfF'
   },
   buttonContainer: {
     alignSelf: 'center',
