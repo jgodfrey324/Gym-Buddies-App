@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput } from 'react-native';
 import { supabase } from '../../lib/supabase';
-import { Input } from 'react-native-elements';
+// import { Input } from 'react-native-elements';
+// import { useNavigation } from '@react-navigation/native';
 
 export default function SignInIndex() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    // const navigation = useNavigation()
 
     async function signInWithEmail() {
         setLoading(true);
@@ -20,20 +22,20 @@ export default function SignInIndex() {
         setLoading(false);
     }
 
-    async function signUpWithEmail() {
-        setLoading(true);
-        const {
-            data: { session },
-            error,
-        } = await supabase.auth.signUp({
-            email: email,
-            password: password,
-        });
+    // async function signUpWithEmail() {
+    //     setLoading(true);
+    //     const {
+    //         data: { session },
+    //         error,
+    //     } = await supabase.auth.signUp({
+    //         email: email,
+    //         password: password,
+    //     });
 
-        if (error) Alert.alert(error.message);
-        if (!session) Alert.alert('Please check your inbox for email verification!');
-        setLoading(false);
-    }
+    //     if (error) Alert.alert(error.message);
+    //     if (!session) Alert.alert('Please check your inbox for email verification!');
+    //     setLoading(false);
+    // }
 
 
     return (
@@ -45,6 +47,7 @@ export default function SignInIndex() {
                     placeholder="Email"
                     placeholderTextColor={'#929292'}
                     autoCapitalize={'none'}
+                    style={styles.inputText}
                 />
             </View>
             <View style={[styles.inputStyle]}>
@@ -56,6 +59,8 @@ export default function SignInIndex() {
                     placeholder="Password"
                     placeholderTextColor={'#929292'}
                     autoCapitalize={'none'}
+                    style={styles.inputText}
+
                 />
             </View>
             <View>
@@ -68,11 +73,12 @@ export default function SignInIndex() {
                 </TouchableOpacity>
             </View>
             <View style={styles.password}>
-                <Text>Forgot Password?</Text>
+                <Text style={styles.smallText}>Forgot Password?</Text>
             </View>
-            <View style={styles.signup}>
-                <Text>Don't have an account? Sign Up</Text>
-            </View>
+            {/* <View style={styles.signup}>
+                <Text style={styles.smallTextAccount}>Don't have an account?</Text>
+                <Text onPress={() => } style={styles.signUpText}>Sign up</Text>
+            </View> */}
         </View>
     )
 }
@@ -80,8 +86,8 @@ export default function SignInIndex() {
 const styles = StyleSheet.create({
     container: {
       backgroundColor: 'white',
-      borderTopLeftRadius: 20,
-      borderTopRightRadius: 20,
+      borderTopLeftRadius: 25,
+      borderTopRightRadius: 25,
       height: '100%',
       paddingTop: 150,
     },
@@ -93,7 +99,14 @@ const styles = StyleSheet.create({
       backgroundColor: '#E1E1E1',
       borderRadius: 50,
       paddingLeft: 50,
-      width: '85%',
+      width: '80%',
+      height: 45
+
+    },
+    inputText: {
+        fontSize: 18,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     emailMargin: {
       marginBottom: 20
@@ -106,21 +119,39 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       marginLeft: 'auto',
       marginRight: 'auto',
-      width: '85%',
+      width: '80%',
       marginTop: 40,
+      height: 45
+
     },
     buttonText: {
       color: 'white',
-      fontSize: 16,
+      fontSize: 18,
     },
     password: {
        marginLeft: 'auto',
        marginRight: 'auto',
-       marginTop: 20
+       marginTop: 25,
+    },
+    smallText: {
+        fontSize: 14,
+        color: '#242424'
+    },
+    smallTextAccount: {
+        color: '#929292',
+        fontSize: 14
+    },
+    signUpText: {
+        color: '#242424',
+        fontSize: 14,
+        marginLeft: 10,
+        // textDecorationLine: 'underline'
     },
     signup: {
        marginLeft: 'auto',
        marginRight: 'auto',
-       marginTop: 150
+       marginTop: 150,
+        flexDirection: 'row'
     }
+
   });

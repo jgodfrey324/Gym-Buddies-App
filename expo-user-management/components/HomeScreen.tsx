@@ -62,6 +62,14 @@ export default function HomeScreen() {
              :
             null}
 
+            {/* {modalState === 'sign in' ?
+            <View style={styles.signup}>
+                <Text style={styles.smallTextAccount}>Don't have an account?</Text>
+                <Text onPress={() => setModalState('sign up')} style={styles.signUpText}>Sign up</Text>
+            </View>
+            :
+            null} */}
+
         </Modal>
     </View>
   )
@@ -122,15 +130,16 @@ const styles = StyleSheet.create({
   },
   goBackButton: {
     margin: 20,
-    top: 60,
+    top: 85,
     zIndex: 2,
     borderColor: 'black',
     borderWidth: 2,
     // width: '10%',
     alignSelf: 'baseline',
-    padding: 5,
-    paddingHorizontal: 12,
-    borderRadius: 30
+    padding: 12,
+    // paddingHorizontal: 12,
+    borderRadius: 30,
+
   },
   arrow: {
     height: 50,
@@ -138,7 +147,7 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     textDecorationStyle: 'solid',
-    textDecorationLine: 'underline',
+    // textDecorationLine: 'underline',
     color: '#242424',
     alignSelf: 'baseline'
   },
@@ -148,7 +157,27 @@ const styles = StyleSheet.create({
   },
   switchModalViewHouse: {
     flexDirection: 'row',
-    top: 100,
-    alignSelf: 'center'
-  }
+    bottom: 350,
+    alignSelf: 'center',
+    zIndex: 2,
+    // borderWidth: 2,
+    // borderColor: 'red'
+  },
+  // smallTextAccount: {
+  //   color: '#929292',
+  //   fontSize: 14
+  // },
+  // signUpText: {
+  //   color: '#242424',
+  //   fontSize: 14,
+  //   marginLeft: 10,
+  //   // textDecorationLine: 'underline'
+  // },
+  // signup: {
+  //   marginLeft: 'auto',
+  //   marginRight: 'auto',
+  //   marginTop: 150,
+  //   flexDirection: 'row',
+  //   zIndex: 3
+  // }
 })
