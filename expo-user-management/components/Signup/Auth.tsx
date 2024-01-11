@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput } from 'react-native';
+import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput, Modal } from 'react-native';
 import { supabase } from '../../lib/supabase';
 import { Input } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -11,6 +11,8 @@ export default function Auth() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+
   const navigation = useNavigation()
 
   // async function signInWithEmail() {
@@ -42,69 +44,81 @@ export default function Auth() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.inputStyle, styles.inputMargin]}>
-        <TextInput
-          style={styles.inputText}
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          placeholder="Email"
-          placeholderTextColor={'#929292'}
-          autoCapitalize={'none'}
-        />
+    // <Modal
+    //   animationType="slide"
+    //   transparent={true}
+    //   visible={modalVisible}
+    //   onRequestClose={() => {
+    //   setModalVisible(!modalVisible)}}>
+
+      <View style={styles.container}>
+        <View style={[styles.inputStyle, styles.inputMargin]}>
+          <TextInput
+            style={styles.inputText}
+            onChangeText={(text) => setEmail(text)}
+            value={email}
+            placeholder="Email"
+            placeholderTextColor={'#929292'}
+            autoCapitalize={'none'}
+          />
+        </View>
+        <View style={[styles.inputStyle, styles.inputMargin]}>
+          <TextInput
+            style={styles.inputText}
+            onChangeText={(text) => setFirstName(text)}
+            value={firstName}
+            placeholder="First Name"
+            placeholderTextColor={'#929292'}
+            autoCapitalize={'none'}
+          />
+        </View>
+        <View style={[styles.inputStyle, styles.inputMargin]}>
+          <TextInput
+            style={styles.inputText}
+            onChangeText={(text) => setLastName(text)}
+            value={lastName}
+            placeholder="Last Name"
+            placeholderTextColor={'#929292'}
+            autoCapitalize={'none'}
+          />
+        </View>
+        <View style={[styles.inputStyle, styles.inputMargin]}>
+          <TextInput
+            style={styles.inputText}
+            secureTextEntry={true}
+            onChangeText={(text) => setPassword(text)}
+            value={password}
+            placeholder="Password"
+            placeholderTextColor={'#929292'}
+            autoCapitalize={'none'}
+          />
+        </View>
+        <View style={[styles.inputStyle]}>
+          <TextInput
+            style={styles.inputText}
+            secureTextEntry={true}
+            onChangeText={(text) => setConfirmPassword(text)}
+            value={confirmPassword}
+            placeholder="Confirm Password"
+            placeholderTextColor={'#929292'}
+            autoCapitalize={'none'}
+          />
+        </View>
+        <View>
+          <TouchableOpacity
+            style={styles.customButton}
+            disabled={loading}
+            onPress={function() {
+              signUpWithEmail()
+              setModalVisible(!modalVisible)
+            }}
+          >
+            <Text style={styles.buttonText}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={[styles.inputStyle, styles.inputMargin]}>
-        <TextInput
-          style={styles.inputText}
-          onChangeText={(text) => setFirstName(text)}
-          value={firstName}
-          placeholder="First Name"
-          placeholderTextColor={'#929292'}
-          autoCapitalize={'none'}
-        />
-      </View>
-      <View style={[styles.inputStyle, styles.inputMargin]}>
-        <TextInput
-          style={styles.inputText}
-          onChangeText={(text) => setLastName(text)}
-          value={lastName}
-          placeholder="Last Name"
-          placeholderTextColor={'#929292'}
-          autoCapitalize={'none'}
-        />
-      </View>
-      <View style={[styles.inputStyle, styles.inputMargin]}>
-        <TextInput
-          style={styles.inputText}
-          secureTextEntry={true}
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          placeholder="Password"
-          placeholderTextColor={'#929292'}
-          autoCapitalize={'none'}
-        />
-      </View>
-      <View style={[styles.inputStyle]}>
-        <TextInput
-          style={styles.inputText}
-          secureTextEntry={true}
-          onChangeText={(text) => setConfirmPassword(text)}
-          value={confirmPassword}
-          placeholder="Confirm Password"
-          placeholderTextColor={'#929292'}
-          autoCapitalize={'none'}
-        />
-      </View>
-      <View>
-        <TouchableOpacity
-          style={styles.customButton}
-          disabled={loading}
-          onPress={() => signUpWithEmail()}
-        >
-          <Text style={styles.buttonText}>Sign Up</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+
+    // </Modal>
   );
 }
 
@@ -115,6 +129,8 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     height: '100%',
     paddingTop: 150,
+    // zIndex: 5,
+    // top: -100
   },
   inputStyle: {
     padding: 10,

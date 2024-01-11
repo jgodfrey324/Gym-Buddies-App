@@ -52,6 +52,11 @@ export default function HomeScreen() {
               </View>
         </View>
 
+        {/* <View>
+        {modalState === 'sign up' ? <Auth /> : null}
+
+        </View> */}
+
         <Modal
         animationType="slide"
         transparent={true}
@@ -80,14 +85,6 @@ export default function HomeScreen() {
             </View>
              :
             null}
-
-            {/* {modalState === 'sign in' ?
-            <View style={styles.signup}>
-                <Text style={styles.smallTextAccount}>Don't have an account?</Text>
-                <Text onPress={() => setModalState('sign up')} style={styles.signUpText}>Sign up</Text>
-            </View>
-            :
-            null} */}
 
         </Modal>
     </View>
