@@ -72,9 +72,9 @@ export default function SignInIndex() {
                     <Text style={styles.buttonText}>Sign in</Text>
                 </TouchableOpacity>
             </View>
-            <View style={styles.password}>
+            {/* <View style={styles.password}>
                 <Text style={styles.smallText}>Forgot Password?</Text>
-            </View>
+            </View> */}
         </View>
     )
 }
@@ -124,14 +124,14 @@ const styles = StyleSheet.create({
       color: 'white',
       fontSize: 18,
     },
-    password: {
-       marginLeft: 'auto',
-       marginRight: 'auto',
-       marginTop: 25,
-    },
-    smallText: {
-        fontSize: 14,
-        color: '#242424'
-    },
+    // password: {
+    //    marginLeft: 'auto',
+    //    marginRight: 'auto',
+    //    marginTop: 25,
+    // },
+    // smallText: {
+    //     fontSize: 14,
+    //     color: '#242424'
+    // },
 
   });

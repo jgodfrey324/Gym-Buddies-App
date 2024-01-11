@@ -5,6 +5,7 @@ import { Button, Input, Text } from 'react-native-elements'
 // import { useNavigation } from '@react-navigation/native'
 import SignInIndex from './SignIn'
 import Auth from './Signup/Auth'
+import ForgotPassword from './ForgotPassword'
 // import LeftArrow from '../assets/left-arrow.svg'
 import LeftArrowSVG from '../assets/leftArrow'
 // import { SvgUri } from 'react-native-svg'
@@ -14,6 +15,16 @@ export default function HomeScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalState, setModalState] = useState('');
   // const navigation = useNavigation()
+
+  const getModalState = (modalState) => {
+    if (modalState === 'sign in') {
+      return <SignInIndex />
+    } else if (modalState === 'sign up') {
+      return <Auth />
+    } else if (modalState === 'forgot password') {
+      return <ForgotPassword />
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -53,7 +64,15 @@ export default function HomeScreen() {
               onPress={() => setModalVisible(!modalVisible)}>
                 <LeftArrowSVG width={20} height={20} />
             </Pressable>
-            {modalState === 'sign in' ? <SignInIndex /> : <Auth />}
+
+            {getModalState(modalState)}
+
+            {modalState === 'sign in' ?
+            <View style={styles.password}>
+            <Text onPress={() => setModalState('forgot password')} style={styles.smallText}>Forgot Password?</Text>
+            </View>
+            :
+            null}
 
             {modalState === 'sign in' ?
             <View style={styles.switchModalViewHouse}>
@@ -157,27 +176,20 @@ const styles = StyleSheet.create({
   },
   switchModalViewHouse: {
     flexDirection: 'row',
-    bottom: 350,
+    bottom: 375,
     alignSelf: 'center',
     zIndex: 2,
-    // borderWidth: 2,
-    // borderColor: 'red'
   },
-  // smallTextAccount: {
-  //   color: '#929292',
-  //   fontSize: 14
-  // },
-  // signUpText: {
-  //   color: '#242424',
-  //   fontSize: 14,
-  //   marginLeft: 10,
-  //   // textDecorationLine: 'underline'
-  // },
-  // signup: {
-  //   marginLeft: 'auto',
-  //   marginRight: 'auto',
-  //   marginTop: 150,
-  //   flexDirection: 'row',
-  //   zIndex: 3
-  // }
+  password: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    // borderWidth: 2,
+    // borderColor: 'red',
+    zIndex: 2,
+    bottom: 550
+  },
+  smallText: {
+      fontSize: 14,
+      color: '#242424'
+  },
 })
