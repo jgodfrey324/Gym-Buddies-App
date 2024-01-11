@@ -75,10 +75,6 @@ export default function SignInIndex() {
             <View style={styles.password}>
                 <Text style={styles.smallText}>Forgot Password?</Text>
             </View>
-            {/* <View style={styles.signup}>
-                <Text style={styles.smallTextAccount}>Don't have an account?</Text>
-                <Text onPress={() => } style={styles.signUpText}>Sign up</Text>
-            </View> */}
         </View>
     )
 }
@@ -137,21 +133,5 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#242424'
     },
-    smallTextAccount: {
-        color: '#929292',
-        fontSize: 14
-    },
-    signUpText: {
-        color: '#242424',
-        fontSize: 14,
-        marginLeft: 10,
-        // textDecorationLine: 'underline'
-    },
-    signup: {
-       marginLeft: 'auto',
-       marginRight: 'auto',
-       marginTop: 150,
-        flexDirection: 'row'
-    }
 
   });

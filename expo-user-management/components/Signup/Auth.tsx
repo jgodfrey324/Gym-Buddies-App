@@ -41,6 +41,7 @@ export default function Auth() {
     <View style={styles.container}>
       <View style={[styles.inputStyle, styles.inputMargin]}>
         <TextInput
+          style={styles.inputText}
           onChangeText={(text) => setEmail(text)}
           value={email}
           placeholder="Email"
@@ -50,6 +51,7 @@ export default function Auth() {
       </View>
       <View style={[styles.inputStyle, styles.inputMargin]}>
         <TextInput
+          style={styles.inputText}
           onChangeText={(text) => setFirstName(text)}
           value={firstName}
           placeholder="First Name"
@@ -59,6 +61,7 @@ export default function Auth() {
       </View>
       <View style={[styles.inputStyle, styles.inputMargin]}>
         <TextInput
+          style={styles.inputText}
           onChangeText={(text) => setLastName(text)}
           value={lastName}
           placeholder="Last Name"
@@ -68,6 +71,7 @@ export default function Auth() {
       </View>
       <View style={[styles.inputStyle, styles.inputMargin]}>
         <TextInput
+          style={styles.inputText}
           secureTextEntry={true}
           onChangeText={(text) => setPassword(text)}
           value={password}
@@ -78,6 +82,7 @@ export default function Auth() {
       </View>
       <View style={[styles.inputStyle]}>
         <TextInput
+          style={styles.inputText}
           secureTextEntry={true}
           onChangeText={(text) => setConfirmPassword(text)}
           value={confirmPassword}
@@ -102,8 +107,8 @@ export default function Auth() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
     height: '100%',
     paddingTop: 150,
   },
@@ -115,7 +120,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#E1E1E1',
     borderRadius: 50,
     paddingLeft: 50,
-    width: '85%',
+    width: '80%',
+    height: 45,
+  },
+  inputText: {
+    fontSize: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   inputMargin: {
     marginBottom: 20
@@ -128,11 +139,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: '85%',
+    width: '80%',
     marginTop: 40,
+    height: 45,
   },
   buttonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 18,
   },
 });
