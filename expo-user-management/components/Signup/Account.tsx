@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import { StyleSheet, View, Alert, TouchableOpacity, Text} from 'react-native'
+import { StyleSheet, View, Alert, TouchableOpacity, Text, TextInput} from 'react-native'
 import { Button, Input } from 'react-native-elements'
 import { Session } from '@supabase/supabase-js'
 
@@ -90,39 +90,39 @@ export default function Account({ session }: { session: Session }) {
 
   return (
     <View style={styles.container}>
-      {/* <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Input label="Email" value={session?.user?.email} disabled />
-      </View> */}
-      <View style={styles.verticallySpaced}>
-        <Input label="Nickname" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
+      <View style={styles.tell}>
+        <Text style={{fontSize: 25}}>Tell us about yourself</Text>
       </View>
-      <View style={styles.verticallySpaced}>
-        <Input label="First name" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
+      <View style={[styles.inputStyle, styles.inputMargin]}>
+        <TextInput placeholder="Nickname" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
       </View>
-      <View style={styles.verticallySpaced}>
-        <Input label="Last name" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
+      <View style={[styles.inputStyle, styles.inputMargin]}>
+        <TextInput placeholder="First name" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
       </View>
-      <View style={styles.verticallySpaced}>
-        <Input label="Age" value={age || ''} onChangeText={(text) => setAge(text)} />
+      <View style={[styles.inputStyle, styles.inputMargin]}>
+        <TextInput placeholder="Last name" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
       </View>
-      <View style={styles.verticallySpaced}>
-        <Input label="Weight" value={weight || ''} onChangeText={(text) => setWeight(text)} />
+      <View style={[styles.inputStyle, styles.inputMargin]}>
+        <TextInput placeholder="Age" value={age || ''} onChangeText={(text) => setAge(text)} />
       </View>
-
-      <View style={[styles.verticallySpaced]}>
+      <View style={[styles.inputStyle, styles.inputMargin]}>
+        <TextInput placeholder="Weight (lbs)" value={weight || ''} onChangeText={(text) => setWeight(text)} />
+      </View>
+      <View>
         <TouchableOpacity
+          style={styles.customButton}
           onPress={() => updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight })}
           disabled={loading}
         >
-          <Text style={styles.buttonText}>Update</Text>
+          <TextInput style={styles.buttonText}>Update</TextInput>
         </TouchableOpacity>
       </View>
 
-      <View style={[styles.verticallySpaced, styles.container]}>
+      <View>
         <TouchableOpacity
           style={styles.customButton}
           onPress={() => supabase.auth.signOut()}>
-          <Text style={styles.buttonText}>Sign Out</Text>
+          <TextInput style={styles.buttonText}>Sign Out</TextInput>
         </TouchableOpacity>
       </View>
     </View>
@@ -131,23 +131,43 @@ export default function Account({ session }: { session: Session }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
-    padding: 12,
-  },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: 'stretch',
+    backgroundColor: 'white',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    height: '100%',
+    paddingTop: 150,
   },
   customButton: {
     backgroundColor: '#242424',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: '85%',
+    marginTop: 40,
   },
   buttonText: {
     color: 'white',
     fontSize: 16,
   },
+  inputStyle: {
+    padding: 10,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    alignSelf: 'stretch',
+    backgroundColor: '#E1E1E1',
+    borderRadius: 50,
+    paddingLeft: 50,
+    width: '85%',
+  },
+  inputMargin: {
+    marginBottom: 20
+  },
+  tell: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginBottom: 40
+  }
 })
