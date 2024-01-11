@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput } from 'react-native';
 import { supabase } from '../../lib/supabase';
 import { Input } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Auth() {
   const [email, setEmail] = useState('');
@@ -10,17 +11,18 @@ export default function Auth() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false);
+  const navigation = useNavigation()
 
-  async function signInWithEmail() {
-    setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
+  // async function signInWithEmail() {
+  //   setLoading(true);
+  //   const { error } = await supabase.auth.signInWithPassword({
+  //     email: email,
+  //     password: password,
+  //   });
 
-    if (error) Alert.alert(error.message);
-    setLoading(false);
-  }
+  //   if (error) Alert.alert(error.message);
+  //   setLoading(false);
+  // }
 
   async function signUpWithEmail() {
     setLoading(true);
@@ -35,6 +37,8 @@ export default function Auth() {
     if (error) Alert.alert(error.message);
     if (!session) Alert.alert('Please check your inbox for email verification!');
     setLoading(false);
+
+    navigation.navigate("ProfilePage")
   }
 
   return (
