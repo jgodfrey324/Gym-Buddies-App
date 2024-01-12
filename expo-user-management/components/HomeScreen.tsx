@@ -180,10 +180,11 @@ const styles = StyleSheet.create({
   password: {
     marginLeft: 'auto',
     marginRight: 'auto',
-    // borderWidth: 2,
-    // borderColor: 'red',
+    borderWidth: 2,
+    borderColor: 'red',
     zIndex: 2,
-    bottom: 550
+    bottom: 400
+    // marginTop: 500
   },
   smallText: {
       fontSize: 14,
