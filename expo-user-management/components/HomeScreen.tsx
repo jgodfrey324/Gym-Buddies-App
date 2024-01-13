@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Alert, StyleSheet, Touchable, TouchableOpacity, View, Modal, Pressable, Image } from 'react-native'
+import { Alert, StyleSheet, Touchable, TouchableOpacity, View, Modal, Pressable, Image, Platform } from 'react-native'
 // import { supabase } from '../lib/supabase'
 import { Button, Input, Text } from 'react-native-elements'
 // import { useNavigation } from '@react-navigation/native'
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   switchModalViewHouse: {
     flexDirection: 'row',
-    bottom: 375,
+    bottom: Platform.OS === 'ios' ? '90%' : '72%',
     alignSelf: 'center',
     zIndex: 2,
   },
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'red',
     zIndex: 2,
-    bottom: '52%'
+    bottom: Platform.OS === 'ios' ? '60%' : '52%'
     // alignSelf: 'flex-end'
   },
   smallText: {
