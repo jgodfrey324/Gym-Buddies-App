@@ -23,11 +23,11 @@ export default function ProfilePage () {
             setModalVisible(!modalVisible);
             }}>
 
-                <Pressable
+                {/* <Pressable
                     style={styles.goBackButton}
                     onPress={() => setModalVisible(!modalVisible)}>
                     <LeftArrowSVG width={20} height={20} />
-                </Pressable>
+                </Pressable> */}
 
                 <FinishSignUp />
 
