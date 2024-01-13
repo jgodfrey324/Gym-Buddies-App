@@ -9,7 +9,7 @@ import { Session } from '@supabase/supabase-js'
 // import { Session } from '@supabase/supabase-js'
 
 export default function ProfilePage () {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
 //   const session =
 
     return (
