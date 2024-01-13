@@ -183,8 +183,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'red',
     zIndex: 2,
-    bottom: 400
-    // marginTop: 500
+    bottom: '52%'
+    // alignSelf: 'flex-end'
   },
   smallText: {
       fontSize: 14,
