@@ -15,13 +15,13 @@ export default function ProfilePage () {
     return (
         <Text>
             This is profile page.
-            <Modal
+            {/* <Modal
             animationType="slide"
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
             setModalVisible(!modalVisible);
-            }}>
+            }}> */}
 
                 {/* <Pressable
                     style={styles.goBackButton}
@@ -29,9 +29,9 @@ export default function ProfilePage () {
                     <LeftArrowSVG width={20} height={20} />
                 </Pressable> */}
 
-                <FinishSignUp />
 
-            </Modal>
+            {/* </Modal> */}
+            <FinishSignUp />
         </Text>
     )
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import { StyleSheet, View, Alert, TouchableOpacity, Text, TextInput} from 'react-native'
+import { StyleSheet, View, Alert, TouchableOpacity, Text, TextInput, Modal} from 'react-native'
 import { Button, Input } from 'react-native-elements'
 import { Session } from '@supabase/supabase-js'
 
@@ -11,6 +11,7 @@ export default function FinishSignUp({ session }: { session: Session }) {
   const [lastName, setLastName] = useState('')
   const [age, setAge] = useState('')
   const [weight, setWeight] = useState('')
+  const [modalVisible, setModalVisible] = useState(true);
 
 
   useEffect(() => {
@@ -89,43 +90,59 @@ export default function FinishSignUp({ session }: { session: Session }) {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.tell}>
-        <Text style={{fontSize: 30,}}>Tell us about yourself</Text>
-      </View>
-      <View style={[styles.inputStyle, styles.inputMargin]}>
-        <TextInput style={styles.inputText} placeholder="Nickname" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
-      </View>
-      <View style={[styles.inputStyle, styles.inputMargin]}>
-        <TextInput style={styles.inputText} placeholder="First name" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
-      </View>
-      <View style={[styles.inputStyle, styles.inputMargin]}>
-        <TextInput style={styles.inputText} placeholder="Last name" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
-      </View>
-      <View style={[styles.inputStyle, styles.inputMargin]}>
-        <TextInput style={styles.inputText} placeholder="Age" value={age || ''} onChangeText={(text) => setAge(text)} />
-      </View>
-      <View style={[styles.inputStyle, styles.inputMargin]}>
-        <TextInput style={styles.inputText} placeholder="Weight (lbs)" value={weight || ''} onChangeText={(text) => setWeight(text)} />
-      </View>
-      <View>
-        <TouchableOpacity
-          style={styles.customButton}
-          onPress={() => updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight })}
-          disabled={loading}
-        >
-          <TextInput style={styles.buttonText}>Continue</TextInput>
-        </TouchableOpacity>
-      </View>
+    <Modal
+    animationType="slide"
+    transparent={true}
+    visible={modalVisible}
+    onRequestClose={() => {
+      setModalVisible(!modalVisible);
+    }}
+    >
 
-      {/* <View>
-        <TouchableOpacity
-          style={styles.customButton}
-          onPress={() => supabase.auth.signOut()}>
-          <TextInput style={styles.buttonText}>Sign Out</TextInput>
-        </TouchableOpacity>
-      </View> */}
-    </View>
+
+
+      <View style={styles.container}>
+        <View style={styles.tell}>
+          <Text style={{fontSize: 30,}}>Tell us about yourself</Text>
+        </View>
+        <View style={[styles.inputStyle, styles.inputMargin]}>
+          <TextInput style={styles.inputText} placeholder="Nickname" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
+        </View>
+        <View style={[styles.inputStyle, styles.inputMargin]}>
+          <TextInput style={styles.inputText} placeholder="First name" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
+        </View>
+        <View style={[styles.inputStyle, styles.inputMargin]}>
+          <TextInput style={styles.inputText} placeholder="Last name" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
+        </View>
+        <View style={[styles.inputStyle, styles.inputMargin]}>
+          <TextInput style={styles.inputText} placeholder="Age" value={age || ''} onChangeText={(text) => setAge(text)} />
+        </View>
+        <View style={[styles.inputStyle, styles.inputMargin]}>
+          <TextInput style={styles.inputText} placeholder="Weight (lbs)" value={weight || ''} onChangeText={(text) => setWeight(text)} />
+        </View>
+        <View>
+          <TouchableOpacity
+            style={styles.customButton}
+            onPress={function() {
+              updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight
+              })
+              setModalVisible(!modalVisible)
+            }}
+            disabled={loading}
+          >
+            <Text style={styles.buttonText}>Continue</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* <View>
+          <TouchableOpacity
+            style={styles.customButton}
+            onPress={() => supabase.auth.signOut()}>
+            <TextInput style={styles.buttonText}>Sign Out</TextInput>
+          </TouchableOpacity>
+        </View> */}
+      </View>
+    </Modal>
   )
 }
 
