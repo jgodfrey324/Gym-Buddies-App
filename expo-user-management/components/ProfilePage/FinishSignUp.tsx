@@ -91,22 +91,22 @@ export default function FinishSignUp({ session }: { session: Session }) {
   return (
     <View style={styles.container}>
       <View style={styles.tell}>
-        <Text style={{fontSize: 25}}>Tell us about yourself</Text>
+        <Text style={{fontSize: 30,}}>Tell us about yourself</Text>
       </View>
       <View style={[styles.inputStyle, styles.inputMargin]}>
-        <TextInput placeholder="Nickname" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
+        <TextInput style={styles.inputText} placeholder="Nickname" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
       </View>
       <View style={[styles.inputStyle, styles.inputMargin]}>
-        <TextInput placeholder="First name" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
+        <TextInput style={styles.inputText} placeholder="First name" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
       </View>
       <View style={[styles.inputStyle, styles.inputMargin]}>
-        <TextInput placeholder="Last name" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
+        <TextInput style={styles.inputText} placeholder="Last name" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
       </View>
       <View style={[styles.inputStyle, styles.inputMargin]}>
-        <TextInput placeholder="Age" value={age || ''} onChangeText={(text) => setAge(text)} />
+        <TextInput style={styles.inputText} placeholder="Age" value={age || ''} onChangeText={(text) => setAge(text)} />
       </View>
       <View style={[styles.inputStyle, styles.inputMargin]}>
-        <TextInput placeholder="Weight (lbs)" value={weight || ''} onChangeText={(text) => setWeight(text)} />
+        <TextInput style={styles.inputText} placeholder="Weight (lbs)" value={weight || ''} onChangeText={(text) => setWeight(text)} />
       </View>
       <View>
         <TouchableOpacity
@@ -114,17 +114,17 @@ export default function FinishSignUp({ session }: { session: Session }) {
           onPress={() => updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight })}
           disabled={loading}
         >
-          <TextInput style={styles.buttonText}>Update</TextInput>
+          <TextInput style={styles.buttonText}>Continue</TextInput>
         </TouchableOpacity>
       </View>
 
-      <View>
+      {/* <View>
         <TouchableOpacity
           style={styles.customButton}
           onPress={() => supabase.auth.signOut()}>
           <TextInput style={styles.buttonText}>Sign Out</TextInput>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   )
 }
@@ -132,10 +132,13 @@ export default function FinishSignUp({ session }: { session: Session }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
     height: '100%',
-    paddingTop: 150,
+    borderColor: 'black',
+    borderWidth: 2,
+    // paddingTop: 100
+    // padding: 20
   },
   customButton: {
     backgroundColor: '#242424',
@@ -145,12 +148,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: '85%',
+    width: '80%',
     marginTop: 40,
   },
   buttonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 18,
+    // width: 100
   },
   inputStyle: {
     padding: 10,
@@ -160,7 +164,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E1E1E1',
     borderRadius: 50,
     paddingLeft: 50,
-    width: '85%',
+    width: '80%',
   },
   inputMargin: {
     marginBottom: 20
@@ -169,5 +173,8 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     marginBottom: 40
+  },
+  inputText: {
+    fontSize: 18
   }
 })
