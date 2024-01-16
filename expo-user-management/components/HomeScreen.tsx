@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Alert, StyleSheet, Touchable, TouchableOpacity, View, Modal, Pressable, Image, Platform } from 'react-native'
+import { Alert, StyleSheet, Touchable, TouchableOpacity, View, Modal, Pressable, Image, Platform, ScrollView } from 'react-native'
 // import { supabase } from '../lib/supabase'
 import { Button, Input, Text } from 'react-native-elements'
 // import { useNavigation } from '@react-navigation/native'

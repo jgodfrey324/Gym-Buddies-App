@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput, Platform } from 'react-native';
+import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput, Platform, ScrollView } from 'react-native';
 import { supabase } from '../../lib/supabase';
 // import { Input } from 'react-native-elements';
 // import { useNavigation } from '@react-navigation/native';
@@ -39,54 +39,54 @@ export default function SignInIndex({ setModalState }) {
 
 
     return (
-        <View style={styles.container}>
-            <View style={[styles.inputStyle, styles.emailMargin]}>
-                <TextInput
-                    onChangeText={(text) => setEmail(text)}
-                    value={email}
-                    placeholder="Email"
-                    placeholderTextColor={'#929292'}
-                    autoCapitalize={'none'}
-                    style={styles.inputText}
-                />
-            </View>
-            <View style={[styles.inputStyle]}>
-                <TextInput
+      <View>
+          <View style={[styles.inputStyle, styles.emailMargin]}>
+              <TextInput
+                  onChangeText={(text) => setEmail(text)}
+                  value={email}
+                  placeholder="Email"
+                  placeholderTextColor={'#929292'}
+                  autoCapitalize={'none'}
+                  style={styles.inputText}
+              />
+          </View>
+          <View style={[styles.inputStyle]}>
+              <TextInput
 
-                    secureTextEntry={true}
-                    onChangeText={(text) => setPassword(text)}
-                    value={password}
-                    placeholder="Password"
-                    placeholderTextColor={'#929292'}
-                    autoCapitalize={'none'}
-                    style={styles.inputText}
+                  secureTextEntry={true}
+                  onChangeText={(text) => setPassword(text)}
+                  value={password}
+                  placeholder="Password"
+                  placeholderTextColor={'#929292'}
+                  autoCapitalize={'none'}
+                  style={styles.inputText}
 
-                />
-            </View>
-            <View>
-                <TouchableOpacity
-                    style={styles.customButton}
-                    disabled={loading}
-                    onPress={() => signInWithEmail()}
+              />
+          </View>
+          <View>
+              <TouchableOpacity
+                  style={styles.customButton}
+                  disabled={loading}
+                  onPress={() => signInWithEmail()}
+              >
+                  <Text style={styles.buttonText}>Sign in</Text>
+              </TouchableOpacity>
+              <View style={styles.password}>
+                <Text
+                  onPress={() => setModalState('forgot password')}
+                  style={styles.smallText}
                 >
-                    <Text style={styles.buttonText}>Sign in</Text>
-                </TouchableOpacity>
-                <View style={styles.password}>
-                  <Text
-                    onPress={() => setModalState('forgot password')}
-                    style={styles.smallText}
-                  >
-                    Forgot Password?
-                  </Text>
-                </View>
-                <View style={styles.switchModalViewHouse}>
-              <Text style={styles.switchModalViewText}>Don't have an account? </Text><Text onPress={() => setModalState('sign up')} style={styles.signUpText}> Sign up</Text>
-            </View>
-            </View>
-            {/* <View style={styles.password}>
-                <Text style={styles.smallText}>Forgot Password?</Text>
-            </View> */}
-        </View>
+                  Forgot Password?
+                </Text>
+              </View>
+              <View style={styles.switchModalViewHouse}>
+            <Text style={styles.switchModalViewText}>Don't have an account? </Text><Text onPress={() => setModalState('sign up')} style={styles.signUpText}> Sign up</Text>
+          </View>
+          </View>
+          {/* <View style={styles.password}>
+              <Text style={styles.smallText}>Forgot Password?</Text>
+          </View> */}
+      </View>
     )
 }
 
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
       backgroundColor: 'white',
       borderTopLeftRadius: 25,
       borderTopRightRadius: 25,
-      height: '100%',
+      height: '150%',
       paddingTop: 150,
     },
     inputStyle: {
