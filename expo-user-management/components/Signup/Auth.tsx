@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput, Modal } from 'react-native';
+import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput, Modal, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { supabase } from '../../lib/supabase';
 import { Input } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -50,8 +50,11 @@ export default function Auth() {
     //   visible={modalVisible}
     //   onRequestClose={() => {
     //   setModalVisible(!modalVisible)}}>
-
-      <View style={styles.container}>
+    <KeyboardAvoidingView
+      style={styles.container}
+    >
+      <ScrollView>
+      <View>
         <View style={[styles.inputStyle, styles.inputMargin]}>
           <TextInput
             style={styles.inputText}
@@ -117,8 +120,9 @@ export default function Auth() {
           </TouchableOpacity>
         </View>
       </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
 
-    // </Modal>
   );
 }
 
@@ -129,8 +133,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     height: '100%',
     paddingTop: 150,
-    // zIndex: 5,
-    // top: -100
+    flex: 1
   },
   inputStyle: {
     padding: 10,
