@@ -37,7 +37,7 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <UserContext.Provider>
+    // <UserContext.Provider>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}} />
@@ -45,6 +45,6 @@ export default function App() {
           <Stack.Screen name="ProfilePage" component={ProfilePage} />
         </Stack.Navigator>
       </NavigationContainer>
-    </UserContext.Provider>
+    // </UserContext.Provider>
   )
 }
