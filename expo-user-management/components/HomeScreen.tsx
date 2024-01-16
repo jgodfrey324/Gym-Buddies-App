@@ -18,7 +18,7 @@ export default function HomeScreen() {
 
   const getModalState = (modalState) => {
     if (modalState === 'sign in') {
-      return <SignInIndex />
+      return <SignInIndex setModalState={setModalState} />
     } else if (modalState === 'sign up') {
       return <Auth />
     } else if (modalState === 'forgot password') {
@@ -72,19 +72,19 @@ export default function HomeScreen() {
 
             {getModalState(modalState)}
 
-            {modalState === 'sign in' ?
+            {/* {modalState === 'sign in' ?
             <View style={styles.password}>
             <Text onPress={() => setModalState('forgot password')} style={styles.smallText}>Forgot Password?</Text>
             </View>
             :
-            null}
+            null} */}
 
-            {modalState === 'sign in' ?
+            {/* {modalState === 'sign in' ?
             <View style={styles.switchModalViewHouse}>
               <Text style={styles.switchModalViewText}>Don't have an account? </Text><Text onPress={() => setModalState('sign up')} style={styles.signUpText}> Sign up</Text>
             </View>
              :
-            null}
+            null} */}
 
         </Modal>
     </View>
@@ -161,22 +161,22 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
   },
-  signUpText: {
-    textDecorationStyle: 'solid',
-    // textDecorationLine: 'underline',
-    color: '#242424',
-    alignSelf: 'baseline'
-  },
-  switchModalViewText: {
-    color: '#929292',
-    alignSelf: 'baseline'
-  },
-  switchModalViewHouse: {
-    flexDirection: 'row',
-    bottom: Platform.OS === 'ios' ? '90%' : '72%',
-    alignSelf: 'center',
-    zIndex: 2,
-  },
+  // signUpText: {
+  //   textDecorationStyle: 'solid',
+  //   // textDecorationLine: 'underline',
+  //   color: '#242424',
+  //   alignSelf: 'baseline'
+  // },
+  // switchModalViewText: {
+  //   color: '#929292',
+  //   alignSelf: 'baseline'
+  // },
+  // switchModalViewHouse: {
+  //   flexDirection: 'row',
+  //   bottom: Platform.OS === 'ios' ? '90%' : '72%',
+  //   alignSelf: 'center',
+  //   zIndex: 2,
+  // },
   password: {
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -186,8 +186,8 @@ const styles = StyleSheet.create({
     bottom: Platform.OS === 'ios' ? '60%' : '52%'
     // alignSelf: 'flex-end'
   },
-  smallText: {
-      fontSize: 14,
-      color: '#242424'
-  },
+  // smallText: {
+  //     fontSize: 14,
+  //     color: '#242424'
+  // },
 })

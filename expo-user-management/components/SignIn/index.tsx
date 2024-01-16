@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput } from 'react-native';
+import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput, Platform } from 'react-native';
 import { supabase } from '../../lib/supabase';
 // import { Input } from 'react-native-elements';
 // import { useNavigation } from '@react-navigation/native';
 
-export default function SignInIndex() {
+export default function SignInIndex({ setModalState }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -71,6 +71,17 @@ export default function SignInIndex() {
                 >
                     <Text style={styles.buttonText}>Sign in</Text>
                 </TouchableOpacity>
+                <View style={styles.password}>
+                  <Text
+                    onPress={() => setModalState('forgot password')}
+                    style={styles.smallText}
+                  >
+                    Forgot Password?
+                  </Text>
+                </View>
+                <View style={styles.switchModalViewHouse}>
+              <Text style={styles.switchModalViewText}>Don't have an account? </Text><Text onPress={() => setModalState('sign up')} style={styles.signUpText}> Sign up</Text>
+            </View>
             </View>
             {/* <View style={styles.password}>
                 <Text style={styles.smallText}>Forgot Password?</Text>
@@ -124,14 +135,31 @@ const styles = StyleSheet.create({
       color: 'white',
       fontSize: 18,
     },
-    // password: {
-    //    marginLeft: 'auto',
-    //    marginRight: 'auto',
-    //    marginTop: 25,
-    // },
-    // smallText: {
-    //     fontSize: 14,
-    //     color: '#242424'
-    // },
+    password: {
+       marginLeft: 'auto',
+       marginRight: 'auto',
+       marginTop: 25,
+    },
+    smallText: {
+        fontSize: 14,
+        color: '#242424'
+    },
+    signUpText: {
+      textDecorationStyle: 'solid',
+      // textDecorationLine: 'underline',
+      color: '#242424',
+      alignSelf: 'baseline'
+    },
+    switchModalViewText: {
+      color: '#929292',
+      alignSelf: 'baseline'
+    },
+    switchModalViewHouse: {
+      flexDirection: 'row',
+      paddingTop: 20,
+      // bottom: Platform.OS === 'ios' ? '90%' : '0%',
+      alignSelf: 'center',
+      zIndex: 2,
+    },
 
   });
