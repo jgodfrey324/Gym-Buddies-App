@@ -9,6 +9,7 @@ import Account from './components/Signup/Account';
 import { Session } from '@supabase/supabase-js'
 import Auth from './components/Signup/Auth';
 import ProfilePage from './components/ProfilePage';
+import { UserContext } from './context/user';
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -36,12 +37,14 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}} />
-        <Stack.Screen name="Auth" component={Auth} />
-        <Stack.Screen name="ProfilePage" component={ProfilePage} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <UserContext.Provider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}} />
+          <Stack.Screen name="Auth" component={Auth} />
+          <Stack.Screen name="ProfilePage" component={ProfilePage} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserContext.Provider>
   )
 }
