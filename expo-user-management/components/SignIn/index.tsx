@@ -39,7 +39,7 @@ export default function SignInIndex({ setModalState }) {
 
 
     return (
-      <View>
+      <View style={styles.container}>
           <View style={[styles.inputStyle, styles.emailMargin]}>
               <TextInput
                   onChangeText={(text) => setEmail(text)}
