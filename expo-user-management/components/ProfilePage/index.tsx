@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import { Modal, Pressable, StyleSheet, Alert } from 'react-native'
+import { Modal, Pressable, StyleSheet, Alert, View } from 'react-native'
 import { Text } from 'react-native-elements'
 import FinishSignUp from './FinishSignUp'
 import LeftArrowSVG from '../../assets/leftArrow'
@@ -55,30 +55,27 @@ export default function ProfilePage ({ session }: { session: Session }) {
 
 
     return (
-        <Text>
-            This is profile page.
-            {/* <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-            setModalVisible(!modalVisible);
-            }}> */}
-
-                {/* <Pressable
-                    style={styles.goBackButton}
-                    onPress={() => setModalVisible(!modalVisible)}>
-                    <LeftArrowSVG width={20} height={20} />
-                </Pressable> */}
-
-
-            {/* </Modal> */}
-            <FinishSignUp session={session} />
-        </Text>
+        <View style={styles.container}>
+            <View>
+                <FinishSignUp session={session} />
+            </View>
+            <View style={styles.profileNameBox}>
+                <Text style={styles.profileName}>{firstName} {lastName}</Text>
+            </View>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
+container: {
+
+},
+profileNameBox: {
+
+},
+profileName: {
+    fontSize: 20
+},
 goBackButton: {
     margin: 20,
     top: 85,
