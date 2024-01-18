@@ -1,16 +1,58 @@
-import { useState } from 'react'
-import { Modal, Pressable, StyleSheet } from 'react-native'
+import { useState, useEffect } from 'react'
+import { supabase } from '../../lib/supabase'
+import { Modal, Pressable, StyleSheet, Alert } from 'react-native'
 import { Text } from 'react-native-elements'
 import FinishSignUp from './FinishSignUp'
 import LeftArrowSVG from '../../assets/leftArrow'
 import { Session } from '@supabase/supabase-js'
 
 
-// import { Session } from '@supabase/supabase-js'
-
-export default function ProfilePage () {
+export default function ProfilePage ({ session }: { session: Session }) {
   const [modalVisible, setModalVisible] = useState(true);
-//   const session =
+  const [loading, setLoading] = useState(true)
+  const [nickname, setNickname] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [age, setAge] = useState('')
+  const [weight, setWeight] = useState('')
+
+
+  useEffect(() => {
+    if (session) getProfile()
+  }, [session])
+
+
+
+  async function getProfile() {
+    try {
+      setLoading(true)
+      if (!session?.user) throw new Error('No user on the session!')
+
+      const { data, error, status } = await supabase
+        .from('profiles')
+        .select(`nickname, first_name, last_name, age, weight`)
+        .eq('id', session?.user.id)
+        .single()
+      if (error && status !== 406) {
+        throw error
+      }
+
+      if (data) {
+        setNickname(data.nickname)
+        setFirstName(data.first_name)
+        setLastName(data.last_name)
+        setAge(data.age)
+        setWeight(data.weight)
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        Alert.alert(error.message)
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
+
 
     return (
         <Text>

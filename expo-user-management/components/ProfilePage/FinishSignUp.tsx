@@ -14,39 +14,39 @@ export default function FinishSignUp({ session }: { session: Session }) {
   const [modalVisible, setModalVisible] = useState(true);
 
 
-  useEffect(() => {
-    if (session) getProfile()
-  }, [session])
+  // useEffect(() => {
+  //   if (session) getProfile()
+  // }, [session])
 
-  async function getProfile() {
-    try {
-      setLoading(true)
-      if (!session?.user) throw new Error('No user on the session!')
+  // async function getProfile() {
+  //   try {
+  //     setLoading(true)
+  //     if (!session?.user) throw new Error('No user on the session!')
 
-      const { data, error, status } = await supabase
-        .from('profiles')
-        .select(`nickname, first_name, last_name, age, weight`)
-        .eq('id', session?.user.id)
-        .single()
-      if (error && status !== 406) {
-        throw error
-      }
+  //     const { data, error, status } = await supabase
+  //       .from('profiles')
+  //       .select(`nickname, first_name, last_name, age, weight`)
+  //       .eq('id', session?.user.id)
+  //       .single()
+  //     if (error && status !== 406) {
+  //       throw error
+  //     }
 
-      if (data) {
-        setNickname(data.nickname)
-        setFirstName(data.first_name)
-        setLastName(data.last_name)
-        setAge(data.age)
-        setWeight(data.weight)
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        Alert.alert(error.message)
-      }
-    } finally {
-      setLoading(false)
-    }
-  }
+  //     if (data) {
+  //       setNickname(data.nickname)
+  //       setFirstName(data.first_name)
+  //       setLastName(data.last_name)
+  //       setAge(data.age)
+  //       setWeight(data.weight)
+  //     }
+  //   } catch (error) {
+  //     if (error instanceof Error) {
+  //       Alert.alert(error.message)
+  //     }
+  //   } finally {
+  //     setLoading(false)
+  //   }
+  // }
 
   async function updateProfile({
     nickname,
