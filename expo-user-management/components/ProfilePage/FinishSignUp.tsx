@@ -127,9 +127,9 @@ export default function FinishSignUp({ session }: { session: Session }) {
         <View>
           <TouchableOpacity
             style={styles.customButton}
+            disabled={loading}
             onPress={() => updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight
             })}
-            disabled={loading}
           >
             <Text style={styles.buttonText}>Continue</Text>
           </TouchableOpacity>
@@ -153,6 +153,8 @@ export default function FinishSignUp({ session }: { session: Session }) {
   )
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
@@ -174,6 +176,8 @@ const styles = StyleSheet.create({
     marginRight: 'auto',
     width: '80%',
     marginTop: 40,
+    borderWidth: 1,
+    borderColor: 'blue'
   },
   buttonText: {
     color: 'white',
