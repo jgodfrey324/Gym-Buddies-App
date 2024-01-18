@@ -40,7 +40,7 @@ export default function Auth() {
     if (!session) Alert.alert('Please check your inbox for email verification!');
     setLoading(false);
 
-    navigation.navigate("ProfilePage")
+    // navigation.navigate("ProfilePage")
   }
 
   return (

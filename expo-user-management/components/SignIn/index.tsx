@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput, Platform, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { supabase } from '../../lib/supabase';
 // import { Input } from 'react-native-elements';
-// import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function SignInIndex({ setModalState }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    // const navigation = useNavigation()
+    const navigation = useNavigation()
 
     async function signInWithEmail() {
         setLoading(true);
@@ -68,7 +68,10 @@ export default function SignInIndex({ setModalState }) {
                 <TouchableOpacity
                     style={styles.customButton}
                     disabled={loading}
-                    onPress={() => signInWithEmail()}
+                    onPress={() => {
+                        signInWithEmail()
+                        // navigation.navigate("ProfilePage")
+                    }}
                 >
                     <Text style={styles.buttonText}>Sign in</Text>
                 </TouchableOpacity>

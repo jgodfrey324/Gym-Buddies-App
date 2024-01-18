@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import { Modal, Pressable, StyleSheet, Alert, View } from 'react-native'
+import { Modal, Pressable, StyleSheet, Alert, View, TouchableOpacity, TextInput } from 'react-native'
 import { Text } from 'react-native-elements'
 import FinishSignUp from './FinishSignUp'
 import LeftArrowSVG from '../../assets/leftArrow'
@@ -38,6 +38,8 @@ export default function ProfilePage ({ session }: { session: Session }) {
       }
 
       if (data) {
+        console.log('data from profile', data)
+
         setNickname(data.nickname)
         setFirstName(data.first_name)
         setLastName(data.last_name)
@@ -62,6 +64,14 @@ export default function ProfilePage ({ session }: { session: Session }) {
             <View style={styles.profileNameBox}>
                 <Text style={styles.profileName}>{firstName} {lastName}</Text>
             </View>
+
+            <View>
+              <TouchableOpacity
+                style={styles.customButton}
+                onPress={() => supabase.auth.signOut()}>
+                <TextInput style={styles.buttonText}>Sign Out</TextInput>
+              </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -75,6 +85,21 @@ profileNameBox: {
 },
 profileName: {
     fontSize: 20
+},
+customButton: {
+  backgroundColor: '#242424',
+  padding: 10,
+  borderRadius: 50,
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  width: '85%',
+  marginTop: 40,
+},
+buttonText: {
+  color: 'white',
+  fontSize: 16,
 },
 goBackButton: {
     margin: 20,

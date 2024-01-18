@@ -29,7 +29,7 @@ export default function App() {
   if (session && session.user) {
     return (
       <View>
-        <Account key={session.user.id} session={session} />
+        <ProfilePage key={session.user.id} session={session} />
       </View>
     )
   }
@@ -44,7 +44,7 @@ export default function App() {
           <Stack.Screen name="Auth" component={Auth} />
 
 
-          <Stack.Screen name="ProfilePage" component={ProfilePage} />
+          {/* <Stack.Screen name="ProfilePage" component={ProfilePage} /> */}
           {/* couldn't tell you why it's still red here, something about session but i don't understand */}
 
 
