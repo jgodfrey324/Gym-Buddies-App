@@ -73,7 +73,7 @@ export default function ProfilePage ({ session }: { session: Session }) {
 
 
             {/* </Modal> */}
-            <FinishSignUp />
+            <FinishSignUp session={session} />
         </Text>
     )
 }

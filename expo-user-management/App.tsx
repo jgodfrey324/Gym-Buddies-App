@@ -42,7 +42,12 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}} />
           <Stack.Screen name="Auth" component={Auth} />
+
+
           <Stack.Screen name="ProfilePage" component={ProfilePage} />
+          {/* couldn't tell you why it's still red here, something about session but i don't understand */}
+
+
         </Stack.Navigator>
       </NavigationContainer>
     // </UserContext.Provider>
