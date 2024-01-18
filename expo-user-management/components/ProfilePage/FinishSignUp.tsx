@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import { StyleSheet, View, Alert, TouchableOpacity, Text, TextInput, Modal} from 'react-native'
+import { StyleSheet, View, Alert, TouchableOpacity, Text, TextInput, Modal, Pressable } from 'react-native'
 import { Button, Input } from 'react-native-elements'
 import { Session } from '@supabase/supabase-js'
+import LeftArrowSVG from '../../assets/leftArrow'
+
 
 export default function FinishSignUp({ session }: { session: Session }) {
   const [loading, setLoading] = useState(true)
@@ -79,6 +81,8 @@ export default function FinishSignUp({ session }: { session: Session }) {
 
       if (error) {
         throw error
+      } else {
+        Alert.alert('db was updated')
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -123,16 +127,19 @@ export default function FinishSignUp({ session }: { session: Session }) {
         <View>
           <TouchableOpacity
             style={styles.customButton}
-            onPress={function() {
-              updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight
-              })
-              setModalVisible(!modalVisible)
-            }}
+            onPress={() => updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight
+            })}
             disabled={loading}
           >
             <Text style={styles.buttonText}>Continue</Text>
           </TouchableOpacity>
         </View>
+
+        <Pressable
+          // style={styles.goBackButton}
+          onPress={() => setModalVisible(!modalVisible)}>
+            <LeftArrowSVG width={20} height={20} />
+        </Pressable>
 
         {/* <View>
           <TouchableOpacity
