@@ -38,7 +38,7 @@ export default function ProfilePage ({ session }: { session: Session }) {
       }
 
       if (data) {
-        console.log('data from profile', data)
+        // console.log('data from profile', data)
 
         setNickname(data.nickname)
         setFirstName(data.first_name)
@@ -83,8 +83,10 @@ export default function ProfilePage ({ session }: { session: Session }) {
 
 const styles = StyleSheet.create({
 container: {
-  margin: 20,
-  top: 100
+  padding: 20,
+  // top: 100,
+  paddingTop: 120,
+  backgroundColor: '#3C3C3C'
 },
 profileNameBox: {
   width: 220,
