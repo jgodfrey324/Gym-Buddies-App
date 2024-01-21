@@ -38,7 +38,7 @@ export default function ProfilePage ({ session }: { session: Session }) {
       }
 
       if (data) {
-        // console.log('data from profile', data)
+        console.log('data from profile', data)
 
         setNickname(data.nickname)
         setFirstName(data.first_name)

@@ -25,7 +25,7 @@ export default function FinishSignUp({ session }: { session: Session }) {
         setModalVisible(!modalVisible)
       }, 1000)
     }
-  }, [session, firstName, lastName])
+  }, [session])
 
   async function getProfile() {
     try {
