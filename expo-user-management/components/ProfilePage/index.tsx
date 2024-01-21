@@ -62,7 +62,12 @@ export default function ProfilePage ({ session }: { session: Session }) {
                 <FinishSignUp session={session} />
             </View>
             <View style={styles.profileNameBox}>
-                <Text style={styles.profileName}>{firstName} {lastName}</Text>
+                <Text style={styles.profileName}>{firstName}</Text>
+                <Text style={styles.profileName}>{lastName}</Text>
+            </View>
+
+            <View style={styles.nicknameBox}>
+              <Text style={styles.nickname}>Nickname: {nickname}</Text>
             </View>
 
             <View>
@@ -78,13 +83,29 @@ export default function ProfilePage ({ session }: { session: Session }) {
 
 const styles = StyleSheet.create({
 container: {
-
+  margin: 20,
+  top: 100
 },
 profileNameBox: {
+  width: 220,
 
+  left: 105,
 },
 profileName: {
-    fontSize: 20
+  fontSize: 30,
+  // left: 120,
+  color: '#C7C588'
+},
+nicknameBox: {
+  // borderWidth: 2,
+  // borderColor: 'red',
+  // alignItems: 'center',
+  marginTop: 20
+},
+nickname: {
+  fontSize: 17,
+  fontStyle: 'italic',
+  left: 105
 },
 customButton: {
   backgroundColor: '#242424',
