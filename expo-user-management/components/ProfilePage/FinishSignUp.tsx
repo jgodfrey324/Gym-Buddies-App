@@ -13,42 +13,48 @@ export default function FinishSignUp({ session }: { session: Session }) {
   const [lastName, setLastName] = useState('')
   const [age, setAge] = useState('')
   const [weight, setWeight] = useState('')
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
 
-  // useEffect(() => {
-  //   if (session) getProfile()
-  // }, [session])
+  useEffect(() => {
+    if (session) getProfile()
 
-  // async function getProfile() {
-  //   try {
-  //     setLoading(true)
-  //     if (!session?.user) throw new Error('No user on the session!')
+    if (!firstName && !lastName) {
+      setTimeout(() => {
+        setModalVisible(!modalVisible)
+      }, 1000)
+    }
+  }, [session, firstName, lastName])
 
-  //     const { data, error, status } = await supabase
-  //       .from('profiles')
-  //       .select(`nickname, first_name, last_name, age, weight`)
-  //       .eq('id', session?.user.id)
-  //       .single()
-  //     if (error && status !== 406) {
-  //       throw error
-  //     }
+  async function getProfile() {
+    try {
+      setLoading(true)
+      if (!session?.user) throw new Error('No user on the session!')
 
-  //     if (data) {
-  //       setNickname(data.nickname)
-  //       setFirstName(data.first_name)
-  //       setLastName(data.last_name)
-  //       setAge(data.age)
-  //       setWeight(data.weight)
-  //     }
-  //   } catch (error) {
-  //     if (error instanceof Error) {
-  //       Alert.alert(error.message)
-  //     }
-  //   } finally {
-  //     setLoading(false)
-  //   }
-  // }
+      const { data, error, status } = await supabase
+        .from('profiles')
+        .select(`nickname, first_name, last_name, age, weight`)
+        .eq('id', session?.user.id)
+        .single()
+      if (error && status !== 406) {
+        throw error
+      }
+
+      if (data) {
+        setNickname(data.nickname)
+        setFirstName(data.first_name)
+        setLastName(data.last_name)
+        setAge(data.age)
+        setWeight(data.weight)
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        Alert.alert(error.message)
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
 
   async function updateProfile({
     nickname,
