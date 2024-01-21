@@ -91,13 +91,14 @@ const styles = StyleSheet.create({
 container: {
   padding: 20,
   // top: 100,
-  paddingTop: 120,
+  paddingTop: '20%',
   backgroundColor: '#3C3C3C'
 },
 profileNameBox: {
-  width: 220,
-
-  left: 105,
+  width: '55%',
+  // borderWidth: 2,
+  // borderColor: 'red',
+  left: '27%',
 },
 profileName: {
   fontSize: 30,
@@ -105,15 +106,14 @@ profileName: {
   color: '#C7C588'
 },
 nicknameBox: {
-  // borderWidth: 2,
-  // borderColor: 'red',
+
   // alignItems: 'center',
   marginTop: 20
 },
 nickname: {
   fontSize: 17,
   fontStyle: 'italic',
-  left: 105,
+  left: '27%',
   color: 'white'
 },
 customButton: {
@@ -135,7 +135,11 @@ buttonText: {
 whiteScrollContainer: {
   borderWidth: 2,
   borderColor: 'red',
-  height: 100
+  height: '56%',
+  borderTopLeftRadius: 25,
+  borderTopRightRadius: 25,
+  top: -20,
+  backgroundColor: 'white'
 },
 goBackButton: {
     margin: 20,
