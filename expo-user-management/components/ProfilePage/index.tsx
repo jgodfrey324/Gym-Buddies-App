@@ -75,7 +75,7 @@ export default function ProfilePage ({ session }: { session: Session }) {
               <TouchableOpacity
                 style={styles.customButton}
                 onPress={() => supabase.auth.signOut()}>
-                <TextInput style={styles.buttonText}>Sign Out</TextInput>
+                <Text style={styles.buttonText}>Sign Out</Text>
               </TouchableOpacity>
             </View>
           </View>

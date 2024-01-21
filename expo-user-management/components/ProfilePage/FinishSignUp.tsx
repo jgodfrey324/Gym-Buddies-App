@@ -19,6 +19,7 @@ export default function FinishSignUp({ session }: { session: Session }) {
   useEffect(() => {
     if (session) getProfile()
 
+    console.log('first name', firstName, 'last name', lastName)
     if (!firstName && !lastName) {
       setTimeout(() => {
         setModalVisible(!modalVisible)
@@ -170,7 +171,10 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 2,
     // paddingTop: 100
-    // padding: 20
+    // padding: 20,
+    top: '10%',
+    padding: 20,
+    paddingTop: 50
   },
   customButton: {
     backgroundColor: '#242424',
@@ -182,8 +186,8 @@ const styles = StyleSheet.create({
     marginRight: 'auto',
     width: '80%',
     marginTop: 40,
-    borderWidth: 1,
-    borderColor: 'blue'
+    // borderWidth: 1,
+    // borderColor: 'blue'
   },
   buttonText: {
     color: 'white',
