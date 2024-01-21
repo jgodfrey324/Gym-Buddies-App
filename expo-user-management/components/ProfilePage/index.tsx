@@ -57,7 +57,8 @@ export default function ProfilePage ({ session }: { session: Session }) {
 
 
     return (
-        <View style={styles.container}>
+        <View>
+          <View style={styles.container}>
             <View>
                 <FinishSignUp session={session} />
             </View>
@@ -67,7 +68,7 @@ export default function ProfilePage ({ session }: { session: Session }) {
             </View>
 
             <View style={styles.nicknameBox}>
-              <Text style={styles.nickname}>Nickname: {nickname}</Text>
+              <Text style={styles.nickname}>Nickname :  {nickname}</Text>
             </View>
 
             <View>
@@ -76,6 +77,11 @@ export default function ProfilePage ({ session }: { session: Session }) {
                 onPress={() => supabase.auth.signOut()}>
                 <TextInput style={styles.buttonText}>Sign Out</TextInput>
               </TouchableOpacity>
+            </View>
+          </View>
+
+            <View style={styles.whiteScrollContainer}>
+
             </View>
         </View>
     )
@@ -107,7 +113,8 @@ nicknameBox: {
 nickname: {
   fontSize: 17,
   fontStyle: 'italic',
-  left: 105
+  left: 105,
+  color: 'white'
 },
 customButton: {
   backgroundColor: '#242424',
@@ -118,11 +125,17 @@ customButton: {
   marginLeft: 'auto',
   marginRight: 'auto',
   width: '85%',
-  marginTop: 40,
+  marginTop: 60,
+  marginBottom: 50
 },
 buttonText: {
   color: 'white',
   fontSize: 16,
+},
+whiteScrollContainer: {
+  borderWidth: 2,
+  borderColor: 'red',
+  height: 100
 },
 goBackButton: {
     margin: 20,
