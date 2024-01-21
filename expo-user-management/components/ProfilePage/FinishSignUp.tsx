@@ -135,8 +135,12 @@ export default function FinishSignUp({ session }: { session: Session }) {
           <TouchableOpacity
             style={styles.customButton}
             disabled={loading}
-            onPress={() => updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight
-            })}
+            onPress={() => {
+              updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight
+              })
+              setModalVisible(!modalVisible)
+          }
+          }
           >
             <Text style={styles.buttonText}>Continue</Text>
           </TouchableOpacity>
