@@ -17,7 +17,7 @@ export default function ProfilePage ({ session }: { session: Session }) {
   const [weight, setWeight] = useState('')
 
 
-  // console.log('session', session)
+  console.log('session user updated', session.user.updated_at)
   useEffect(() => {
     if (session) {
       console.log('get profile was triggered in use effect')

@@ -39,6 +39,7 @@ export default function FinishSignUp({ session }: { session: Session }) {
         throw error
       }
 
+      console.log('data from get profile function', data)
       if (data) {
         setNickname(data.nickname)
         setFirstName(data.first_name)
@@ -56,38 +57,42 @@ export default function FinishSignUp({ session }: { session: Session }) {
   }
 
   async function updateProfile({
-    nickname,
     first_name,
     last_name,
-    age,
-    weight
+    nickname,
+    weight,
+    age
   }: {
-    nickname: string
     first_name: string
     last_name: string
-    age: string
+    nickname: string
     weight: string
+    age: string
   }) {
     try {
       setLoading(true)
       if (!session?.user) throw new Error('No user on the session!')
 
       const updates = {
-        id: session?.user.id,
-        nickname,
+        // id: session?.user.id,
         first_name,
         last_name,
-        age,
+        nickname,
         weight,
+        age,
         updated_at: new Date(),
       }
 
+      console.log('updates obj to be inserted', updates)
+
       const { error } = await supabase
         .from('profiles')
-        .update(updates)
-        .eq('id', session.user.id)
+        .upsert(updates)
+
+      // console.log('data from select statement in update function', data)
 
       if (error) {
+        console.log('error was thrown when updating', error)
         throw error
       } else {
         Alert.alert('db was updated')
