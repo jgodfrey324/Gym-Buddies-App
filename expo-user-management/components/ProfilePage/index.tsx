@@ -15,7 +15,6 @@ export default function ProfilePage ({ session }: { session: Session }) {
   const [lastName, setLastName] = useState('')
   const [age, setAge] = useState('')
   const [weight, setWeight] = useState('')
-  const [profileData, setProfileData] = useState({})
 
   useEffect(() => {
     if (session) {
@@ -48,8 +47,6 @@ export default function ProfilePage ({ session }: { session: Session }) {
       console.log('data', data)
       if (data) {
         console.log('data from profile', data)
-
-        setProfileData(data)
 
         setNickname(data.nickname)
         setFirstName(data.first_name)

@@ -20,13 +20,6 @@ export default function FinishSignUp({ session }: { session: Session }) {
     if (session) getProfile()
   }, [session])
 
-  // if (!firstName) {
-  //   console.log('i somehow still passed these checks')
-  //   setTimeout(() => {
-  //     setModalVisible(!modalVisible)
-  //   }, 500)
-  // }
-
   async function getProfile() {
     try {
       setLoading(true)
@@ -41,13 +34,14 @@ export default function FinishSignUp({ session }: { session: Session }) {
         throw error
       }
 
-      console.log('data from get profile function', data)
       if (data) {
         setFirstName(data.first_name)
-      } else {
-        setTimeout(() => {
-          setModalVisible(!modalVisible)
-        }, 500)
+
+        if (!firstName) {
+          setTimeout(() => {
+            setModalVisible(!modalVisible)
+          }, 500)
+        }
       }
     } catch (error) {
       if (error instanceof Error) {

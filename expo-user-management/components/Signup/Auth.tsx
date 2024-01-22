@@ -15,16 +15,17 @@ export default function Auth() {
 
   const navigation = useNavigation()
 
-  // async function signInWithEmail() {
-  //   setLoading(true);
-  //   const { error } = await supabase.auth.signInWithPassword({
-  //     email: email,
-  //     password: password,
-  //   });
+  async function signInWithEmail() {
+    console.log('i was called to log in after sign up in the auth file')
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
 
-  //   if (error) Alert.alert(error.message);
-  //   setLoading(false);
-  // }
+    if (error) Alert.alert(error.message);
+    setLoading(false);
+  }
 
   async function signUpWithEmail() {
     setLoading(true);
@@ -36,13 +37,14 @@ export default function Auth() {
       password: password,
     });
 
-    console.log('data', session)
+    console.log('session from the sign up with email function --> ', session)
     if (error) {
       console.log(error)
       Alert.alert(error.message);
     }
     if (!error && !session) Alert.alert('Please check your inbox for email verification!');
     setLoading(false);
+    signInWithEmail()
 
     // navigation.navigate("ProfilePage")
   }
