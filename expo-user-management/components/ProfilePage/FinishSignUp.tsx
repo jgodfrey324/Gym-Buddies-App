@@ -40,7 +40,7 @@ export default function FinishSignUp({ session }: { session: Session }) {
         if (!data.first_name) {
           setTimeout(() => {
             setModalVisible(!modalVisible)
-          }, 500)
+          }, 100)
         }
       }
     } catch (error) {

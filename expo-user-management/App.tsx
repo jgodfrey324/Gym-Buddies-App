@@ -24,7 +24,6 @@ export default function App() {
     })
   }, [])
 
-  console.log('session from app, ---> ', session)
 
   if (session) return (
     <View>
