@@ -19,12 +19,10 @@ export default function FinishSignUp({ session }: { session: Session }) {
   useEffect(() => {
     if (session) getProfile()
 
-    console.log('first name', firstName, 'last name', lastName)
-    if (!firstName && !lastName) {
-      setTimeout(() => {
-        setModalVisible(!modalVisible)
-      }, 1000)
-    }
+    setTimeout(() => {
+      setModalVisible(!modalVisible)
+    }, 500)
+
   }, [session])
 
   async function getProfile() {
@@ -84,7 +82,10 @@ export default function FinishSignUp({ session }: { session: Session }) {
         updated_at: new Date(),
       }
 
-      const { error } = await supabase.from('profiles').upsert(updates)
+      const { error } = await supabase
+        .from('profiles')
+        .update(updates)
+        .eq('id', session.user.id)
 
       if (error) {
         throw error

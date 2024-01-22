@@ -17,16 +17,24 @@ export default function ProfilePage ({ session }: { session: Session }) {
   const [weight, setWeight] = useState('')
 
 
+  // console.log('session', session)
   useEffect(() => {
-    if (session) getProfile()
+    if (session) {
+      console.log('get profile was triggered in use effect')
+      getProfile()
+    }
   }, [session])
 
 
 
   async function getProfile() {
+    console.log('get profile function running')
     try {
       setLoading(true)
-      if (!session?.user) throw new Error('No user on the session!')
+      if (!session?.user) {
+        // console.log('there isn\'t a session user')
+        throw new Error('No user on the session!')
+      }
 
       const { data, error, status } = await supabase
         .from('profiles')
@@ -34,9 +42,12 @@ export default function ProfilePage ({ session }: { session: Session }) {
         .eq('id', session?.user.id)
         .single()
       if (error && status !== 406) {
+        console.log('there was an error getting the data from sb')
+        console.log('error', error)
         throw error
       }
 
+      console.log('data', data)
       if (data) {
         console.log('data from profile', data)
 
