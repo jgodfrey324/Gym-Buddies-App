@@ -25,14 +25,11 @@ export default function App() {
   }, [])
 
 
-
-  if (session) {
-    return (
-      <View>
-        <ProfilePage key={session.user.id} session={session} />
-      </View>
-    )
-  }
+  if (session) return (
+    <View>
+      <ProfilePage key={session.user.id} session={session} />
+    </View>
+  )
 
   const Stack = createNativeStackNavigator();
 

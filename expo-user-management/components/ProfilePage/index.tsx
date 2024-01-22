@@ -15,9 +15,8 @@ export default function ProfilePage ({ session }: { session: Session }) {
   const [lastName, setLastName] = useState('')
   const [age, setAge] = useState('')
   const [weight, setWeight] = useState('')
+  const [profileData, setProfileData] = useState({})
 
-
-  console.log('session user updated', session.user.updated_at)
   useEffect(() => {
     if (session) {
       console.log('get profile was triggered in use effect')
@@ -42,7 +41,6 @@ export default function ProfilePage ({ session }: { session: Session }) {
         .eq('id', session?.user.id)
         .single()
       if (error && status !== 406) {
-        console.log('there was an error getting the data from sb')
         console.log('error', error)
         throw error
       }
@@ -50,6 +48,8 @@ export default function ProfilePage ({ session }: { session: Session }) {
       console.log('data', data)
       if (data) {
         console.log('data from profile', data)
+
+        setProfileData(data)
 
         setNickname(data.nickname)
         setFirstName(data.first_name)

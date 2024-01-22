@@ -18,12 +18,14 @@ export default function FinishSignUp({ session }: { session: Session }) {
 
   useEffect(() => {
     if (session) getProfile()
-
-    setTimeout(() => {
-      setModalVisible(!modalVisible)
-    }, 500)
-
   }, [session])
+
+  // if (!firstName) {
+  //   console.log('i somehow still passed these checks')
+  //   setTimeout(() => {
+  //     setModalVisible(!modalVisible)
+  //   }, 500)
+  // }
 
   async function getProfile() {
     try {
@@ -32,7 +34,7 @@ export default function FinishSignUp({ session }: { session: Session }) {
 
       const { data, error, status } = await supabase
         .from('profiles')
-        .select(`nickname, first_name, last_name, age, weight`)
+        .select(`first_name`)
         .eq('id', session?.user.id)
         .single()
       if (error && status !== 406) {
@@ -41,11 +43,11 @@ export default function FinishSignUp({ session }: { session: Session }) {
 
       console.log('data from get profile function', data)
       if (data) {
-        setNickname(data.nickname)
         setFirstName(data.first_name)
-        setLastName(data.last_name)
-        setAge(data.age)
-        setWeight(data.weight)
+      } else {
+        setTimeout(() => {
+          setModalVisible(!modalVisible)
+        }, 500)
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -83,16 +85,11 @@ export default function FinishSignUp({ session }: { session: Session }) {
         updated_at: new Date(),
       }
 
-      console.log('updates obj to be inserted', updates)
-
       const { error } = await supabase
         .from('profiles')
         .upsert(updates)
 
-      // console.log('data from select statement in update function', data)
-
       if (error) {
-        console.log('error was thrown when updating', error)
         throw error
       } else {
         Alert.alert('db was updated')
