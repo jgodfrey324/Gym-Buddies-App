@@ -45,8 +45,6 @@ export default function Auth() {
     if (!error && !session) Alert.alert('Please check your inbox for email verification!');
     setLoading(false);
     signInWithEmail()
-
-    // navigation.navigate("ProfilePage")
   }
 
   return (

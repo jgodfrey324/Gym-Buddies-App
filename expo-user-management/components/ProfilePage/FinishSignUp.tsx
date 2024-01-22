@@ -37,7 +37,7 @@ export default function FinishSignUp({ session }: { session: Session }) {
       if (data) {
         setFirstName(data.first_name)
 
-        if (!firstName) {
+        if (!data.first_name) {
           setTimeout(() => {
             setModalVisible(!modalVisible)
           }, 500)
