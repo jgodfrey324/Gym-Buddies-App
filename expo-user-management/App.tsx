@@ -26,7 +26,7 @@ export default function App() {
 
 
 
-  if (session && session.user) {
+  if (session) {
     return (
       <View>
         <ProfilePage key={session.user.id} session={session} />

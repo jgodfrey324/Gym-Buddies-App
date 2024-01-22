@@ -36,8 +36,12 @@ export default function Auth() {
       password: password,
     });
 
-    if (error) Alert.alert(error.message);
-    if (!session) Alert.alert('Please check your inbox for email verification!');
+    console.log('data', session)
+    if (error) {
+      console.log(error)
+      Alert.alert(error.message);
+    }
+    if (!error && !session) Alert.alert('Please check your inbox for email verification!');
     setLoading(false);
 
     // navigation.navigate("ProfilePage")
@@ -65,7 +69,7 @@ export default function Auth() {
             autoCapitalize={'none'}
           />
         </View>
-        <View style={[styles.inputStyle, styles.inputMargin]}>
+        {/* <View style={[styles.inputStyle, styles.inputMargin]}>
           <TextInput
             style={styles.inputText}
             onChangeText={(text) => setFirstName(text)}
@@ -84,7 +88,7 @@ export default function Auth() {
             placeholderTextColor={'#929292'}
             autoCapitalize={'none'}
           />
-        </View>
+        </View> */}
         <View style={[styles.inputStyle, styles.inputMargin]}>
           <TextInput
             style={styles.inputText}
@@ -114,6 +118,7 @@ export default function Auth() {
             onPress={function() {
               signUpWithEmail()
               setModalVisible(!modalVisible)
+              // navigation.navigate('ProfilePage')
             }}
           >
             <Text style={styles.buttonText}>Sign Up</Text>
