@@ -23,7 +23,9 @@ export default function ProfilePage ({ session }: { session: Session }) {
     }
   }, [session])
 
-
+  const reloadProfile = () => {
+    getProfile()
+  }
 
   async function getProfile() {
     console.log('get profile function running')
@@ -68,7 +70,7 @@ export default function ProfilePage ({ session }: { session: Session }) {
         <View>
           <View style={styles.container}>
             <View>
-                <FinishSignUp session={session} />
+                <FinishSignUp session={session} reloadProfile={reloadProfile} />
             </View>
             <View style={styles.profileNameBox}>
                 <Text style={styles.profileName}>{firstName}</Text>

@@ -6,7 +6,7 @@ import { Session } from '@supabase/supabase-js'
 import LeftArrowSVG from '../../assets/leftArrow'
 
 
-export default function FinishSignUp({ session }: { session: Session }) {
+export default function FinishSignUp({ session, reloadProfile }: { session: Session; reloadProfile: () => void }) {
   const [loading, setLoading] = useState(true)
   const [nickname, setNickname] = useState('')
   const [firstName, setFirstName] = useState('')
@@ -136,6 +136,7 @@ export default function FinishSignUp({ session }: { session: Session }) {
               updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight
               })
               setModalVisible(!modalVisible)
+              reloadProfile()
           }
           }
           >
