@@ -4,7 +4,11 @@ import { supabase } from '../../lib/supabase';
 // import { Input } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
-export default function SignInIndex({ setModalState }) {
+interface SignInProps {
+    setModalState: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function SignInIndex({ setModalState }: SignInProps) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
