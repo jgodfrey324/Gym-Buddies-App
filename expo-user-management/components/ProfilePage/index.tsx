@@ -24,7 +24,8 @@ export default function ProfilePage ({ session }: { session: Session }) {
   }, [session])
 
   const reloadProfile = () => {
-    getProfile()
+    console.log('reload profile called get profile')
+    setTimeout(() => getProfile(), 2000)
   }
 
   async function getProfile() {
@@ -64,7 +65,6 @@ export default function ProfilePage ({ session }: { session: Session }) {
       setLoading(false)
     }
   }
-
 
     return (
         <View>

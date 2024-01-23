@@ -21,6 +21,7 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
   }, [session])
 
   async function getProfile() {
+    console.log('get profile function was triggered inside the modal')
     try {
       setLoading(true)
       if (!session?.user) throw new Error('No user on the session!')
