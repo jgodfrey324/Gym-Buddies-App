@@ -45,8 +45,6 @@ export default function App() {
 
             {/* <Stack.Screen name="ProfilePage" component={ProfilePage} /> */}
             {/* couldn't tell you why it's still red here, something about session but i don't understand */}
-
-
           </Stack.Navigator>
         </NavigationContainer>
       </UserProvider>

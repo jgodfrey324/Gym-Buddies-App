@@ -6,6 +6,7 @@ import FinishSignUp from './FinishSignUp'
 import LeftArrowSVG from '../../assets/leftArrow'
 import { Session } from '@supabase/supabase-js'
 import { useUserContext } from '../../context/context'
+import NavBar from '../Navbar'
 
 
 export default function ProfilePage ({ session }: { session: Session }) {
@@ -91,10 +92,11 @@ export default function ProfilePage ({ session }: { session: Session }) {
               </TouchableOpacity>
             </View>
           </View>
-
             <View style={styles.whiteScrollContainer}>
-
-            </View>
+          </View>
+          {/* <View>
+            <NavBar />
+          </View> */}
         </View>
     )
 }
@@ -147,7 +149,8 @@ buttonText: {
 whiteScrollContainer: {
   borderWidth: 2,
   borderColor: 'red',
-  height: '56%',
+  height: '54%',
+  // height: '53%', w navbar
   borderTopLeftRadius: 25,
   borderTopRightRadius: 25,
   top: -20,
