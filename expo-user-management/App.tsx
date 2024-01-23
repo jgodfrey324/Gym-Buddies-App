@@ -9,7 +9,7 @@ import Account from './components/Signup/Account';
 import { Session } from '@supabase/supabase-js'
 import Auth from './components/Signup/Auth';
 import ProfilePage from './components/ProfilePage';
-import { UserContext } from './context/user';
+import { UserProvider } from './context/context';
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -26,27 +26,29 @@ export default function App() {
 
 
   if (session) return (
-    <View>
-      <ProfilePage key={session.user.id} session={session} />
-    </View>
+    <UserProvider>
+      <View>
+        <ProfilePage key={session.user.id} session={session} />
+      </View>
+    </UserProvider>
   )
 
   const Stack = createNativeStackNavigator();
 
   return (
-    // <UserContext.Provider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}} />
-          <Stack.Screen name="Auth" component={Auth} />
+      <UserProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}} />
+            <Stack.Screen name="Auth" component={Auth} />
 
 
-          {/* <Stack.Screen name="ProfilePage" component={ProfilePage} /> */}
-          {/* couldn't tell you why it's still red here, something about session but i don't understand */}
+            {/* <Stack.Screen name="ProfilePage" component={ProfilePage} /> */}
+            {/* couldn't tell you why it's still red here, something about session but i don't understand */}
 
 
-        </Stack.Navigator>
-      </NavigationContainer>
-    // </UserContext.Provider>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </UserProvider>
   )
 }

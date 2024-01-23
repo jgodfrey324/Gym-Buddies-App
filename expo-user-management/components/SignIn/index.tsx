@@ -3,10 +3,7 @@ import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput, Platform, S
 import { supabase } from '../../lib/supabase';
 // import { Input } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-
-interface SignInProps {
-    setModalState: React.Dispatch<React.SetStateAction<string>>;
-}
+import { SignInProps } from '../../types';
 
 export default function SignInIndex({ setModalState }: SignInProps) {
 

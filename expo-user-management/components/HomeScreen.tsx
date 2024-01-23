@@ -9,6 +9,7 @@ import ForgotPassword from './ForgotPassword'
 // import LeftArrow from '../assets/left-arrow.svg'
 import LeftArrowSVG from '../assets/leftArrow'
 // import { SvgUri } from 'react-native-svg'
+// import { ModalStateProps } from '../types'
 
 export default function HomeScreen() {
   const [loading, setLoading] = useState(false)

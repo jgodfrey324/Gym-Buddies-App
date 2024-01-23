@@ -5,16 +5,18 @@ import { Text } from 'react-native-elements'
 import FinishSignUp from './FinishSignUp'
 import LeftArrowSVG from '../../assets/leftArrow'
 import { Session } from '@supabase/supabase-js'
+import { useUserContext } from '../../context/context'
 
 
 export default function ProfilePage ({ session }: { session: Session }) {
+  const { nickname, setNickname, firstName, setFirstName, lastName, setLastName, age, setAge, weight, setWeight } = useUserContext()
   const [modalVisible, setModalVisible] = useState(true);
   const [loading, setLoading] = useState(true)
-  const [nickname, setNickname] = useState('')
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [age, setAge] = useState('')
-  const [weight, setWeight] = useState('')
+  // const [nickname, setNickname] = useState('')
+  // const [firstName, setFirstName] = useState('')
+  // const [lastName, setLastName] = useState('')
+  // const [age, setAge] = useState('')
+  // const [weight, setWeight] = useState('')
 
   useEffect(() => {
     if (session) {

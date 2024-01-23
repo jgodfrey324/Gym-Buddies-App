@@ -4,15 +4,18 @@ import { StyleSheet, View, Alert, TouchableOpacity, Text, TextInput, Modal, Pres
 import { Button, Input } from 'react-native-elements'
 import { Session } from '@supabase/supabase-js'
 import LeftArrowSVG from '../../assets/leftArrow'
+import Spinner from '../Spinner'
+import { useUserContext } from '../../context/context'
 
 
 export default function FinishSignUp({ session, reloadProfile }: { session: Session; reloadProfile: () => void }) {
+  const { nickname, setNickname, firstName, setFirstName, lastName, setLastName, age, setAge, weight, setWeight } = useUserContext()
   const [loading, setLoading] = useState(true)
-  const [nickname, setNickname] = useState('')
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [age, setAge] = useState('')
-  const [weight, setWeight] = useState('')
+  // const [nickname, setNickname] = useState('')
+  // const [firstName, setFirstName] = useState('')
+  // const [lastName, setLastName] = useState('')
+  // const [age, setAge] = useState('')
+  // const [weight, setWeight] = useState('')
   const [modalVisible, setModalVisible] = useState(false);
 
 
@@ -98,6 +101,14 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
     }
   }
 
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', zIndex: 10 }}>
+        <Spinner />
+      </View>
+    )
+  }
+
   return (
     <Modal
     animationType="slide"
@@ -107,9 +118,6 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
       setModalVisible(!modalVisible);
     }}
     >
-
-
-
       <View style={styles.container}>
         <View style={styles.tell}>
           <Text style={{fontSize: 30,}}>Tell us about yourself</Text>
