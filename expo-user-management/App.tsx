@@ -1,6 +1,6 @@
 import 'react-native-url-polyfill/auto'
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createNativeStackNavigator, } from '@react-navigation/native-stack';
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import { View } from 'react-native';
@@ -10,6 +10,7 @@ import { Session } from '@supabase/supabase-js'
 import Auth from './components/Signup/Auth';
 import ProfilePage from './components/ProfilePage';
 import { UserProvider } from './context/context';
+import NavBar from './components/Navbar';
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -24,23 +25,40 @@ export default function App() {
     })
   }, [])
 
+  console.log(session)
 
-  if (session) return (
-    <UserProvider>
-      <View>
-        <ProfilePage key={session.user.id} session={session} />
-      </View>
-    </UserProvider>
-  )
+  // if (session) return (
+  //   <UserProvider>
+  //     <View>
+  //       <ProfilePage key={session.user.id} session={session} />
+  //       <NavBar />
+  //     </View>
+  //   </UserProvider>
+  // )
 
   const Stack = createNativeStackNavigator();
 
   return (
       <UserProvider>
         <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}} />
-            <Stack.Screen name="Auth" component={Auth} />
+          <Stack.Navigator
+            initialRouteName={`${session ? 'ProfilePage' : 'HomeScreen'}`}
+          >
+            {session ? (
+              <>
+                <Stack.Screen name="ProfilePage" options={{headerShown: false}}>
+                  {() => <ProfilePage session={session} />}
+                </Stack.Screen>
+              </>
+            ) : (
+              <>
+                <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}} />
+                <Stack.Screen name="Auth" component={Auth} options={{headerShown: false}} />
+              </>
+            )}
+            {/* <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}} />
+            <Stack.Screen name="Auth" component={Auth} options={{headerShown: false}} />   */}
+
 
 
             {/* <Stack.Screen name="ProfilePage" component={ProfilePage} /> */}

@@ -19,7 +19,8 @@ export default function SignInIndex({ setModalState }: SignInProps) {
             password: password,
         });
 
-        if (error) Alert.alert(error.message);
+        if (error) Alert.alert(error.message)
+        else navigation.navigate('ProfilePage')
         setLoading(false);
     }
 
