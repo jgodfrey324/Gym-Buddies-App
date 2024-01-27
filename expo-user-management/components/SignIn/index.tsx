@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput, Platform, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { supabase } from '../../lib/supabase';
 // import { Input } from 'react-native-elements';
@@ -11,6 +11,7 @@ export default function SignInIndex({ setModalState }: SignInProps) {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const navigation = useNavigation()
+
 
     async function signInWithEmail() {
         setLoading(true);
