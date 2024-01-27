@@ -17,7 +17,7 @@ export default function ProfilePage ({ session }: { session: Session }) {
   // const [firstName, setFirstName] = useState('')
   // const [lastName, setLastName] = useState('')
   // const [age, setAge] = useState('')
-  // const [weight, setWeight] = useState('')
+  const [weight, setWeight] = useState('')
 
   useEffect(() => {
     if (session) {
