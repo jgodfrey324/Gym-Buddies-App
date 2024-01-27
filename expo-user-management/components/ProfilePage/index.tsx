@@ -6,13 +6,17 @@ import FinishSignUp from './FinishSignUp'
 import LeftArrowSVG from '../../assets/leftArrow'
 import { Session } from '@supabase/supabase-js'
 import { useUserContext } from '../../context/context'
+import Groups from '../Groups'
 import NavBar from '../Navbar'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigationContainer } from '@react-navigation/native'
 
 
 export default function ProfilePage ({ session }: { session: Session }) {
   const { nickname, setNickname, firstName, setFirstName, lastName, setLastName, age, setAge, weight, setWeight } = useUserContext()
   const [modalVisible, setModalVisible] = useState(true);
   const [loading, setLoading] = useState(true)
+  const Tab = createBottomTabNavigator()
   // const [nickname, setNickname] = useState('')
   // const [firstName, setFirstName] = useState('')
   // const [lastName, setLastName] = useState('')
@@ -92,8 +96,11 @@ export default function ProfilePage ({ session }: { session: Session }) {
               </TouchableOpacity>
             </View>
           </View>
-            <View style={styles.whiteScrollContainer}>
-          </View>
+            {/* <View style={styles.whiteScrollContainer}>
+          </View> */}
+          <Tab.Navigator>
+            <Tab.Screen name="Groups" component={Groups}  />
+          </Tab.Navigator>
           {/* <View>
             <NavBar />
           </View> */}

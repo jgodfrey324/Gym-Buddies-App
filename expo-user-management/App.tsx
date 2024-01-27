@@ -1,6 +1,7 @@
 import 'react-native-url-polyfill/auto'
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator, } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import { View } from 'react-native';
@@ -11,6 +12,8 @@ import Auth from './components/Signup/Auth';
 import ProfilePage from './components/ProfilePage';
 import { UserProvider } from './context/context';
 import NavBar from './components/Navbar';
+import FinishSignUp from './components/ProfilePage/FinishSignUp';
+import Groups from './components/Groups';
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -37,6 +40,15 @@ export default function App() {
   // )
 
   const Stack = createNativeStackNavigator();
+  const Tab = createBottomTabNavigator();
+
+  const BottomTabs = () => {
+    return (
+      <Tab.Navigator>
+        <Tab.Screen name="Groups" component={Groups} />
+      </Tab.Navigator>
+    )
+  }
 
   return (
       <UserProvider>
@@ -49,6 +61,7 @@ export default function App() {
                 <Stack.Screen name="ProfilePage" options={{headerShown: false}}>
                   {() => <ProfilePage session={session} />}
                 </Stack.Screen>
+                <Stack.Screen name="BottomTabs" component={BottomTabs} options={{headerShown: false}} />
               </>
             ) : (
               <>
