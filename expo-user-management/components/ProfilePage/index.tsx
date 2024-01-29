@@ -7,6 +7,7 @@ import LeftArrowSVG from '../../assets/leftArrow'
 import { Session } from '@supabase/supabase-js'
 import { useUserContext } from '../../context/context'
 import NavBar from '../Navbar'
+import ImagePickerComp from './ImagePickerComp'
 
 
 export default function ProfilePage ({ session }: { session: Session }) {
@@ -78,6 +79,10 @@ export default function ProfilePage ({ session }: { session: Session }) {
             <View style={styles.profileNameBox}>
                 <Text style={styles.profileName}>{firstName}</Text>
                 <Text style={styles.profileName}>{lastName}</Text>
+            </View>
+
+            <View style={styles.imagePicker}>
+              <ImagePickerComp />
             </View>
 
             <View style={styles.nicknameBox}>
@@ -169,4 +174,9 @@ goBackButton: {
     borderRadius: 30,
 
   },
+  imagePicker: {
+    borderWidth: 2,
+    borderColor: 'red',
+    height: 50
+  }
 })
