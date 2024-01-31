@@ -26,7 +26,7 @@ export default function ImagePickerComp() {
 
     const filePath = userId + '/' + uuidv4()
 
-    const imageURI = result.assets[0].uri
+    const imageURI = result.assets?.[0]?.uri
 
 
     try {
