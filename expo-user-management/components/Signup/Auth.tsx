@@ -16,7 +16,6 @@ export default function Auth() {
   const navigation = useNavigation()
 
   async function signInWithEmail() {
-    console.log('i was called to log in after sign up in the auth file')
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
       email: email,
@@ -37,7 +36,6 @@ export default function Auth() {
       password: password,
     });
 
-    console.log('session from the sign up with email function --> ', session)
     if (error) {
       console.log(error)
       Alert.alert(error.message);

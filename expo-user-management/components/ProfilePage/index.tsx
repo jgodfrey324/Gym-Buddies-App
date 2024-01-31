@@ -22,18 +22,15 @@ export default function ProfilePage ({ session }: { session: Session }) {
 
   useEffect(() => {
     if (session) {
-      console.log('get profile was triggered in use effect')
       getProfile()
     }
   }, [session])
 
   const reloadProfile = () => {
-    console.log('reload profile called get profile')
     setTimeout(() => getProfile(), 2000)
   }
 
   async function getProfile() {
-    console.log('get profile function running')
     try {
       setLoading(true)
       if (!session?.user) {
@@ -51,10 +48,7 @@ export default function ProfilePage ({ session }: { session: Session }) {
         throw error
       }
 
-      console.log('data', data)
       if (data) {
-        console.log('data from profile', data)
-
         setNickname(data.nickname)
         setFirstName(data.first_name)
         setLastName(data.last_name)
