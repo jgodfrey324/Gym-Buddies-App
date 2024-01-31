@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Image, View, Platform } from 'react-native';
+import { supabase } from '../../lib/supabase';
+import { decode } from 'base64-arraybuffer'
 import * as ImagePicker from 'expo-image-picker';
 
 export default function ImagePickerComp() {
@@ -15,6 +17,21 @@ export default function ImagePickerComp() {
     });
 
     console.log(result);
+
+    // const imageURI = result.assets[0].uri
+    // const { data, error } = await supabase
+    //   .storage
+    //   .from('Images')
+    //   .upload( imageURI, decode(result.assets[0].uri), {
+    //     contentType: 'image/png'
+    //   })
+
+    // if (error) {
+    //   console.log('error: ', error)
+    // } else {
+    //   console.log('data: ', data)
+    // }
+
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
