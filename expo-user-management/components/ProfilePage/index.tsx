@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import { Modal, Pressable, StyleSheet, Alert, View, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native'
+import { Modal, Pressable, StyleSheet, Alert, View, TouchableOpacity, TextInput, ActivityIndicator, Image } from 'react-native'
 import { Text } from 'react-native-elements'
 import FinishSignUp from './FinishSignUp'
 import LeftArrowSVG from '../../assets/leftArrow'
@@ -15,24 +15,64 @@ import { NavigationContainer } from '@react-navigation/native'
 
 export default function ProfilePage ({ session }: { session: Session }) {
   const { nickname, setNickname, firstName, setFirstName, lastName, setLastName, age, setAge, weight, setWeight } = useUserContext()
+  const Tab = createBottomTabNavigator()
   const [modalVisible, setModalVisible] = useState(true);
   const [loading, setLoading] = useState(true)
-  const Tab = createBottomTabNavigator()
+  const [image, setImage] = useState('')
   // const [nickname, setNickname] = useState('')
   // const [firstName, setFirstName] = useState('')
   // const [lastName, setLastName] = useState('')
   // const [age, setAge] = useState('')
   // const [weight, setWeight] = useState('')
 
+
+
   useEffect(() => {
     if (session) {
       getProfile()
+      getProfilePic()
     }
   }, [session])
+
+
+
+
 
   const reloadProfile = () => {
     setTimeout(() => getProfile(), 2000)
   }
+
+
+
+  const getProfilePic = async () => {
+    const userId = (await supabase.auth.getUser()).data.user?.id
+    const CDNUrl = "https://qmuznbxetqnzninllxde.supabase.co/storage/v1/object/public/Images/"
+
+    const { data, error } = await supabase
+      .storage
+      .from("Images")
+      .list( userId + '/' , {
+        limit: 1,
+        offset: 0
+      });
+
+      if (data != null) {
+        console.log('data --> ', data)
+        const imageName = data[0].name
+
+        setImage(CDNUrl + userId + '/' + imageName)
+
+        console.log('image url --> ', image)
+      } else {
+        if (error) {
+          console.log('error --> ', error)
+        }
+        console.log('data was null')
+      }
+  }
+
+
+
 
   async function getProfile() {
     try {
@@ -68,6 +108,9 @@ export default function ProfilePage ({ session }: { session: Session }) {
     }
   }
 
+
+
+
     return (
         <View>
           <View style={styles.container}>
@@ -77,6 +120,10 @@ export default function ProfilePage ({ session }: { session: Session }) {
             <View style={styles.profileNameBox}>
                 <Text style={styles.profileName}>{firstName}</Text>
                 <Text style={styles.profileName}>{lastName}</Text>
+            </View>
+
+            <View style={styles.profilePicBox}>
+              <Image style={styles.profilePic} source={{uri: image}}></Image>
             </View>
 
             <View style={styles.imagePicker}>
@@ -176,5 +223,16 @@ goBackButton: {
     borderWidth: 2,
     borderColor: 'red',
     height: 50
-  }
+  },
+  profilePicBox: {
+    borderWidth: 2,
+    borderColor: 'red',
+    height: 200
+  },
+  profilePic: {
+    zIndex: 5,
+    borderWidth: 3,
+    borderColor: 'blue',
+    height: 200
+  },
 })
