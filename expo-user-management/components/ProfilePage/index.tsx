@@ -98,9 +98,6 @@ export default function ProfilePage ({ session }: { session: Session }) {
           </View>
             {/* <View style={styles.whiteScrollContainer}>
           </View> */}
-          <Tab.Navigator>
-            <Tab.Screen name="Groups" component={Groups}  />
-          </Tab.Navigator>
           {/* <View>
             <NavBar />
           </View> */}

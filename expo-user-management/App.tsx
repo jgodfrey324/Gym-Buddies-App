@@ -1,5 +1,6 @@
 import 'react-native-url-polyfill/auto'
 import {NavigationContainer} from '@react-navigation/native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createNativeStackNavigator, } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useState, useEffect } from 'react'
@@ -14,6 +15,7 @@ import { UserProvider } from './context/context';
 import NavBar from './components/Navbar';
 import FinishSignUp from './components/ProfilePage/FinishSignUp';
 import Groups from './components/Groups';
+import Workouts from './components/Workouts';
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -44,8 +46,34 @@ export default function App() {
 
   const BottomTabs = () => {
     return (
-      <Tab.Navigator>
-        <Tab.Screen name="Groups" component={Groups} />
+      <Tab.Navigator screenOptions={{
+        tabBarStyle: {
+          backgroundColor: '#c7c588',
+          height: "8%",
+          paddingBottom: 10,
+        },
+        tabBarActiveTintColor: 'white',
+      }}>
+        <Tab.Screen name="Groups" component={Groups} options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account-group" color={"white"} size={size} />
+          ),
+          // change button text color
+          }
+        }
+        />
+        <Tab.Screen name="Workouts" component={Workouts} options={{ headerShown: false,
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="weight-lifter" color={"white"} size={size} />
+        )}} />
+        <Tab.Screen name="Profile" options={{ headerShown: false,
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="account" color={"white"} size={size} />
+        )
+        }}>
+          { () => <ProfilePage session={session} /> }
+        </Tab.Screen>
       </Tab.Navigator>
     )
   }
@@ -58,9 +86,6 @@ export default function App() {
           >
             {session ? (
               <>
-                <Stack.Screen name="ProfilePage" options={{headerShown: false}}>
-                  {() => <ProfilePage session={session} />}
-                </Stack.Screen>
                 <Stack.Screen name="BottomTabs" component={BottomTabs} options={{headerShown: false}} />
               </>
             ) : (
