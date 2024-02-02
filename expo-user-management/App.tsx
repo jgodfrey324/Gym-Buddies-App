@@ -50,7 +50,13 @@ export default function App() {
           backgroundColor: '#c7c588',
           height: "10%",
           paddingBottom: 20,
-
+          shadowColor: "#242424",
+          shadowOpacity: 0.8,
+          shadowRadius: 3,
+          shadowOffset: {
+            height: 1,
+            width: 1
+          }
         },
         tabBarActiveTintColor: 'white',
         // #242424
