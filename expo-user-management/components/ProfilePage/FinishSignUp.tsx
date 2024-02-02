@@ -135,13 +135,13 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
             <TextInput style={styles.inputText} placeholder="First name" placeholderTextColor="#929292" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
           </View>
           <View style={[styles.inputStyle, styles.inputMargin]}>
-            <TextInput style={styles.inputText} placeholder="Last name" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
+            <TextInput style={styles.inputText} placeholder="Last name" placeholderTextColor="#929292" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
           </View>
           <View style={[styles.inputStyle, styles.inputMargin]}>
-            <TextInput style={styles.inputText} placeholder="Age" value={age || ''} onChangeText={(text) => setAge(text)} />
+            <TextInput style={styles.inputText} placeholder="Age" placeholderTextColor="#929292" value={age || ''} onChangeText={(text) => setAge(text)} />
           </View>
           <View style={[styles.inputStyle, styles.inputMargin]}>
-            <TextInput style={styles.inputText} placeholder="Weight (lbs)" value={weight || ''} onChangeText={(text) => setWeight(text)} />
+            <TextInput style={styles.inputText} placeholder="Weight (lbs)" placeholderTextColor="#929292" value={weight || ''} onChangeText={(text) => setWeight(text)} />
           </View>
           <View>
             <TouchableOpacity
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     fontSize: 18,
-    color: 'black'
+    color: '#242424'
   },
   imagePickerButtonBox: {
     alignItems: 'center'
