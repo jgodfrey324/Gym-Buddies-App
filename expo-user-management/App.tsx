@@ -12,7 +12,6 @@ import { Session } from '@supabase/supabase-js'
 import Auth from './components/Signup/Auth';
 import ProfilePage from './components/ProfilePage';
 import { UserProvider } from './context/context';
-import NavBar from './components/Navbar';
 import FinishSignUp from './components/ProfilePage/FinishSignUp';
 import Groups from './components/Groups';
 import Workouts from './components/Workouts';
@@ -49,15 +48,28 @@ export default function App() {
       <Tab.Navigator screenOptions={{
         tabBarStyle: {
           backgroundColor: '#c7c588',
-          height: "8%",
-          paddingBottom: 10,
+          height: "10%",
+          paddingBottom: 20,
+
         },
         tabBarActiveTintColor: 'white',
+        // #242424
+        tabBarLabelStyle: {
+          fontSize: 18,
+        },
+        tabBarItemStyle: {
+          borderLeftWidth: 1,
+          // borderRightWidth: 1,
+          // borderRightColor: 'blue',
+          borderLeftColor: '#D9D9D9',
+          marginTop: 6,
+          height: '100%',
+        }
       }}>
         <Tab.Screen name="Groups" component={Groups} options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account-group" color={"white"} size={size} />
+            <MaterialCommunityIcons name="account-group" color={"white"} size={35} />
           ),
           // change button text color
           }
@@ -65,11 +77,11 @@ export default function App() {
         />
         <Tab.Screen name="Workouts" component={Workouts} options={{ headerShown: false,
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="weight-lifter" color={"white"} size={size} />
+          <MaterialCommunityIcons name="weight-lifter" color={"white"} size={35} />
         )}} />
         <Tab.Screen name="Profile" options={{ headerShown: false,
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="account" color={"white"} size={size} />
+          <MaterialCommunityIcons name="account" color={"white"} size={35} />
         )
         }}>
           { () => <ProfilePage session={session} /> }
