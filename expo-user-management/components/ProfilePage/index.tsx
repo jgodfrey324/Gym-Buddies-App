@@ -7,7 +7,6 @@ import LeftArrowSVG from '../../assets/leftArrow'
 import { Session } from '@supabase/supabase-js'
 import { useUserContext } from '../../context/context'
 import Groups from '../Groups'
-import NavBar from '../Navbar'
 import ImagePickerComp from './ImagePickerComp'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
@@ -112,7 +111,6 @@ export default function ProfilePage ({ session }: { session: Session }) {
     }
   }
 
-  // console.log('nothing')
 
 
     return (
