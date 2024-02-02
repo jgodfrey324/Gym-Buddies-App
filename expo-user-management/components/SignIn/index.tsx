@@ -21,7 +21,7 @@ export default function SignInIndex({ setModalState }: SignInProps) {
         });
 
         if (error) Alert.alert(error.message)
-        else navigation.navigate('ProfilePage')
+        // else navigation.navigate('ProfilePage')
         setLoading(false);
     }
 

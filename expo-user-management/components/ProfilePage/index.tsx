@@ -60,6 +60,9 @@ export default function ProfilePage ({ session }: { session: Session }) {
         console.log('data --> ', data)
         const imageName = data[0].name
 
+        // console.log('userId --> ', userId)
+        // console.log('imageName --> ', imageName)
+
         setImage(CDNUrl + userId + '/' + imageName)
 
         console.log('image url --> ', image)
