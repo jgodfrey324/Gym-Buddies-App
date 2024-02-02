@@ -129,10 +129,10 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
             <Text style={{fontSize: 30,}}>Tell us about yourself</Text>
           </View>
           <View style={[styles.inputStyle, styles.inputMargin]}>
-            <TextInput style={styles.inputText} placeholder="Nickname" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
+            <TextInput style={styles.inputText} placeholder="Nickname" placeholderTextColor="#929292" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
           </View>
           <View style={[styles.inputStyle, styles.inputMargin]}>
-            <TextInput style={styles.inputText} placeholder="First name" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
+            <TextInput style={styles.inputText} placeholder="First name" placeholderTextColor="#929292" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
           </View>
           <View style={[styles.inputStyle, styles.inputMargin]}>
             <TextInput style={styles.inputText} placeholder="Last name" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
@@ -221,6 +221,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     paddingLeft: 50,
     width: '80%',
+    // color: 'black'
   },
   inputMargin: {
     marginBottom: 20
