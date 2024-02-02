@@ -121,22 +121,26 @@ export default function ProfilePage ({ session }: { session: Session }) {
             <View>
                 <FinishSignUp session={session} reloadProfile={reloadProfile} />
             </View>
-            <View style={styles.profileNameBox}>
-                <Text style={styles.profileName}>{firstName}</Text>
-                <Text style={styles.profileName}>{lastName}</Text>
-            </View>
 
-            <View style={styles.profilePicBox}>
+            <View style={styles.profileNameAndPic}>
+              <View style={styles.profileNameBox}>
+                  <Text style={styles.profileName}>{firstName}</Text>
+                  <Text style={styles.profileName}>{lastName}</Text>
+
+                  <View style={styles.nicknameBox}>
+                    <Text style={styles.nickname}>Nickname :  {nickname}</Text>
+                  </View>
+              </View>
+
               <Image style={styles.profilePic} source={{uri: image}}></Image>
+              {/* <View style={styles.profilePicBox}>
+              </View> */}
             </View>
 
-            <View style={styles.imagePicker}>
+            {/* <View style={styles.imagePicker}>
               <ImagePickerComp />
-            </View>
+            </View> */}
 
-            <View style={styles.nicknameBox}>
-              <Text style={styles.nickname}>Nickname :  {nickname}</Text>
-            </View>
 
             <View>
               <TouchableOpacity
@@ -164,25 +168,37 @@ container: {
 },
 profileNameBox: {
   width: '55%',
-  // borderWidth: 2,
-  // borderColor: 'red',
-  left: '27%',
+  borderWidth: 1,
+  borderColor: 'orange',
+  // left: '27%',
+  alignItems: 'flex-start',
 },
 profileName: {
   fontSize: 30,
   // left: 120,
-  color: '#C7C588'
+  color: '#C7C588',
+  borderWidth: 1,
+  borderColor: 'red',
+  maxWidth: '100%'
 },
 nicknameBox: {
-
-  // alignItems: 'center',
-  marginTop: 20
+  // left: 30,
+  maxWidth: '100%',
+  // marginTop: 20,
+  alignItems: 'flex-start',
+  // justifyContent: 'flex-start',
+  borderWidth: 1,
+  borderColor: 'orange',
+  marginTop: 15
 },
 nickname: {
-  fontSize: 17,
+  fontSize: 14,
   fontStyle: 'italic',
-  left: '27%',
-  color: 'white'
+  // left: '27%',
+  color: 'white',
+  borderWidth: 1,
+  borderColor: 'red',
+  maxWidth: 'auto'
 },
 customButton: {
   backgroundColor: '#242424',
@@ -228,15 +244,28 @@ goBackButton: {
     borderColor: 'red',
     height: 50
   },
+  profileNameAndPic: {
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'green'
+  },
   profilePicBox: {
     borderWidth: 2,
     borderColor: 'red',
-    height: 200
+    height: 120,
+    width: 120
   },
   profilePic: {
     zIndex: 5,
     borderWidth: 3,
-    borderColor: 'blue',
-    height: 200
+    borderColor: '#242424',
+    height: 135,
+    width: 135,
+    borderRadius: 70,
+    // right: -45,
+    marginRight: 12,
+    objectFit: 'contain'
   },
 })

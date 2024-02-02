@@ -6,6 +6,7 @@ import { Session } from '@supabase/supabase-js'
 import LeftArrowSVG from '../../assets/leftArrow'
 import Spinner from '../Spinner'
 import { useUserContext } from '../../context/context'
+import ImagePickerComp from './ImagePickerComp'
 
 
 export default function FinishSignUp({ session, reloadProfile }: { session: Session; reloadProfile: () => void }) {
@@ -118,6 +119,9 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
     }}
     >
       <View style={styles.container}>
+
+        <ImagePickerComp />
+
         <View style={styles.tell}>
           <Text style={{fontSize: 30,}}>Tell us about yourself</Text>
         </View>

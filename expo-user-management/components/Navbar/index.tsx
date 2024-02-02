@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         borderWidth: 1,
         borderColor: 'black',
+        // marginBottom: 5
     },
     navItem: {
         flex: 1,
