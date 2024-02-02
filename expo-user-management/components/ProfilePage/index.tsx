@@ -53,7 +53,8 @@ export default function ProfilePage ({ session }: { session: Session }) {
       .from("Images")
       .list( userId + '/' , {
         limit: 1,
-        offset: 0
+        offset: 0,
+        sortBy: { column: "created_at", order: "desc" }
       });
 
       if (data != null) {
@@ -111,7 +112,7 @@ export default function ProfilePage ({ session }: { session: Session }) {
     }
   }
 
-
+  // console.log('nothing')
 
 
     return (

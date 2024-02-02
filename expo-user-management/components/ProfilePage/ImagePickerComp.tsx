@@ -26,6 +26,8 @@ export default function ImagePickerComp() {
 
 
     const filePath = userId + '/' + uuidv4()
+    // const filePath = userId + '/profile-pic'
+
 
     const imageURI = result.assets[0].uri
     const base64Image = await FileSystem.readAsStringAsync(imageURI, { encoding: FileSystem?.EncodingType?.Base64 })
