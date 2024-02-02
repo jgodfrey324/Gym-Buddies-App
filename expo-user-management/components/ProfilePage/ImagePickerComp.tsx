@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Image, View, Platform } from 'react-native';
+import { Button, Image, View, Platform, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { supabase } from '../../lib/supabase';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
@@ -60,9 +60,51 @@ export default function ImagePickerComp() {
 
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Pick a profile picture from your camera roll" onPress={pickImage} />
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+    <View style={styles.buttonContainer}>
+      {image ? (
+        <Image source={{ uri: image }} style={styles.tempProfilePic} />
+      ) :
+      (
+        <View style={styles.tempProfilePic} >
+          {/* profile pic placeholder */}
+          <Text>
+
+          </Text>
+        </View>
+      )}
+      <TouchableOpacity onPress={pickImage}>
+        {!image ? (
+          <Text style={styles.buttonText}>Upload profile picture</Text>
+        ) :
+        (
+          <Text style={styles.buttonText}>Change profile picture</Text>
+        )}
+      </TouchableOpacity>
     </View>
   );
+
 }
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    marginTop: 20,
+    marginBottom: 50,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#C7C588',
+    fontSize: 18,
+    textAlign: 'center',
+    // borderWidth: 1,
+    // borderColor: 'orange',
+    width: 150,
+  },
+  tempProfilePic: {
+    height: 130,
+    width: 130,
+    borderWidth: 2,
+    borderColor: '##242424',
+    borderRadius: 70,
+    marginBottom: 10
+  }
+})

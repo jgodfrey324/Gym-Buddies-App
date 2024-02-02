@@ -120,47 +120,51 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
     >
       <View style={styles.container}>
 
-        <ImagePickerComp />
-
-        <View style={styles.tell}>
-          <Text style={{fontSize: 30,}}>Tell us about yourself</Text>
-        </View>
-        <View style={[styles.inputStyle, styles.inputMargin]}>
-          <TextInput style={styles.inputText} placeholder="Nickname" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
-        </View>
-        <View style={[styles.inputStyle, styles.inputMargin]}>
-          <TextInput style={styles.inputText} placeholder="First name" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
-        </View>
-        <View style={[styles.inputStyle, styles.inputMargin]}>
-          <TextInput style={styles.inputText} placeholder="Last name" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
-        </View>
-        <View style={[styles.inputStyle, styles.inputMargin]}>
-          <TextInput style={styles.inputText} placeholder="Age" value={age || ''} onChangeText={(text) => setAge(text)} />
-        </View>
-        <View style={[styles.inputStyle, styles.inputMargin]}>
-          <TextInput style={styles.inputText} placeholder="Weight (lbs)" value={weight || ''} onChangeText={(text) => setWeight(text)} />
-        </View>
-        <View>
-          <TouchableOpacity
-            style={styles.customButton}
-            disabled={loading}
-            onPress={() => {
-              updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight
-              })
-              setModalVisible(!modalVisible)
-              reloadProfile()
-          }
-          }
-          >
-            <Text style={styles.buttonText}>Continue</Text>
-          </TouchableOpacity>
+        <View style={styles.imagePickerButtonBox}>
+          <ImagePickerComp />
         </View>
 
-        <Pressable
-          // style={styles.goBackButton}
-          onPress={() => setModalVisible(!modalVisible)}>
-            <LeftArrowSVG width={20} height={20} />
-        </Pressable>
+        <View style={styles.modalTextContentsBox} >
+          <View style={styles.tell}>
+            <Text style={{fontSize: 30,}}>Tell us about yourself</Text>
+          </View>
+          <View style={[styles.inputStyle, styles.inputMargin]}>
+            <TextInput style={styles.inputText} placeholder="Nickname" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
+          </View>
+          <View style={[styles.inputStyle, styles.inputMargin]}>
+            <TextInput style={styles.inputText} placeholder="First name" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
+          </View>
+          <View style={[styles.inputStyle, styles.inputMargin]}>
+            <TextInput style={styles.inputText} placeholder="Last name" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
+          </View>
+          <View style={[styles.inputStyle, styles.inputMargin]}>
+            <TextInput style={styles.inputText} placeholder="Age" value={age || ''} onChangeText={(text) => setAge(text)} />
+          </View>
+          <View style={[styles.inputStyle, styles.inputMargin]}>
+            <TextInput style={styles.inputText} placeholder="Weight (lbs)" value={weight || ''} onChangeText={(text) => setWeight(text)} />
+          </View>
+          <View>
+            <TouchableOpacity
+              style={styles.customButton}
+              disabled={loading}
+              onPress={() => {
+                updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight
+                })
+                setModalVisible(!modalVisible)
+                reloadProfile()
+            }
+            }
+            >
+              <Text style={styles.buttonText}>Continue</Text>
+            </TouchableOpacity>
+          </View>
+
+          <Pressable
+            // style={styles.goBackButton}
+            onPress={() => setModalVisible(!modalVisible)}>
+              <LeftArrowSVG width={20} height={20} />
+          </Pressable>
+        </View>
 
         {/* <View>
           <TouchableOpacity
@@ -187,8 +191,8 @@ const styles = StyleSheet.create({
     // paddingTop: 100
     // padding: 20,
     top: '10%',
-    padding: 20,
-    paddingTop: 50
+    // padding: 20,
+    // paddingTop: 50
   },
   customButton: {
     backgroundColor: '#242424',
@@ -227,6 +231,15 @@ const styles = StyleSheet.create({
     marginBottom: 40
   },
   inputText: {
-    fontSize: 18
+    fontSize: 18,
+    color: 'black'
+  },
+  imagePickerButtonBox: {
+    alignItems: 'center'
+  },
+  modalTextContentsBox: {
+    // borderWidth: 1,
+    // borderColor: 'orange',
+    top: '-2%'
   }
 })
