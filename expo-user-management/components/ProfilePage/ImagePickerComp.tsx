@@ -67,9 +67,8 @@ export default function ImagePickerComp() {
       (
         <View style={styles.tempProfilePic} >
           {/* profile pic placeholder */}
-          <Text>
-
-          </Text>
+          {/* <Text>
+          </Text> */}
         </View>
       )}
       <TouchableOpacity onPress={pickImage}>
@@ -103,7 +102,7 @@ const styles = StyleSheet.create({
     height: 130,
     width: 130,
     borderWidth: 2,
-    borderColor: '##242424',
+    borderColor: '#242424',
     borderRadius: 70,
     marginBottom: 10
   }
