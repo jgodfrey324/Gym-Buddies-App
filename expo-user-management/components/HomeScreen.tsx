@@ -18,7 +18,7 @@ export default function HomeScreen() {
   // const navigation = useNavigation()
 
 
-  const getModalState = (modalState) => {
+  const getModalState = (modalState:any) => {
     if (modalState === 'sign in') {
       return <SignInIndex setModalState={setModalState} />
     } else if (modalState === 'sign up') {
