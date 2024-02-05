@@ -90,7 +90,7 @@ export default function App() {
           <MaterialCommunityIcons name="account" color={"white"} size={35} />
         )
         }}>
-          { () => <ProfilePage session={session} /> }
+          { () => <ProfilePage session={session || undefined} /> }
         </Tab.Screen>
       </Tab.Navigator>
     )

@@ -1,11 +1,24 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import { StyleSheet, View, Alert, TouchableOpacity, Text, TextInput, Modal, Pressable } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Alert,
+  TouchableOpacity,
+  Text,
+  TextInput,
+  Modal,
+  Pressable,
+  KeyboardAvoidingView,
+  ScrollView
+} from 'react-native'
 import { Button, Input } from 'react-native-elements'
 import { Session } from '@supabase/supabase-js'
+
+// components
+import { useUserContext } from '../../context/context'
 import LeftArrowSVG from '../../assets/leftArrow'
 import Spinner from '../Spinner'
-import { useUserContext } from '../../context/context'
 import ImagePickerComp from './ImagePickerComp'
 
 
@@ -118,7 +131,15 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
       setModalVisible(!modalVisible);
     }}
     >
+      <KeyboardAvoidingView>
+          <ScrollView>
       <View style={styles.container}>
+      <Pressable
+
+            style={styles.goBackButton}
+            onPress={() => setModalVisible(!modalVisible)}>
+              <LeftArrowSVG width={20} height={20} />
+          </Pressable>
 
         <View style={styles.imagePickerButtonBox}>
           <ImagePickerComp />
@@ -159,21 +180,23 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
             </TouchableOpacity>
           </View>
 
-          <Pressable
+          {/* <Pressable
             // style={styles.goBackButton}
             onPress={() => setModalVisible(!modalVisible)}>
               <LeftArrowSVG width={20} height={20} />
-          </Pressable>
+          </Pressable> */}
         </View>
 
         {/* <View>
           <TouchableOpacity
-            style={styles.customButton}
-            onPress={() => supabase.auth.signOut()}>
-            <TextInput style={styles.buttonText}>Sign Out</TextInput>
+          style={styles.customButton}
+          onPress={() => supabase.auth.signOut()}>
+          <TextInput style={styles.buttonText}>Sign Out</TextInput>
           </TouchableOpacity>
         </View> */}
       </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </Modal>
   )
 }
@@ -185,12 +208,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    height: '100%',
+    // height: '100%',
     borderColor: 'black',
     borderWidth: 2,
     // paddingTop: 100
     // padding: 20,
-    top: '10%',
+    marginTop: '20%',
+    // top: '10%',
     // padding: 20,
     // paddingTop: 50
   },
@@ -211,6 +235,20 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     // width: 100
+  },
+  goBackButton: {
+    marginTop: 20,
+    marginLeft: 20,
+    top: 5,
+    zIndex: 2,
+    borderColor: 'black',
+    borderWidth: 2,
+    // width: '10%',
+    alignSelf: 'baseline',
+    padding: 12,
+    // paddingHorizontal: 12,
+    borderRadius: 30,
+
   },
   inputStyle: {
     padding: 10,
