@@ -111,6 +111,7 @@ export default function ProfilePage({ session }: { session: Session }) {
   return (
     <View>
       <View style={styles.container}>
+
         <View>
           <FinishSignUp session={session} reloadProfile={reloadProfile} />
         </View>
@@ -124,7 +125,7 @@ export default function ProfilePage({ session }: { session: Session }) {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.settingsComponent}>
+        <View>
           <Modal
             animationType="slide"
             transparent={true}
@@ -154,33 +155,10 @@ export default function ProfilePage({ session }: { session: Session }) {
 
           <Image style={styles.profilePic} source={{ uri: image }}></Image>
         </View>
+      </View>
 
-
-            <View>
-              <TouchableOpacity
-                style={styles.customButton}
-                onPress={() => supabase.auth.signOut()}>
-                <Text style={styles.buttonText}>Sign Out</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-
-
-          <View style={styles.whiteScrollContainer}>
-            <RecentWorkouts />
-          </View>
-          {/* <View>
-            <NavBar />
-          </View> */}
-        </View>
-    )
-        <View>
-          <TouchableOpacity
-            style={styles.customButton}
-            onPress={() => supabase.auth.signOut()}>
-            <Text style={styles.buttonText}>Sign Out</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.whiteScrollContainer}>
+        <RecentWorkouts />
       </View>
     </View>
   )
@@ -191,6 +169,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: '10%',
     backgroundColor: '#3C3C3C',
+    paddingBottom: '27%'
   },
   settings: {
     alignItems: 'flex-end',
@@ -243,10 +222,10 @@ const styles = StyleSheet.create({
   whiteScrollContainer: {
     borderWidth: 2,
     borderColor: 'red',
-    height: '54%',
+    height: '100%',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    top: -20,
+    top: -25,
     backgroundColor: 'white'
   },
   goBackButton: {
