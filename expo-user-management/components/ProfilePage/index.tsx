@@ -12,6 +12,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Settings from '../Settings'
+import RecentWorkouts from '../Workouts/RecentWorkouts'
 
 
 export default function ProfilePage({ session }: { session: Session }) {
@@ -155,6 +156,24 @@ export default function ProfilePage({ session }: { session: Session }) {
         </View>
 
 
+            <View>
+              <TouchableOpacity
+                style={styles.customButton}
+                onPress={() => supabase.auth.signOut()}>
+                <Text style={styles.buttonText}>Sign Out</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+
+          <View style={styles.whiteScrollContainer}>
+            <RecentWorkouts />
+          </View>
+          {/* <View>
+            <NavBar />
+          </View> */}
+        </View>
+    )
         <View>
           <TouchableOpacity
             style={styles.customButton}
