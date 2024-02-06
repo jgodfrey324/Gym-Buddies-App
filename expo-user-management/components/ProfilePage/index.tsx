@@ -10,6 +10,7 @@ import Groups from '../Groups'
 import ImagePickerComp from './ImagePickerComp'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
+import RecentWorkouts from '../Workouts/RecentWorkouts'
 
 
 export default function ProfilePage ({ session }: { session: Session }) {
@@ -148,8 +149,11 @@ export default function ProfilePage ({ session }: { session: Session }) {
               </TouchableOpacity>
             </View>
           </View>
-            {/* <View style={styles.whiteScrollContainer}>
-          </View> */}
+
+
+          <View style={styles.whiteScrollContainer}>
+            <RecentWorkouts />
+          </View>
           {/* <View>
             <NavBar />
           </View> */}
