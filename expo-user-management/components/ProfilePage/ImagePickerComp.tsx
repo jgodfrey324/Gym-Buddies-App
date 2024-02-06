@@ -16,7 +16,6 @@ export default function ImagePickerComp() {
   const pickImage = async () => {
     const userId = (await supabase.auth.getUser()).data.user?.id
 
-
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -57,30 +56,19 @@ export default function ImagePickerComp() {
   };
 
 
-
-
   return (
     <View style={styles.buttonContainer}>
       {image ? (
         <Image source={{ uri: image }} style={styles.tempProfilePic} />
-      ) :
-      (
-        <View style={styles.tempProfilePic} >
+      ) : (
+        <TouchableOpacity style={styles.tempProfilePic} onPress={pickImage}>
           {/* profile pic placeholder */}
-          {/* <Text>
-          </Text> */}
-        </View>
-      )}
-      <TouchableOpacity onPress={pickImage}>
-        {!image ? (
           <Text style={styles.buttonText}>Upload profile picture</Text>
-        ) :
-        (
-          <Text style={styles.buttonText}>Change profile picture</Text>
-        )}
-      </TouchableOpacity>
+        </TouchableOpacity>
+      )}
     </View>
   );
+
 
 }
 
@@ -92,18 +80,20 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#C7C588',
-    fontSize: 18,
+    fontSize: 16,
     textAlign: 'center',
-    // borderWidth: 1,
-    // borderColor: 'orange',
     width: 150,
+    alignSelf: 'center',
+    marginTop: 'auto',
+    marginBottom: 'auto'
   },
   tempProfilePic: {
     height: 130,
     width: 130,
     borderWidth: 2,
-    borderColor: '#242424',
+    // borderColor: '#242424',
     borderRadius: 70,
-    marginBottom: 10
-  }
+    marginBottom: 10,
+    backgroundColor: '#242424'
+  },
 })

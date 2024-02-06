@@ -10,6 +10,7 @@ import Groups from '../Groups'
 import ImagePickerComp from './ImagePickerComp'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 export default function ProfilePage ({ session }: { session: Session }) {
@@ -120,6 +121,13 @@ export default function ProfilePage ({ session }: { session: Session }) {
                 <FinishSignUp session={session} reloadProfile={reloadProfile} />
             </View>
 
+            <View style={styles.settings}>
+              <MaterialCommunityIcons
+                name='account-cog'
+                size={30}
+              />
+            </View>
+
             <View style={styles.profileNameAndPic}>
               <View style={styles.profileNameBox}>
                   <Text style={styles.profileName}>{firstName}</Text>
@@ -163,6 +171,11 @@ container: {
   // top: 100,
   paddingTop: '20%',
   backgroundColor: '#3C3C3C'
+},
+settings: {
+  borderWidth: 5,
+  display: 'flex',
+  justifyContent: 'flex-end',
 },
 profileNameBox: {
   width: '55%',
