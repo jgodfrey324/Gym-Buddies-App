@@ -12,7 +12,7 @@ import {
   KeyboardAvoidingView,
   ScrollView
 } from 'react-native'
-import { Button, Input } from 'react-native-elements'
+import { SelectList } from 'react-native-dropdown-select-list'
 import { Session } from '@supabase/supabase-js'
 
 // components
@@ -25,6 +25,7 @@ import ImagePickerComp from './ImagePickerComp'
 export default function FinishSignUp({ session, reloadProfile }: { session: Session; reloadProfile: () => void }) {
   const { nickname, setNickname, firstName, setFirstName, lastName, setLastName, age, setAge, weight, setWeight } = useUserContext()
   const [loading, setLoading] = useState(true)
+  const [selected, setSelected] = useState("");
 
   // trying to add this part into finish sign up and connect them with foreign keys
   const [experienceLevel, setExperienceLevel] = useState(0)
@@ -37,9 +38,34 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
   const [modalVisible, setModalVisible] = useState(false);
 
 
+
+
+  // data for the select fields
+  const getExperienceLevelsData = async () => {
+    const { data, error } = await supabase
+      .from('experience_levels')
+      .select('*')
+
+    if (error) {
+      console.log('error getting experience ---> ', error)
+      throw error
+    }
+
+    if (data) {
+      console.log('data from get experience --> ', data)
+    }
+  }
+
+
   useEffect(() => {
-    if (session) getProfile()
+    if (session) {
+      getProfile()
+      getExperienceLevelsData()
+    }
   }, [session])
+
+
+
 
   async function getProfile() {
     try {
@@ -72,6 +98,9 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
       setLoading(false)
     }
   }
+
+
+
 
   async function updateProfile({
     first_name,
@@ -127,6 +156,11 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
     }
   }
 
+
+
+
+
+
   if (loading) {
     return (
       <View style={styles.spinner}>
@@ -134,6 +168,7 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
       </View>
     )
   }
+
 
   return (
     <Modal
