@@ -25,9 +25,13 @@ import ImagePickerComp from './ImagePickerComp'
 export default function FinishSignUp({ session, reloadProfile }: { session: Session; reloadProfile: () => void }) {
   const { nickname, setNickname, firstName, setFirstName, lastName, setLastName, age, setAge, weight, setWeight } = useUserContext()
   const [loading, setLoading] = useState(true)
-  // const [nickname, setNickname] = useState('')
-  // const [firstName, setFirstName] = useState('')
-  // const [lastName, setLastName] = useState('')
+
+  // trying to add this part into finish sign up and connect them with foreign keys
+  const [experienceLevel, setExperienceLevel] = useState(null)
+  const [sex, setSex] = useState(null)
+  const [athleteType, setAthleteType] = useState(null)
+
+
   // const [age, setAge] = useState('')
   // const [weight, setWeight] = useState('')
   const [modalVisible, setModalVisible] = useState(false);
