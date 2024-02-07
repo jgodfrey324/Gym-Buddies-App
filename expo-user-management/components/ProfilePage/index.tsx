@@ -158,7 +158,10 @@ export default function ProfilePage({ session }: { session: Session }) {
             </View>
           </View>
 
-          <Image style={styles.profilePic} source={{ uri: image }}></Image>
+          <View style={styles.imageContainer}>
+            {image && <Image style={styles.profilePic} source={{ uri: image }}></Image>}
+          </View>
+
         </View>
       </View>
 
@@ -264,12 +267,18 @@ const styles = StyleSheet.create({
   },
   profilePic: {
     zIndex: 5,
-    borderWidth: 3,
-    borderColor: '#242424',
-    height: 135,
-    width: 135,
+    height: 130,
+    width: 130,
     borderRadius: 70,
     marginRight: 12,
     objectFit: 'contain'
   },
+  imageContainer: {
+    height: 130,
+    width: 130,
+    borderWidth: 3,
+    borderColor: '#242424',
+    borderRadius: 70,
+    marginRight: 12,
+  }
 })
