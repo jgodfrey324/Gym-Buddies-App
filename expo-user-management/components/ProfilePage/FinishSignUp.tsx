@@ -78,13 +78,19 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
     last_name,
     nickname,
     weight,
-    age
+    age,
+    experience_level_id,
+    sex_id,
+    athlete_type_id
   }: {
     first_name: string
     last_name: string
     nickname: string
-    weight: string
-    age: string
+    weight: number
+    age: number
+    experience_level_id: number
+    sex_id: number
+    athlete_type_id: number
   }) {
     try {
       setLoading(true)
