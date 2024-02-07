@@ -134,12 +134,17 @@ export default function ProfilePage({ session }: { session: Session }) {
               setModalVisible(!modalVisible);
             }}
           >
-            <Settings />
             <Pressable
+            style={styles.goBackButton}
+            onPress={() => setModalVisible(!modalVisible)}>
+              <LeftArrowSVG width={20} height={20} />
+            </Pressable>
+            <Settings />
+            {/* <Pressable
               style={styles.goBackButton}
               onPress={() => setModalVisible(!modalVisible)}>
               <LeftArrowSVG width={20} height={20} />
-            </Pressable>
+            </Pressable> */}
           </Modal>
         </View>
 
@@ -230,7 +235,7 @@ const styles = StyleSheet.create({
   },
   goBackButton: {
     margin: 20,
-    top: 85,
+    top: '18%',
     zIndex: 2,
     borderColor: 'black',
     borderWidth: 2,
