@@ -225,9 +225,14 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
             onPress={() => setModalVisible(!modalVisible)}>
               <LeftArrowSVG width={20} height={20} />
           </Pressable> */}
+        <View style={styles.introTextBox}>
+            <Text style={styles.introText}>
+              Congrats, you're all signed up!
+            </Text>
+        </View>
 
         <View style={styles.tell}>
-          <Text style={{fontSize: 30,}}>Complete your profile</Text>
+          <Text style={{fontSize: 30,}}>Finish setting up your profile</Text>
         </View>
 
         <View style={styles.imagePickerButtonBox}>
@@ -372,6 +377,14 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     marginTop: '20%',
   },
+  introTextBox: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 20
+  },
+  introText: {
+    fontSize: 16
+  },
   selectBox: {
     borderRadius: 30,
     // padding: 15,
@@ -450,7 +463,7 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     marginBottom: 40,
-    marginTop: 20
+    marginTop: 5
   },
   inputText: {
     fontSize: 18,
