@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, SetStateAction } from 'react'
 import { supabase } from '../../lib/supabase'
 import {
   StyleSheet,
@@ -33,6 +33,38 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
   const [athleteType, setAthleteType] = useState(0)
 
 
+  // setting up data interfaces
+  // interface DataInterface {
+  //   expData: any | null,
+  //   setExpData: (value: any) => void,
+  // }
+  // const [expData, setExpData] = useState<DataInterface>()
+
+
+
+  // data from tables
+  const expData = [
+    { key: 1, value: '0-3 years' },
+    { key: 2, value: '4-6 years' },
+    { key: 3, value: '7+ years' }
+  ]
+  const sexData = [
+    { key: 1, value: 'Male' },
+    { key: 2, value: 'Female' },
+    { key: 3, value: 'Prefer not to say' }
+  ]
+  const athleteData = [
+    { key: 1, value: 'bodybuilding' },
+    { key: 2, value: 'strength' },
+    { key: 3, value: 'crossfit' },
+    { key: 4, value: 'calisthenics' },
+    { key: 5, value: 'wellness' },
+    { key: 6, value: 'endurance' }
+  ]
+
+
+
+
   // const [age, setAge] = useState('')
   // const [weight, setWeight] = useState('')
   const [modalVisible, setModalVisible] = useState(false);
@@ -41,26 +73,31 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
 
 
   // data for the select fields
-  const getExperienceLevelsData = async () => {
-    const { data, error } = await supabase
-      .from('experience_levels')
-      .select('*')
+  // const getExperienceLevelsData = async () => {
+  //   const { data, error } = await supabase
+  //     .from('experience_levels')
+  //     .select('id, level')
 
-    if (error) {
-      console.log('error getting experience ---> ', error)
-      throw error
-    }
+  //   if (error) {
+  //     console.log('error getting experience ---> ', error)
+  //     throw error
+  //   }
 
-    if (data) {
-      console.log('data from get experience --> ', data)
-    }
-  }
+  //   if (data) {
+  //     const selectExpData = data.map((item) => {
+  //       return { key: item.id, value: item.level }
+  //     })
+
+  //     return selectExpData
+  //   } else return []
+  // }
+
+
 
 
   useEffect(() => {
     if (session) {
       getProfile()
-      getExperienceLevelsData()
     }
   }, [session])
 
@@ -182,36 +219,94 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
       <KeyboardAvoidingView>
           <ScrollView>
       <View style={styles.container}>
-      <Pressable
+      {/* <Pressable
 
             style={styles.goBackButton}
             onPress={() => setModalVisible(!modalVisible)}>
               <LeftArrowSVG width={20} height={20} />
-          </Pressable>
+          </Pressable> */}
+
+        <View style={styles.tell}>
+          <Text style={{fontSize: 30,}}>Complete your profile</Text>
+        </View>
 
         <View style={styles.imagePickerButtonBox}>
           <ImagePickerComp />
         </View>
 
         <View style={styles.modalTextContentsBox} >
-          <View style={styles.tell}>
-            <Text style={{fontSize: 30,}}>Tell us about yourself</Text>
+
+
+          <View style={styles.sideTextBox}>
+            <Text style={styles.sideText}>
+              What do you like to be called?
+            </Text>
           </View>
+
           <View style={[styles.inputStyle, styles.inputMargin]}>
             <TextInput style={styles.inputText} placeholder="Nickname" placeholderTextColor="#929292" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
           </View>
+
           <View style={[styles.inputStyle, styles.inputMargin]}>
             <TextInput style={styles.inputText} placeholder="First name" placeholderTextColor="#929292" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
           </View>
+
           <View style={[styles.inputStyle, styles.inputMargin]}>
             <TextInput style={styles.inputText} placeholder="Last name" placeholderTextColor="#929292" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
           </View>
+
           <View style={[styles.inputStyle, styles.inputMargin]}>
             <TextInput style={styles.inputText} placeholder="Age" placeholderTextColor="#929292" value={age || ''} onChangeText={(text) => setAge(text)} />
           </View>
+
           <View style={[styles.inputStyle, styles.inputMargin]}>
             <TextInput style={styles.inputText} placeholder="Weight (lbs)" placeholderTextColor="#929292" value={weight || ''} onChangeText={(text) => setWeight(text)} />
           </View>
+
+          <View style={styles.inputMargin}>
+            <SelectList
+              setSelected={(key: SetStateAction<number>) => setSex(key)}
+              data={sexData}
+              save="key"
+              search={false}
+              placeholder='Sex'
+              boxStyles={styles.selectBox}
+              inputStyles={styles.selectInput}
+              dropdownTextStyles={styles.inputText}
+              dropdownStyles={styles.selectDropDownBox}
+            />
+          </View>
+
+          <View style={styles.inputMargin}>
+            <SelectList
+              setSelected={(key: SetStateAction<number>) => setExperienceLevel(key)}
+              data={expData}
+              save="key"
+              search={false}
+              placeholder='How long have you been training?'
+              boxStyles={styles.selectBox}
+              inputStyles={styles.selectInput}
+              dropdownTextStyles={styles.inputText}
+              dropdownStyles={styles.selectDropDownBox}
+            />
+          </View>
+
+          <View style={styles.inputMargin}>
+            <SelectList
+              setSelected={(key: SetStateAction<number>) => setAthleteType(key)}
+              data={athleteData}
+              save="key"
+              search={false}
+              placeholder='What type of athlete are you?'
+              boxStyles={styles.selectBox}
+              inputStyles={styles.selectInput}
+              dropdownTextStyles={styles.inputText}
+              dropdownStyles={styles.selectDropDownBox}
+            />
+          </View>
+
+
+
           <View>
             <TouchableOpacity
               style={styles.customButton}
@@ -257,7 +352,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    zIndex: 10 },
+    zIndex: 10
+  },
+  sideText: {
+    fontSize: 13,
+    fontStyle: 'italic'
+  },
+  sideTextBox: {
+    marginBottom: 10,
+    marginLeft: 50,
+    // alignContent: 'flex-start',
+  },
   container: {
     backgroundColor: 'white',
     borderTopLeftRadius: 25,
@@ -265,12 +370,35 @@ const styles = StyleSheet.create({
     // height: '100%',
     borderColor: 'black',
     borderWidth: 2,
-    // paddingTop: 100
-    // padding: 20,
     marginTop: '20%',
-    // top: '10%',
-    // padding: 20,
-    // paddingTop: 50
+  },
+  selectBox: {
+    borderRadius: 30,
+    // padding: 15,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    alignSelf: 'flex-start',
+    backgroundColor: '#E1E1E1',
+    width: '80%',
+    fontSize: 18,
+    borderColor: '#E1E1E1',
+    // borderWidth: 0,
+    // color: '#929292'
+  },
+  selectDropDownBox: {
+    width: '80%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    borderRadius: 25,
+    borderColor: '#E1E1E1'
+  },
+  selectInput: {
+    // backgroundColor: '#E1E1E1',
+    fontSize: 18,
+    color: '#242424',
+    padding: 2,
+    // paddingLeft: 5,
+    // maxWidth: '90%'
   },
   customButton: {
     backgroundColor: '#242424',
@@ -305,23 +433,24 @@ const styles = StyleSheet.create({
 
   },
   inputStyle: {
-    padding: 10,
+    padding: 15,
     marginLeft: 'auto',
     marginRight: 'auto',
     alignSelf: 'stretch',
     backgroundColor: '#E1E1E1',
     borderRadius: 50,
-    paddingLeft: 50,
+    paddingLeft: 22,
     width: '80%',
-    // color: 'black'
+    // color: 'black',
   },
   inputMargin: {
-    marginBottom: 20
+    marginBottom: 10
   },
   tell: {
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: 40
+    marginBottom: 40,
+    marginTop: 20
   },
   inputText: {
     fontSize: 18,

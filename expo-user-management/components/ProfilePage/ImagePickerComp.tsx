@@ -74,7 +74,7 @@ export default function ImagePickerComp() {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    marginTop: 20,
+    // marginTop: 20,
     marginBottom: 50,
     alignItems: 'center',
   },
