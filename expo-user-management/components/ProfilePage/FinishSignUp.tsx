@@ -27,9 +27,9 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
   const [loading, setLoading] = useState(true)
 
   // trying to add this part into finish sign up and connect them with foreign keys
-  const [experienceLevel, setExperienceLevel] = useState(null)
-  const [sex, setSex] = useState(null)
-  const [athleteType, setAthleteType] = useState(null)
+  const [experienceLevel, setExperienceLevel] = useState(0)
+  const [sex, setSex] = useState(0)
+  const [athleteType, setAthleteType] = useState(0)
 
 
   // const [age, setAge] = useState('')
@@ -103,6 +103,9 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
         nickname,
         weight,
         age,
+        experience_level_id,
+        sex_id,
+        athlete_type_id,
         updated_at: new Date(),
       }
 
@@ -126,7 +129,7 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', zIndex: 10 }}>
+      <View style={styles.spinner}>
         <Spinner />
       </View>
     )
@@ -179,7 +182,7 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
               style={styles.customButton}
               disabled={loading}
               onPress={() => {
-                updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight
+                updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight, experience_level_id: experienceLevel, sex_id: sex, athlete_type_id: athleteType
                 })
                 setModalVisible(!modalVisible)
                 reloadProfile()
@@ -214,6 +217,12 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
 
 
 const styles = StyleSheet.create({
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    zIndex: 10 },
   container: {
     backgroundColor: 'white',
     borderTopLeftRadius: 25,
