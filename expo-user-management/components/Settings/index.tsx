@@ -22,20 +22,20 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         marginTop: 50,
-        height: '50%',
-        borderRadius: 20,
+        height: '71.5%',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
     },
     customButton: {
         backgroundColor: '#242424',
         padding: 10,
         borderRadius: 50,
         alignItems: 'center',
-        justifyContent: 'center',
         marginLeft: 'auto',
         marginRight: 'auto',
         width: '85%',
-        marginTop: 60,
-        marginBottom: 50
+        marginTop: '100%',
+        // marginBottom: 50
     },
     buttonText: {
         color: 'white',
