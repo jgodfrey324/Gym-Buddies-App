@@ -6,7 +6,7 @@ export default function Slide3 () {
     const { nickname, setNickname, firstName, setFirstName, lastName, setLastName } = useUserContext()
 
     return (
-        <View>
+        <View style={styles.container}>
             <View style={styles.sideTextBox}>
                 <Text style={styles.sideText}>
                     What do you like to be called?
@@ -29,6 +29,9 @@ export default function Slide3 () {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        marginTop: '50%'
+    },
     sideTextBox: {
         marginBottom: 10,
         marginLeft: 50,

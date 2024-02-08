@@ -10,6 +10,7 @@ export const UserProvider = ({ children }) => {
   const [lastName, setLastName] = useState('')
   const [age, setAge] = useState('')
   const [weight, setWeight] = useState('')
+  const [sex, setSex] = useState(0)
 
   return (
     <UserContext.Provider
@@ -23,7 +24,9 @@ export const UserProvider = ({ children }) => {
         age,
         setAge,
         weight,
-        setWeight
+        setWeight,
+        sex,
+        setSex
       }}
     >
       {children}

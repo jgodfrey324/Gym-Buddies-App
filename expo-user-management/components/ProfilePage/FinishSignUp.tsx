@@ -26,6 +26,7 @@ import ImagePickerComp from './ImagePickerComp'
 import Slide1 from './FinishSignUpWindows/Slide1'
 import Slide2 from './FinishSignUpWindows/Slide2'
 import Slide3 from './FinishSignUpWindows/Slide3';
+import Slide4 from './FinishSignUpWindows/Slide4';
 
 
 export default function FinishSignUp({ session, reloadProfile }: { session: Session; reloadProfile: () => void }) {
@@ -244,9 +245,15 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
             </Animatable.View>
           )}
 
-          {slideCount >= 3 && (
+          {slideCount === 3 && (
             <Animatable.View animation='bounceInRight' delay={200}>
               <Slide3 />
+            </Animatable.View>
+          )}
+
+          {slideCount >= 4 && (
+            <Animatable.View animation='bounceInRight' delay={200}>
+              <Slide4 />
             </Animatable.View>
           )}
 
@@ -265,28 +272,6 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
         {/*
 
         <View style={styles.modalTextContentsBox} >
-
-          <View style={[styles.inputStyle, styles.inputMargin]}>
-            <TextInput style={styles.inputText} placeholder="Age" placeholderTextColor="#929292" value={age || ''} onChangeText={(text) => setAge(text)} />
-          </View>
-
-          <View style={[styles.inputStyle, styles.inputMargin]}>
-            <TextInput style={styles.inputText} placeholder="Weight (lbs)" placeholderTextColor="#929292" value={weight || ''} onChangeText={(text) => setWeight(text)} />
-          </View>
-
-          <View style={styles.inputMargin}>
-            <SelectList
-              setSelected={(key: SetStateAction<number>) => setSex(key)}
-              data={sexData}
-              save="key"
-              search={false}
-              placeholder='Sex'
-              boxStyles={styles.selectBox}
-              inputStyles={styles.selectInput}
-              dropdownTextStyles={styles.inputText}
-              dropdownStyles={styles.selectDropDownBox}
-            />
-          </View>
 
           <View style={styles.inputMargin}>
             <SelectList
