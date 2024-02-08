@@ -12,6 +12,7 @@ export default function Slide2 () {
 
 const styles = StyleSheet.create({
     imagePickerButton: {
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: '50%'
     }
 })

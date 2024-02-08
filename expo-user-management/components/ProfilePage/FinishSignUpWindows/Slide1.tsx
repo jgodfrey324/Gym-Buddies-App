@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native'
 
 export default function Slide1 () {
     return (
-        <View>
+        <View style={styles.introTextHouse}>
             <View style={styles.introTextBox}>
                 <Text style={styles.introText}>
                 Congrats, you're all signed up!
@@ -17,6 +17,11 @@ export default function Slide1 () {
 }
 
 const styles = StyleSheet.create({
+    introTextHouse: {
+        // borderWidth: 2,
+        // borderColor: 'red',
+        marginTop: '50%'
+    },
     introTextBox: {
         marginLeft: 'auto',
         marginRight: 'auto',
