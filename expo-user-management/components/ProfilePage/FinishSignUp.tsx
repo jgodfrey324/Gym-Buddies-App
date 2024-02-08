@@ -1,4 +1,4 @@
-import { useState, useEffect, SetStateAction } from 'react'
+import { useState, useEffect, SetStateAction, useRef } from 'react'
 import { supabase } from '../../lib/supabase'
 import {
   StyleSheet,
@@ -10,8 +10,11 @@ import {
   Modal,
   Pressable,
   KeyboardAvoidingView,
-  ScrollView
+  ScrollView,
+  Animated,
+  useWindowDimensions
 } from 'react-native'
+import * as Animatable from 'react-native-animatable';
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Session } from '@supabase/supabase-js'
 
@@ -20,17 +23,32 @@ import { useUserContext } from '../../context/context'
 import LeftArrowSVG from '../../assets/leftArrow'
 import Spinner from '../Spinner'
 import ImagePickerComp from './ImagePickerComp'
+import Slide1 from './FinishSignUpWindows/Slide1'
+import Slide2 from './FinishSignUpWindows/Slide2'
 
 
 export default function FinishSignUp({ session, reloadProfile }: { session: Session; reloadProfile: () => void }) {
   const { nickname, setNickname, firstName, setFirstName, lastName, setLastName, age, setAge, weight, setWeight } = useUserContext()
+
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const {width: windowWidth} = useWindowDimensions();
+  const {height: windowHeight} = useWindowDimensions();
+
   const [loading, setLoading] = useState(true)
-  const [selected, setSelected] = useState("");
+  const [slideCount, setSlideCount] = useState(1)
 
   // trying to add this part into finish sign up and connect them with foreign keys
   const [experienceLevel, setExperienceLevel] = useState(0)
   const [sex, setSex] = useState(0)
   const [athleteType, setAthleteType] = useState(0)
+
+
+
+  const getSlideNumber = (slideCount: number) => {
+    if (slideCount === 1) return <Slide1 />
+    if (slideCount >= 2) return <Slide2 />
+  }
+
 
 
   // setting up data interfaces
@@ -218,26 +236,33 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
     >
       <KeyboardAvoidingView>
           <ScrollView>
-      <View style={styles.container}>
-      {/* <Pressable
+      <View style={[styles.container, {width: windowWidth, height: windowHeight}]}>
 
-            style={styles.goBackButton}
-            onPress={() => setModalVisible(!modalVisible)}>
+          {slideCount === 1 && (
+            <Animatable.View animation='bounceInRight' delay={1200}>
+              <Slide1 />
+            </Animatable.View>
+          )}
+
+          {slideCount >= 2 && (
+            <Animatable.View animation='bounceInRight' delay={200}>
+              <Slide2 />
+            </Animatable.View>
+          )}
+
+
+          <Pressable
+            style={styles.nextButton}
+            onPress={() => {setSlideCount(slideCount + 1)}
+            }>
               <LeftArrowSVG width={20} height={20} />
-          </Pressable> */}
-        <View style={styles.introTextBox}>
-            <Text style={styles.introText}>
-              Congrats, you're all signed up!
-            </Text>
+          </Pressable>
+
+
         </View>
 
-        <View style={styles.tell}>
-          <Text style={{fontSize: 30,}}>Finish setting up your profile</Text>
-        </View>
 
-        <View style={styles.imagePickerButtonBox}>
-          <ImagePickerComp />
-        </View>
+        {/*
 
         <View style={styles.modalTextContentsBox} >
 
@@ -326,14 +351,14 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
             >
               <Text style={styles.buttonText}>Continue</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
 
           {/* <Pressable
             // style={styles.goBackButton}
             onPress={() => setModalVisible(!modalVisible)}>
               <LeftArrowSVG width={20} height={20} />
           </Pressable> */}
-        </View>
+        {/* </View> */}
 
         {/* <View>
           <TouchableOpacity
@@ -342,7 +367,7 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
           <TextInput style={styles.buttonText}>Sign Out</TextInput>
           </TouchableOpacity>
         </View> */}
-      </View>
+      {/* </View> */}
         </ScrollView>
       </KeyboardAvoidingView>
     </Modal>
@@ -376,6 +401,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 2,
     marginTop: '20%',
+    height: '100%'
   },
   introTextBox: {
     marginLeft: 'auto',
@@ -431,7 +457,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     // width: 100
   },
-  goBackButton: {
+  nextButton: {
     marginTop: 20,
     marginLeft: 20,
     top: 5,
