@@ -21,12 +21,6 @@ export default function ProfilePage({ session }: { session: Session }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(true)
   const [image, setImage] = useState('')
-  // const [nickname, setNickname] = useState('')
-  // const [firstName, setFirstName] = useState('')
-  // const [lastName, setLastName] = useState('')
-  // const [age, setAge] = useState('')
-  // const [weight, setWeight] = useState('')
-
 
 
   useEffect(() => {
@@ -36,9 +30,15 @@ export default function ProfilePage({ session }: { session: Session }) {
     }
   }, [session])
 
+
+
+
   const reloadProfile = () => {
     setTimeout(() => getProfile(), 2000)
   }
+
+
+
 
   const getProfilePic = async () => {
     const userId = (await supabase.auth.getUser()).data.user?.id
@@ -54,15 +54,8 @@ export default function ProfilePage({ session }: { session: Session }) {
       });
 
     if (data != null) {
-      console.log('data --> ', data)
       const imageName = data[0].name
-
-      // console.log('userId --> ', userId)
-      // console.log('imageName --> ', imageName)
-
       setImage(CDNUrl + userId + '/' + imageName)
-
-      console.log('image url --> ', image)
     } else {
       if (error) {
         console.log('error --> ', error)
@@ -70,6 +63,8 @@ export default function ProfilePage({ session }: { session: Session }) {
       console.log('data was null')
     }
   }
+
+
 
 
   async function getProfile() {
@@ -108,6 +103,15 @@ export default function ProfilePage({ session }: { session: Session }) {
 
 
 
+
+  const getInitials = (firstName: string, lastName: string) => {
+    let initials = firstName[0] + lastName[0]
+    return initials
+  }
+
+
+
+
   return (
     <View>
       <View style={styles.container}>
@@ -140,11 +144,6 @@ export default function ProfilePage({ session }: { session: Session }) {
               <LeftArrowSVG width={20} height={20} />
             </Pressable>
             <Settings />
-            {/* <Pressable
-              style={styles.goBackButton}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <LeftArrowSVG width={20} height={20} />
-            </Pressable> */}
           </Modal>
         </View>
 
@@ -158,9 +157,16 @@ export default function ProfilePage({ session }: { session: Session }) {
             </View>
           </View>
 
-          <View style={styles.imageContainer}>
-            {image && <Image style={styles.profilePic} source={{ uri: image }}></Image>}
-          </View>
+          {image ? (
+            <Image style={styles.profilePic} source={{ uri: image }}></Image>
+          )
+        :
+          (
+            <View style={styles.profilePic}>
+              <Text style={styles.initials}>
+                {getInitials(firstName, lastName)}</Text>
+            </View>
+          )}
 
         </View>
       </View>
@@ -195,6 +201,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'red',
     maxWidth: '100%'
+  },
+  initials: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    fontSize: 100,
+    alignContent: 'center',
+    fontWeight: '200',
+    color: '#272727'
   },
   nicknameBox: {
     maxWidth: '100%',
@@ -259,26 +275,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'green'
   },
-  profilePicBox: {
-    borderWidth: 2,
-    borderColor: 'red',
-    height: 120,
-    width: 120
-  },
   profilePic: {
     zIndex: 5,
     height: 130,
     width: 130,
     borderRadius: 70,
     marginRight: 12,
-    objectFit: 'contain'
+    borderWidth: 2,
+    borderColor: '#242424'
+    // objectFit: 'contain'
   },
-  imageContainer: {
-    height: 130,
-    width: 130,
-    borderWidth: 3,
-    borderColor: '#242424',
-    borderRadius: 70,
-    marginRight: 12,
-  }
 })

@@ -28,84 +28,19 @@ import Slide1 from './FinishSignUpWindows/Slide1'
 import Slide2 from './FinishSignUpWindows/Slide2'
 import Slide3 from './FinishSignUpWindows/Slide3';
 import Slide4 from './FinishSignUpWindows/Slide4';
+import Slide5 from './FinishSignUpWindows/Slide5';
 
 
 export default function FinishSignUp({ session, reloadProfile }: { session: Session; reloadProfile: () => void }) {
-  const { nickname, setNickname, firstName, setFirstName, lastName, setLastName, age, setAge, weight, setWeight } = useUserContext()
+  const { nickname, firstName, lastName, age, weight, experienceLevel, sex, athleteType } = useUserContext()
 
-  const scrollX = useRef(new Animated.Value(0)).current;
   const { width: windowWidth } = useWindowDimensions();
   const { height: windowHeight } = useWindowDimensions();
 
   const [loading, setLoading] = useState(true)
   const [slideCount, setSlideCount] = useState(1)
 
-  // trying to add this part into finish sign up and connect them with foreign keys
-  const [experienceLevel, setExperienceLevel] = useState(0)
-  const [sex, setSex] = useState(0)
-  const [athleteType, setAthleteType] = useState(0)
-
-
-
-  // setting up data interfaces
-  // interface DataInterface {
-  //   expData: any | null,
-  //   setExpData: (value: any) => void,
-  // }
-  // const [expData, setExpData] = useState<DataInterface>()
-
-
-
-  // data from tables
-  const expData = [
-    { key: 1, value: '0-3 years' },
-    { key: 2, value: '4-6 years' },
-    { key: 3, value: '7+ years' }
-  ]
-  const sexData = [
-    { key: 1, value: 'Male' },
-    { key: 2, value: 'Female' },
-    { key: 3, value: 'Prefer not to say' }
-  ]
-  const athleteData = [
-    { key: 1, value: 'bodybuilding' },
-    { key: 2, value: 'strength' },
-    { key: 3, value: 'crossfit' },
-    { key: 4, value: 'calisthenics' },
-    { key: 5, value: 'wellness' },
-    { key: 6, value: 'endurance' }
-  ]
-
-
-
-
-  // const [age, setAge] = useState('')
-  // const [weight, setWeight] = useState('')
   const [modalVisible, setModalVisible] = useState(false);
-
-
-
-
-  // data for the select fields
-  // const getExperienceLevelsData = async () => {
-  //   const { data, error } = await supabase
-  //     .from('experience_levels')
-  //     .select('id, level')
-
-  //   if (error) {
-  //     console.log('error getting experience ---> ', error)
-  //     throw error
-  //   }
-
-  //   if (data) {
-  //     const selectExpData = data.map((item) => {
-  //       return { key: item.id, value: item.level }
-  //     })
-
-  //     return selectExpData
-  //   } else return []
-  // }
-
 
 
 
@@ -133,8 +68,6 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
       }
 
       if (data) {
-        setFirstName(data.first_name)
-
         if (!data.first_name) {
           setTimeout(() => {
             setModalVisible(!modalVisible)
@@ -252,9 +185,15 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
               </Animatable.View>
             )}
 
-            {slideCount >= 4 && (
+            {slideCount === 4 && (
               <Animatable.View animation='bounceInRight' delay={200}>
                 <Slide4 />
+              </Animatable.View>
+            )}
+
+            {slideCount >= 5 && (
+              <Animatable.View animation='bounceInRight' delay={200}>
+                <Slide5 />
               </Animatable.View>
             )}
 
@@ -266,74 +205,22 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
               </Pressable>
             </Animatable.View>)}
 
+            {slideCount > 4 && (
+              <Animatable.View animation='bounceInRight' delay={200}>
+                <TouchableOpacity
+                  style={styles.customButton}
+                  disabled={loading}
+                  onPress={() => {
+                    updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight, experience_level_id: experienceLevel, sex_id: sex, athlete_type_id: athleteType
+                    })
+                    setModalVisible(!modalVisible)
+                    reloadProfile()
+                  }}>
+                  <Text style={styles.buttonText}>Continue</Text>
+                </TouchableOpacity>
+              </Animatable.View>
+            )}
           </View>
-
-
-          {/*
-
-        <View style={styles.modalTextContentsBox} >
-
-          <View style={styles.inputMargin}>
-            <SelectList
-              setSelected={(key: SetStateAction<number>) => setExperienceLevel(key)}
-              data={expData}
-              save="key"
-              search={false}
-              placeholder='How long have you been training?'
-              boxStyles={styles.selectBox}
-              inputStyles={styles.selectInput}
-              dropdownTextStyles={styles.inputText}
-              dropdownStyles={styles.selectDropDownBox}
-            />
-          </View>
-
-          <View style={styles.inputMargin}>
-            <SelectList
-              setSelected={(key: SetStateAction<number>) => setAthleteType(key)}
-              data={athleteData}
-              save="key"
-              search={false}
-              placeholder='What type of athlete are you?'
-              boxStyles={styles.selectBox}
-              inputStyles={styles.selectInput}
-              dropdownTextStyles={styles.inputText}
-              dropdownStyles={styles.selectDropDownBox}
-            />
-          </View>
-
-
-
-          <View>
-            <TouchableOpacity
-              style={styles.customButton}
-              disabled={loading}
-              onPress={() => {
-                updateProfile({ nickname, first_name: firstName, last_name: lastName, age, weight, experience_level_id: experienceLevel, sex_id: sex, athlete_type_id: athleteType
-                })
-                setModalVisible(!modalVisible)
-                reloadProfile()
-            }
-            }
-            >
-              <Text style={styles.buttonText}>Continue</Text>
-            </TouchableOpacity>
-          </View> */}
-
-          {/* <Pressable
-            // style={styles.goBackButton}
-            onPress={() => setModalVisible(!modalVisible)}>
-              <LeftArrowSVG width={20} height={20} />
-          </Pressable> */}
-          {/* </View> */}
-
-          {/* <View>
-          <TouchableOpacity
-          style={styles.customButton}
-          onPress={() => supabase.auth.signOut()}>
-          <TextInput style={styles.buttonText}>Sign Out</TextInput>
-          </TouchableOpacity>
-        </View> */}
-          {/* </View> */}
         </ScrollView>
       </KeyboardAvoidingView>
     </Modal>
@@ -350,15 +237,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     zIndex: 10
   },
-  sideText: {
-    fontSize: 13,
-    fontStyle: 'italic'
-  },
-  sideTextBox: {
-    marginBottom: 10,
-    marginLeft: 50,
-    // alignContent: 'flex-start',
-  },
   container: {
     backgroundColor: 'white',
     borderTopLeftRadius: 25,
@@ -369,42 +247,6 @@ const styles = StyleSheet.create({
     //figure out different screen sizes for modal size thing
     marginTop: '20%',
     height: '100%'
-  },
-  introTextBox: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: 20
-  },
-  introText: {
-    fontSize: 16
-  },
-  selectBox: {
-    borderRadius: 30,
-    // padding: 15,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    alignSelf: 'flex-start',
-    backgroundColor: '#E1E1E1',
-    width: '80%',
-    fontSize: 18,
-    borderColor: '#E1E1E1',
-    // borderWidth: 0,
-    // color: '#929292'
-  },
-  selectDropDownBox: {
-    width: '80%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    borderRadius: 25,
-    borderColor: '#E1E1E1'
-  },
-  selectInput: {
-    // backgroundColor: '#E1E1E1',
-    fontSize: 18,
-    color: '#242424',
-    padding: 2,
-    // paddingLeft: 5,
-    // maxWidth: '90%'
   },
   customButton: {
     backgroundColor: '#242424',
@@ -437,33 +279,6 @@ const styles = StyleSheet.create({
     // paddingHorizontal: 12,
     borderRadius: 30,
 
-  },
-  inputStyle: {
-    padding: 15,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    alignSelf: 'stretch',
-    backgroundColor: '#E1E1E1',
-    borderRadius: 50,
-    paddingLeft: 22,
-    width: '80%',
-    // color: 'black',
-  },
-  inputMargin: {
-    marginBottom: 10
-  },
-  tell: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: 40,
-    marginTop: 5
-  },
-  inputText: {
-    fontSize: 18,
-    color: '#242424'
-  },
-  imagePickerButtonBox: {
-    alignItems: 'center'
   },
   modalTextContentsBox: {
     // borderWidth: 1,
