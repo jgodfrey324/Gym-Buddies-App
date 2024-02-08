@@ -258,13 +258,13 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
               </Animatable.View>
             )}
 
-            <Animatable.View animation='bounceInRight' delay={1200}>
+            {slideCount <= 4 && (<Animatable.View animation='bounceInRight' delay={1200}>
               <Pressable
                 style={styles.nextButton}
                 onPress={() => { setSlideCount(slideCount + 1) }}>
                 <MaterialCommunityIcons name='arrow-right' size={25} />
               </Pressable>
-            </Animatable.View>
+            </Animatable.View>)}
 
           </View>
 
