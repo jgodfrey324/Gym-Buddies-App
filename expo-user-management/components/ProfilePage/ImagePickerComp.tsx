@@ -6,12 +6,16 @@ import * as FileSystem from 'expo-file-system';
 import { decode } from "base64-arraybuffer";
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useUserContext } from '../../context/context'
 
 
 
 
 export default function ImagePickerComp() {
   const [image, setImage] = useState('');
+  const { firstName, lastName } = useUserContext()
+  console.log('first!!!!', firstName, 'last!!!!', lastName)
 
   const pickImage = async () => {
     const userId = (await supabase.auth.getUser()).data.user?.id
@@ -55,16 +59,33 @@ export default function ImagePickerComp() {
     }
   };
 
+  const getInitials = (firstName: string, lastName: string) => {
+    let initials = firstName[0] + lastName[0]
+    return initials
+  }
+
+  // console.log(getInitials(firstName, lastName))
 
   return (
     <View style={styles.buttonContainer}>
       {image ? (
         <Image source={{ uri: image }} style={styles.tempProfilePic} />
       ) : (
-        <TouchableOpacity style={styles.tempProfilePic} onPress={pickImage}>
-          {/* profile pic placeholder */}
-          <Text style={styles.buttonText}>Upload profile picture</Text>
-        </TouchableOpacity>
+        <>
+          <TouchableOpacity onPress={pickImage}>
+            {/* profile pic placeholder */}
+            <View style={styles.tempProfilePic}>
+              {/* <MaterialCommunityIcons name='image-plus' size={80} style={{marginLeft:'auto', marginRight:'auto'}}/> */}
+              {/* <Text style={styles.buttonText}>Upload profile picture</Text> */}
+
+              <Text>
+                {getInitials(firstName, lastName)}</Text>
+            </View>
+          </TouchableOpacity>
+          <View>
+            <Text style={styles.buttonText}>Upload profile picture</Text>
+          </View>
+        </>
       )}
     </View>
   );
@@ -79,21 +100,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: '#C7C588',
+    color: '#272727',
     fontSize: 16,
     textAlign: 'center',
     width: 150,
     alignSelf: 'center',
-    marginTop: 'auto',
-    marginBottom: 'auto'
+    // marginTop: 'auto',
+    // marginBottom: 'auto'
   },
   tempProfilePic: {
-    height: 130,
-    width: 130,
-    borderWidth: 2,
-    // borderColor: '#242424',
-    borderRadius: 70,
-    marginBottom: 10,
-    backgroundColor: '#242424'
+    height: 180,
+    width: 180,
+    borderWidth: 3,
+    borderRadius: 90,
+    margin: 10,
+    padding: 20,
+    gap: 10
   },
 })
