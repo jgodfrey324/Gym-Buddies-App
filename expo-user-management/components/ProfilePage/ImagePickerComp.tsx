@@ -14,8 +14,7 @@ import { useUserContext } from '../../context/context'
 
 export default function ImagePickerComp() {
   const [image, setImage] = useState('');
-  const { firstName, lastName } = useUserContext()
-
+  const { firstName, lastName, imageUrl, setImageUrl } = useUserContext()
   const { width: windowWidth } = useWindowDimensions();
 
   const pickImage = async () => {
@@ -56,7 +55,10 @@ export default function ImagePickerComp() {
 
 
     if (!result.canceled) {
+      // local image state is to help with conditional rendering during finish sign up
       setImage(result.assets[0].uri);
+      // global state for profile pic to show immedietly after sign up is complete
+      setImageUrl(result.assets[0].uri);
     }
   };
 
@@ -74,7 +76,7 @@ export default function ImagePickerComp() {
         <View>
             <Text style={styles.buttonText}>Yeah, is this what you wanted baby? Fuck 🫦</Text>
         </View>
-        <Image source={{ uri: image }} style={styles.tempProfilePic} />
+        <Image source={{ uri: imageUrl }} style={styles.tempProfilePic} />
         </>
       ) : (
         <>

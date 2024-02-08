@@ -17,11 +17,11 @@ import RecentWorkouts from '../Workouts/RecentWorkouts'
 
 
 export default function ProfilePage({ session }: { session: Session }) {
-  const { nickname, setNickname, firstName, setFirstName, lastName, setLastName, age, setAge, weight, setWeight } = useUserContext()
+  const { nickname, setNickname, firstName, setFirstName, lastName, setLastName, age, setAge, weight, setWeight, imageUrl, setImageUrl } = useUserContext()
   const Tab = createBottomTabNavigator()
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(true)
-  const [image, setImage] = useState('')
+  // const [image, setImage] = useState('')
 
 
   useEffect(() => {
@@ -61,8 +61,8 @@ export default function ProfilePage({ session }: { session: Session }) {
         });
 
       if (data != null) {
-        const imageName = data[0].name
-        setImage(CDNUrl + userId + '/' + imageName)
+        const imageName = data[0]?.name ? data[0].name : ''
+        setImageUrl(CDNUrl + userId + '/' + imageName)
       } else {
         if (error) {
           console.log('error --> ', error)
@@ -178,8 +178,8 @@ export default function ProfilePage({ session }: { session: Session }) {
             </View>
           </View>
 
-          {image ? (
-            <Image style={styles.profilePic} source={{ uri: image }}></Image>
+          {imageUrl ? (
+            <Image style={styles.profilePic} source={{ uri: imageUrl }}></Image>
           )
         :
           (
