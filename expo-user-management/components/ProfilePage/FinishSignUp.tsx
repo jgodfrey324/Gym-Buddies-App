@@ -25,6 +25,7 @@ import Spinner from '../Spinner'
 import ImagePickerComp from './ImagePickerComp'
 import Slide1 from './FinishSignUpWindows/Slide1'
 import Slide2 from './FinishSignUpWindows/Slide2'
+import Slide3 from './FinishSignUpWindows/Slide3';
 
 
 export default function FinishSignUp({ session, reloadProfile }: { session: Session; reloadProfile: () => void }) {
@@ -41,13 +42,6 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
   const [experienceLevel, setExperienceLevel] = useState(0)
   const [sex, setSex] = useState(0)
   const [athleteType, setAthleteType] = useState(0)
-
-
-
-  const getSlideNumber = (slideCount: number) => {
-    if (slideCount === 1) return <Slide1 />
-    if (slideCount >= 2) return <Slide2 />
-  }
 
 
 
@@ -244,9 +238,15 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
             </Animatable.View>
           )}
 
-          {slideCount >= 2 && (
+          {slideCount === 2 && (
             <Animatable.View animation='bounceInRight' delay={200}>
               <Slide2 />
+            </Animatable.View>
+          )}
+
+          {slideCount >= 3 && (
+            <Animatable.View animation='bounceInRight' delay={200}>
+              <Slide3 />
             </Animatable.View>
           )}
 
@@ -265,25 +265,6 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
         {/*
 
         <View style={styles.modalTextContentsBox} >
-
-
-          <View style={styles.sideTextBox}>
-            <Text style={styles.sideText}>
-              What do you like to be called?
-            </Text>
-          </View>
-
-          <View style={[styles.inputStyle, styles.inputMargin]}>
-            <TextInput style={styles.inputText} placeholder="Nickname" placeholderTextColor="#929292" value={nickname || ''} onChangeText={(text) => setNickname(text)} />
-          </View>
-
-          <View style={[styles.inputStyle, styles.inputMargin]}>
-            <TextInput style={styles.inputText} placeholder="First name" placeholderTextColor="#929292" value={firstName || ''} onChangeText={(text) => setFirstName(text)} />
-          </View>
-
-          <View style={[styles.inputStyle, styles.inputMargin]}>
-            <TextInput style={styles.inputText} placeholder="Last name" placeholderTextColor="#929292" value={lastName || ''} onChangeText={(text) => setLastName(text)} />
-          </View>
 
           <View style={[styles.inputStyle, styles.inputMargin]}>
             <TextInput style={styles.inputText} placeholder="Age" placeholderTextColor="#929292" value={age || ''} onChangeText={(text) => setAge(text)} />
