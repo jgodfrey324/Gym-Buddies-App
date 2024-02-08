@@ -4,6 +4,7 @@ import { Modal, Pressable, StyleSheet, Alert, View, TouchableOpacity, TextInput,
 import { Text } from 'react-native-elements'
 import FinishSignUp from './FinishSignUp'
 import LeftArrowSVG from '../../assets/leftArrow'
+import Spinner from '../Spinner'
 import { Session } from '@supabase/supabase-js'
 import { useUserContext } from '../../context/context'
 import Groups from '../Groups'
@@ -28,39 +29,50 @@ export default function ProfilePage({ session }: { session: Session }) {
       getProfile()
       getProfilePic()
     }
+
+    setTimeout(() => {
+      setLoading(!loading)
+    }, 800)
   }, [session])
 
 
 
 
   const reloadProfile = () => {
-    setTimeout(() => getProfile(), 2000)
+    setTimeout(() => getProfile(), 1500)
   }
 
 
 
 
   const getProfilePic = async () => {
-    const userId = (await supabase.auth.getUser()).data.user?.id
-    const CDNUrl = "https://qmuznbxetqnzninllxde.supabase.co/storage/v1/object/public/Images/"
 
-    const { data, error } = await supabase
-      .storage
-      .from("Images")
-      .list(userId + '/', {
-        limit: 1,
-        offset: 0,
-        sortBy: { column: "created_at", order: "desc" }
-      });
+    try {
+      const userId = (await supabase.auth.getUser()).data.user?.id
+      const CDNUrl = "https://qmuznbxetqnzninllxde.supabase.co/storage/v1/object/public/Images/"
 
-    if (data != null) {
-      const imageName = data[0].name
-      setImage(CDNUrl + userId + '/' + imageName)
-    } else {
-      if (error) {
-        console.log('error --> ', error)
+      const { data, error } = await supabase
+        .storage
+        .from("Images")
+        .list(userId + '/', {
+          limit: 1,
+          offset: 0,
+          sortBy: { column: "created_at", order: "desc" }
+        });
+
+      if (data != null) {
+        const imageName = data[0].name
+        setImage(CDNUrl + userId + '/' + imageName)
+      } else {
+        if (error) {
+          console.log('error --> ', error)
+        }
+        console.log('data was null')
       }
-      console.log('data was null')
+    } catch(error) {
+      if (error instanceof Error) {
+        Alert.alert(error.message)
+      }
     }
   }
 
@@ -69,7 +81,6 @@ export default function ProfilePage({ session }: { session: Session }) {
 
   async function getProfile() {
     try {
-      setLoading(true)
       if (!session?.user) {
         // console.log('there isn\'t a session user')
         throw new Error('No user on the session!')
@@ -96,8 +107,6 @@ export default function ProfilePage({ session }: { session: Session }) {
       if (error instanceof Error) {
         Alert.alert(error.message)
       }
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -106,7 +115,19 @@ export default function ProfilePage({ session }: { session: Session }) {
 
   const getInitials = (firstName: string, lastName: string) => {
     let initials = firstName[0] + lastName[0]
+
     return initials
+  }
+
+
+
+
+  if (loading) {
+    return (
+      <View style={styles.spinner}>
+        <Spinner />
+      </View>
+    )
   }
 
 
@@ -179,6 +200,14 @@ export default function ProfilePage({ session }: { session: Session }) {
 }
 
 const styles = StyleSheet.create({
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#272727',
+    zIndex: 10,
+    top: 50
+  },
   container: {
     padding: 20,
     paddingTop: '10%',

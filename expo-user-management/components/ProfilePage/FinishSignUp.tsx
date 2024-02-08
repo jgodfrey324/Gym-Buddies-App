@@ -142,18 +142,6 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
 
 
 
-
-
-
-  if (loading) {
-    return (
-      <View style={styles.spinner}>
-        <Spinner />
-      </View>
-    )
-  }
-
-
   return (
     <Modal
       animationType="slide"
@@ -230,13 +218,6 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
 
 
 const styles = StyleSheet.create({
-  spinner: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    zIndex: 10
-  },
   container: {
     backgroundColor: 'white',
     borderTopLeftRadius: 25,
