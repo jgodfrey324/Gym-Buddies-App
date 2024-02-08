@@ -27,18 +27,10 @@ export default function App() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session)
     })
+
   }, [])
 
-  // console.log(session)
 
-  // if (session) return (
-  //   <UserProvider>
-  //     <View>
-  //       <ProfilePage key={session.user.id} session={session} />
-  //       <NavBar />
-  //     </View>
-  //   </UserProvider>
-  // )
 
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
