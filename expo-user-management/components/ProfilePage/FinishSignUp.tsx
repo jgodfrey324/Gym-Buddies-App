@@ -366,6 +366,7 @@ const styles = StyleSheet.create({
     // height: '100%',
     borderColor: 'black',
     borderWidth: 2,
+    //figure out different screen sizes for modal size thing
     marginTop: '20%',
     height: '100%'
   },
