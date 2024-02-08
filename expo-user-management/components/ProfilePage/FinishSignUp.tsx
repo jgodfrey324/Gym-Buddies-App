@@ -21,6 +21,7 @@ import { Session } from '@supabase/supabase-js'
 // components
 import { useUserContext } from '../../context/context'
 import LeftArrowSVG from '../../assets/leftArrow'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Spinner from '../Spinner'
 import ImagePickerComp from './ImagePickerComp'
 import Slide1 from './FinishSignUpWindows/Slide1'
@@ -33,8 +34,8 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
   const { nickname, setNickname, firstName, setFirstName, lastName, setLastName, age, setAge, weight, setWeight } = useUserContext()
 
   const scrollX = useRef(new Animated.Value(0)).current;
-  const {width: windowWidth} = useWindowDimensions();
-  const {height: windowHeight} = useWindowDimensions();
+  const { width: windowWidth } = useWindowDimensions();
+  const { height: windowHeight } = useWindowDimensions();
 
   const [loading, setLoading] = useState(true)
   const [slideCount, setSlideCount] = useState(1)
@@ -222,54 +223,53 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
 
   return (
     <Modal
-    animationType="slide"
-    transparent={true}
-    visible={modalVisible}
-    onRequestClose={() => {
-      setModalVisible(!modalVisible);
-    }}
+      animationType="slide"
+      transparent={true}
+      visible={modalVisible}
+      onRequestClose={() => {
+        setModalVisible(!modalVisible);
+      }}
     >
       <KeyboardAvoidingView>
-          <ScrollView>
-      <View style={[styles.container, {width: windowWidth, height: windowHeight}]}>
+        <ScrollView>
+          <View style={[styles.container, { width: windowWidth, height: windowHeight }]}>
 
-          {slideCount === 1 && (
+            {slideCount === 1 && (
+              <Animatable.View animation='bounceInRight' delay={1200}>
+                <Slide1 />
+              </Animatable.View>
+            )}
+
+            {slideCount === 2 && (
+              <Animatable.View animation='bounceInRight' delay={200}>
+                <Slide2 />
+              </Animatable.View>
+            )}
+
+            {slideCount === 3 && (
+              <Animatable.View animation='bounceInRight' delay={200}>
+                <Slide3 />
+              </Animatable.View>
+            )}
+
+            {slideCount >= 4 && (
+              <Animatable.View animation='bounceInRight' delay={200}>
+                <Slide4 />
+              </Animatable.View>
+            )}
+
             <Animatable.View animation='bounceInRight' delay={1200}>
-              <Slide1 />
+              <Pressable
+                style={styles.nextButton}
+                onPress={() => { setSlideCount(slideCount + 1) }}>
+                <MaterialCommunityIcons name='arrow-right' size={25} />
+              </Pressable>
             </Animatable.View>
-          )}
 
-          {slideCount === 2 && (
-            <Animatable.View animation='bounceInRight' delay={200}>
-              <Slide2 />
-            </Animatable.View>
-          )}
-
-          {slideCount === 3 && (
-            <Animatable.View animation='bounceInRight' delay={200}>
-              <Slide3 />
-            </Animatable.View>
-          )}
-
-          {slideCount >= 4 && (
-            <Animatable.View animation='bounceInRight' delay={200}>
-              <Slide4 />
-            </Animatable.View>
-          )}
+          </View>
 
 
-          <Pressable
-            style={styles.nextButton}
-            onPress={() => {setSlideCount(slideCount + 1)}
-            }>
-              <LeftArrowSVG width={20} height={20} />
-          </Pressable>
-
-
-        </View>
-
-
-        {/*
+          {/*
 
         <View style={styles.modalTextContentsBox} >
 
@@ -324,16 +324,16 @@ export default function FinishSignUp({ session, reloadProfile }: { session: Sess
             onPress={() => setModalVisible(!modalVisible)}>
               <LeftArrowSVG width={20} height={20} />
           </Pressable> */}
-        {/* </View> */}
+          {/* </View> */}
 
-        {/* <View>
+          {/* <View>
           <TouchableOpacity
           style={styles.customButton}
           onPress={() => supabase.auth.signOut()}>
           <TextInput style={styles.buttonText}>Sign Out</TextInput>
           </TouchableOpacity>
         </View> */}
-      {/* </View> */}
+          {/* </View> */}
         </ScrollView>
       </KeyboardAvoidingView>
     </Modal>
@@ -428,8 +428,8 @@ const styles = StyleSheet.create({
     marginRight: 20,
     top: 5,
     zIndex: 2,
-    borderColor: 'black',
-    borderWidth: 2,
+    // borderColor: 'black',
+    // borderWidth: 2,
     // width: '10%',
     alignSelf: 'flex-end',
     padding: 12,
