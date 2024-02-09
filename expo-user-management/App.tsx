@@ -80,7 +80,7 @@ export default function App() {
           paddingBottom: 20,
           shadowColor: "#242424",
           shadowOpacity: 0.8,
-          shadowRadius: 3,
+          shadowRadius: 10,
           shadowOffset: {
             height: 1,
             width: 1
