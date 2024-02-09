@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import { Modal, Pressable, StyleSheet, Alert, View, TouchableOpacity, TextInput, ActivityIndicator, Image } from 'react-native'
+import { Modal, Pressable, StyleSheet, Alert, View, TouchableOpacity, TextInput, ActivityIndicator, Image, Animated } from 'react-native'
 import { Text } from 'react-native-elements'
 import FinishSignUp from './FinishSignUp'
 import LeftArrowSVG from '../../assets/leftArrow'
@@ -24,6 +24,13 @@ export default function ProfilePage({ session }: { session: Session }) {
   // const [image, setImage] = useState('')
 
 
+  // animation settings for workout View
+  const start = new Animated.Value(600);
+  const end = new Animated.Value(0)
+  const duration = 5000;
+  const delay = 1500;
+
+
   useEffect(() => {
     if (session) {
       getProfile()
@@ -33,6 +40,19 @@ export default function ProfilePage({ session }: { session: Session }) {
     setTimeout(() => {
       setLoading(!loading)
     }, 1000)
+
+    console.log('animation potentially ran')
+    Animated.timing(
+      start,
+      {
+        toValue: end,
+        useNativeDriver: true,
+        delay: delay,
+        duration: duration
+      }
+    ).start(() => {
+      console.log('start call back is called')
+    });
   }, [session])
 
 
@@ -192,9 +212,11 @@ export default function ProfilePage({ session }: { session: Session }) {
         </View>
       </View>
 
-      <View style={styles.whiteScrollContainer}>
-        <RecentWorkouts />
-      </View>
+      {/* <Animated.View style={[{transform: [{translateY: animated}]}]}> */}
+        <Animated.View style={[{transform: [{translateY: end}]}, styles.whiteScrollContainer]}>
+          <RecentWorkouts />
+        </Animated.View>
+      {/* </Animated.View> */}
     </View>
   )
 }
