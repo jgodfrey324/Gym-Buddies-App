@@ -4,20 +4,38 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {createNativeStackNavigator, } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useState, useEffect } from 'react'
-import { supabase } from './lib/supabase'
-import { View } from 'react-native';
+
+
 import HomeScreen from './components/HomeScreen'
-import Account from './components/Signup/Account';
-import { Session } from '@supabase/supabase-js'
 import Auth from './components/Signup/Auth';
 import ProfilePage from './components/ProfilePage';
-import { UserProvider } from './context/context';
-import FinishSignUp from './components/ProfilePage/FinishSignUp';
 import Groups from './components/Groups';
 import Workouts from './components/Workouts';
+import { UserProvider } from './context/context';
+
+
+import { supabase } from './lib/supabase'
+import { Session } from '@supabase/supabase-js'
+
+
+import {
+  AnimatedTabBarNavigator,
+  DotSize, // optional
+  TabElementDisplayOptions, // optional
+  TabButtonLayout, // optional
+  IAppearanceOptions // optional
+} from 'react-native-animated-nav-tab-bar';
+
+
+
+
+
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
+
+
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
@@ -31,12 +49,28 @@ export default function App() {
 
 
 
+
+
   const Stack = createNativeStackNavigator();
-  const Tab = createBottomTabNavigator();
+  const Tabs = AnimatedTabBarNavigator();
+
+
+
 
   const BottomTabs = () => {
     return (
-      <Tab.Navigator screenOptions={{
+      <Tabs.Navigator
+      appearance={{
+        whenInactiveShow: "icon-only",
+        dotCornerRadius: 25,
+        floating: true,
+        // dotSize: 'large'
+        shadow: true,
+        tabBarBackground: '#242424',
+        // activeColors: '#242424'
+        activeTabBackgrounds: '#c7c588',
+      }}
+      screenOptions={{
         tabBarStyle: {
           backgroundColor: '#c7c588',
           height: "10%",
@@ -63,29 +97,35 @@ export default function App() {
           height: '100%',
         }
       }}>
-        <Tab.Screen name="Groups" component={Groups} options={{
+        <Tabs.Screen name="Groups" component={Groups} options={{
           headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account-group" color={"white"} size={35} />
+          tabBarIcon: ({ focused, color, size }) => (
+            <MaterialCommunityIcons
+            name="account-group" color={focused ? '#242424' : "#C7C588"} size={35} />
           ),
           // change button text color
           }
         }
         />
-        <Tab.Screen name="Workouts" component={Workouts} options={{ headerShown: false,
-        tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="weight-lifter" color={"white"} size={35} />
+        <Tabs.Screen name="Workouts" component={Workouts} options={{ headerShown: false,
+        tabBarIcon: ({ focused, color, size }) => (
+          <MaterialCommunityIcons
+          name="weight-lifter" color={focused ? '#242424' : "#C7C588"} size={35} />
         )}} />
-        <Tab.Screen name="Profile" options={{ headerShown: false,
-        tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="account" color={"white"} size={35} />
+        <Tabs.Screen name="Profile" options={{ headerShown: false,
+        tabBarIcon: ({ focused, color, size }) => (
+          <MaterialCommunityIcons
+          name="account" color={focused ? '#242424' : "#C7C588"} size={35} />
         )
         }}>
           { () => <ProfilePage session={session} /> }
-        </Tab.Screen>
-      </Tab.Navigator>
+        </Tabs.Screen>
+      </Tabs.Navigator>
     )
   }
+
+
+
 
   return (
       <UserProvider>
