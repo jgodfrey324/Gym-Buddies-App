@@ -204,9 +204,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#272727',
+    backgroundColor: 'white',
     zIndex: 10,
-    top: 50
   },
   container: {
     padding: 20,

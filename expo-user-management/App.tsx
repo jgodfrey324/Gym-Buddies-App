@@ -68,8 +68,10 @@ export default function App() {
         // dotSize: 'large'
         shadow: true,
         tabBarBackground: '#242424',
+        // #3C3C3C
         // activeColors: '#242424'
         activeTabBackgrounds: '#c7c588',
+        activeColors: '#242424'
       }}
       screenOptions={{
         tabBarStyle: {
@@ -102,7 +104,7 @@ export default function App() {
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
             <MaterialCommunityIcons
-            name="account-group" color={focused ? '#242424' : "#C7C588"} size={35} />
+            name="account-group" color={'#c7c588'} size={35} />
           ),
           // change button text color
           }
@@ -111,12 +113,12 @@ export default function App() {
         <Tabs.Screen name="Workouts" component={Workouts} options={{ headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
           <MaterialCommunityIcons
-          name="weight-lifter" color={focused ? '#242424' : "#C7C588"} size={35} />
+          name="weight-lifter" color={'#c7c588'} size={35} />
         )}} />
         <Tabs.Screen name="Profile" options={{ headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
           <MaterialCommunityIcons
-          name="account" color={focused ? '#242424' : "#C7C588"} size={35} />
+          name="account" color={'#c7c588'} size={35} />
         )
         }}>
           { () => <ProfilePage session={session} /> }
