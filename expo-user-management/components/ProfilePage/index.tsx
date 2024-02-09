@@ -51,7 +51,6 @@ export default function ProfilePage({ session }: { session: Session }) {
 
 
   if (animationStarted) {
-    console.log('animation potentially ran')
     Animated.sequence([
       Animated.timing(
         end,
@@ -70,9 +69,7 @@ export default function ProfilePage({ session }: { session: Session }) {
       //   }
       // )
     ])
-    .start(() => {
-      console.log('start call back is called')
-    });
+    .start();
   }
 
 
