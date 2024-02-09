@@ -1,9 +1,10 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import { View } from 'react-native';
+import { Bounce } from 'react-native-animated-spinkit';
 
 const Spinner = () => (
   <View>
-    <ActivityIndicator size="large" color="#C7C588" />
+    <Bounce size={80} color="white" />
   </View>
 );
 

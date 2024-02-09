@@ -32,7 +32,7 @@ export default function ProfilePage({ session }: { session: Session }) {
 
     setTimeout(() => {
       setLoading(!loading)
-    }, 800)
+    }, 1000)
   }, [session])
 
 
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     zIndex: 10,
   },
   container: {
