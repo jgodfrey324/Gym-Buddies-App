@@ -62,6 +62,7 @@ export default function App() {
       <Tabs.Navigator
       appearance={{
         whenInactiveShow: "icon-only",
+        whenActiveShow: 'label-only',
         dotCornerRadius: 25,
         floating: true,
         // dotSize: 'large'
