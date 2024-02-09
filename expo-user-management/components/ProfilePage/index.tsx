@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import { Modal, Pressable, StyleSheet, Alert, View, TouchableOpacity, TextInput, ActivityIndicator, Image, Animated } from 'react-native'
+import { Modal, Pressable, StyleSheet, Alert, View, TouchableOpacity, TextInput, ActivityIndicator, Image, Animated, Easing, useWindowDimensions } from 'react-native'
 import { Text } from 'react-native-elements'
 import FinishSignUp from './FinishSignUp'
 import LeftArrowSVG from '../../assets/leftArrow'
@@ -22,13 +22,17 @@ export default function ProfilePage({ session }: { session: Session }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(true)
   // const [image, setImage] = useState('')
+  const [ animationStarted, setAnimationStarted ] = useState(false)
+
+
+  const { height: windowHeight } = useWindowDimensions()
 
 
   // animation settings for workout View
-  const start = new Animated.Value(600);
+  const workoutTabHeight = windowHeight * .60
+  const start = new Animated.Value(-workoutTabHeight);
   const end = new Animated.Value(0)
-  const duration = 5000;
-  const delay = 1500;
+  const decayValue = new Animated.Value(0)
 
 
   useEffect(() => {
@@ -39,21 +43,37 @@ export default function ProfilePage({ session }: { session: Session }) {
 
     setTimeout(() => {
       setLoading(!loading)
+      setAnimationStarted(!animationStarted)
     }, 1000)
 
+  }, [session])
+
+
+
+  if (animationStarted) {
     console.log('animation potentially ran')
-    Animated.timing(
-      start,
-      {
-        toValue: end,
-        useNativeDriver: true,
-        delay: delay,
-        duration: duration
-      }
-    ).start(() => {
+    Animated.sequence([
+      Animated.timing(
+        end,
+        {
+          toValue: start,
+          useNativeDriver: true,
+          // delay: delay,
+          duration: 300
+        }
+      ),
+      // Animated.decay(
+      //   decayValue, {
+      //     useNativeDriver: true,
+      //     velocity: 100,
+      //     deceleration: 1
+      //   }
+      // )
+    ])
+    .start(() => {
       console.log('start call back is called')
     });
-  }, [session])
+  }
 
 
 
@@ -155,7 +175,7 @@ export default function ProfilePage({ session }: { session: Session }) {
 
   return (
     <View>
-      <View style={styles.container}>
+      <View style={[styles.container, { height: windowHeight }]}>
 
         <View>
           <FinishSignUp session={session} reloadProfile={reloadProfile} />
