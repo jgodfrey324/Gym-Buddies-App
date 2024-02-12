@@ -52,6 +52,14 @@ export default function ProfilePage({ session }: { session: Session }) {
 
   if (animationStarted) {
     Animated.sequence([
+      Animated.spring(
+        end,
+        {
+          toValue: start,
+          useNativeDriver: true,
+          friction: 8
+        }
+      ),
       Animated.timing(
         end,
         {
