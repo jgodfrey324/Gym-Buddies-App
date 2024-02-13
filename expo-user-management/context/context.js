@@ -35,7 +35,7 @@ export const UserProvider = ({ children }) => {
         experienceLevel,
         setExperienceLevel,
         imageUrl,
-        setImageUrl
+        setImageUrl,
       }}
     >
       {children}

@@ -8,6 +8,7 @@ import {
   Platform,
   TouchableOpacity
 } from 'react-native'
+import { SearchBar } from 'react-native-elements'
 
 
 export default function Groups() {
@@ -24,6 +25,15 @@ export default function Groups() {
             <Text style={styles.upperNavText}>Global Leaderboard</Text>
           </TouchableOpacity>
         </View>
+      </View>
+      <View>
+        <SearchBar
+          placeholder="Search for a group"
+          lightTheme
+          round
+          // inputStyle={{backgroundColor: 'white'}}
+          // containerStyle={{backgroundColor: ''}}
+        />
       </View>
     </SafeAreaView>
   )
