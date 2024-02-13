@@ -9,6 +9,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 import { SearchBar } from 'react-native-elements'
+import GroupCard from './GroupCard'
 
 
 export default function Groups() {
@@ -34,6 +35,11 @@ export default function Groups() {
           // inputStyle={{backgroundColor: 'white'}}
           // containerStyle={{backgroundColor: ''}}
         />
+      </View>
+      <View style={styles.groupsList}>
+        <GroupCard />
+        <GroupCard />
+        <GroupCard />
       </View>
     </SafeAreaView>
   )
@@ -76,5 +82,10 @@ const styles = StyleSheet.create({
   upperNavText: {
     color: 'white',
     fontSize: 18,
+  },
+  groupsList: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   }
 })
