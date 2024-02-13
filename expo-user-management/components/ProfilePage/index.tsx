@@ -21,7 +21,7 @@ export default function ProfilePage({ session }: { session: Session }) {
   const Tab = createBottomTabNavigator()
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(true)
-  const [image, setImage] = useState('')
+  // const [image, setImage] = useState('')
   const [ animationStarted, setAnimationStarted ] = useState(false)
 
 
