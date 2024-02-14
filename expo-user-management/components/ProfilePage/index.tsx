@@ -218,6 +218,10 @@ export default function ProfilePage({ session }: { session: Session }) {
             <Text style={styles.profileName}>{firstName}</Text>
             <Text style={styles.profileName}>{lastName}</Text>
 
+            <Image style={styles.rankImage} source={{uri: 'https://i.imgur.com/cnr5b2T.png?1'}}></Image>
+            {/* <View style>
+            </View> */}
+
             <View style={styles.nicknameBox}>
               <Text style={styles.nickname}>Nickname :  {nickname}</Text>
             </View>
@@ -259,6 +263,12 @@ const styles = StyleSheet.create({
     paddingTop: '10%',
     backgroundColor: '#3C3C3C',
     paddingBottom: '27%'
+  },
+  rankImage: {
+    height: 50,
+    width: 50,
+    borderWidth: 2,
+    borderColor: 'blue'
   },
   settings: {
     alignItems: 'flex-end',
