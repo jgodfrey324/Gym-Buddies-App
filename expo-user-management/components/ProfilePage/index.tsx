@@ -267,6 +267,12 @@ export default function ProfilePage({ session }: { session: Session }) {
           </View>
           <View style={styles.expBar}>
             {/* exp bar */}
+            <View style={styles.completeExpBar}>
+              {/* exp bar completed */}
+            </View>
+            <View style={styles.currentMarker}>
+              {/* current marker dot */}
+            </View>
           </View>
           <View style={[styles.expPointsBox]}>
             <Text style={[styles.expText, {fontWeight: '600'}]}>192/208</Text>
@@ -297,8 +303,8 @@ const styles = StyleSheet.create({
     paddingBottom: '27%'
   },
   expBarBox: {
-    borderWidth: 1,
-    borderColor: 'pink',
+    // borderWidth: 1,
+    // borderColor: 'pink',
     alignContent: 'flex-start',
     flexDirection: 'row',
     // justifyContent: 'center',
@@ -308,17 +314,39 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     height: 35
   },
+  completeExpBar: {
+    borderWidth: 1,
+    borderColor: 'black',
+    backgroundColor: 'black',
+    width: '90%',
+    height: '100%',
+    opacity: 1,
+    borderRadius: 5
+  },
+  currentMarker: {
+    // borderWidth: 2,
+    // borderColor: 'blue',
+    width: 10,
+    padding: 7,
+    borderRadius: 5,
+    backgroundColor: '#C7C588',
+    // marginRight: 200
+  },
   expTextBox: {
 
   },
   expBar: {
-    borderWidth: 2,
+    // borderWidth: 2,
     borderColor: '#C7C588',
     width: 218,
     height: '22%',
-    backgroundColor: '#C7C588',
-    opacity: .6
+    backgroundColor: 'white',
+    opacity: .5,
     // justifyContent: 'center'
+    flexDirection: 'row',
+    // justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5
   },
   expPointsBox: {
     borderWidth: 2,
@@ -328,7 +356,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black'
   },
   expText: {
-    color: '#C7C588',
+    color: 'white',
     fontSize: 16
 
   },
