@@ -165,6 +165,13 @@ export default function ProfilePage({ session }: { session: Session }) {
   }
 
 
+  const noCapitalLetters = (nickname: string) => {
+    let lowerNickname = nickname[0].toLowerCase() + nickname.slice(1, nickname.length)
+
+    return lowerNickname
+  }
+
+
 
 
   if (loading) {
@@ -215,15 +222,20 @@ export default function ProfilePage({ session }: { session: Session }) {
 
         <View style={styles.profileNameAndPic}>
           <View style={styles.profileNameBox}>
-            <Text style={styles.profileName}>{firstName}</Text>
-            <Text style={styles.profileName}>{lastName}</Text>
 
-            <Image style={styles.rankImage} source={{uri: 'https://i.imgur.com/cnr5b2T.png?1'}}></Image>
-            {/* <View style>
-            </View> */}
+            <View style={styles.nameAndRankBox}>
+
+              <View style={styles.profileFirstAndLast}>
+                <Text style={styles.profileName}>@{noCapitalLetters(nickname)}</Text>
+              </View>
+
+              <Image style={styles.rankImage} source={{uri: 'https://i.imgur.com/XsQY0h4.png'}}></Image>
+              {/* https://i.imgur.com/cnr5b2T.png?1 */}
+            </View>
 
             <View style={styles.nicknameBox}>
-              <Text style={styles.nickname}>Nickname :  {nickname}</Text>
+                <Text style={styles.nickname}>{firstName}</Text>
+                <Text style={styles.nickname}>{lastName}</Text>
             </View>
           </View>
 
@@ -265,10 +277,27 @@ const styles = StyleSheet.create({
     paddingBottom: '27%'
   },
   rankImage: {
-    height: 50,
-    width: 50,
-    borderWidth: 2,
-    borderColor: 'blue'
+    height: 40,
+    width: 40,
+    // borderWidth: 2,
+    // borderColor: 'blue',
+    marginLeft: 25,
+    shadowColor: 'white',
+    shadowOffset: {
+      width: 2,
+      height: 2
+    },
+    shadowRadius: 3,
+    shadowOpacity: 1
+  },
+  nameAndRankBox: {
+    // borderWidth: 1,
+    // borderColor: 'pink',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  profileFirstAndLast: {
+    flexDirection: 'column'
   },
   settings: {
     alignItems: 'flex-end',
@@ -276,16 +305,17 @@ const styles = StyleSheet.create({
   },
   profileNameBox: {
     width: '55%',
-    borderWidth: 1,
-    borderColor: 'orange',
+    // borderWidth: 1,
+    // borderColor: 'orange',
     alignItems: 'flex-start',
   },
   profileName: {
     fontSize: 30,
     color: '#C7C588',
-    borderWidth: 1,
-    borderColor: 'red',
-    maxWidth: '100%'
+    // borderWidth: 1,
+    // borderColor: 'red',
+    maxWidth: '100%',
+    fontWeight: 600
   },
   initials: {
     marginLeft: 'auto',
@@ -300,16 +330,16 @@ const styles = StyleSheet.create({
   nicknameBox: {
     maxWidth: '100%',
     alignItems: 'flex-start',
-    borderWidth: 1,
-    borderColor: 'orange',
+    // borderWidth: 1,
+    // borderColor: 'orange',
     marginTop: 15
   },
   nickname: {
     fontSize: 14,
     fontStyle: 'italic',
     color: 'white',
-    borderWidth: 1,
-    borderColor: 'red',
+    // borderWidth: 1,
+    // borderColor: 'red',
     maxWidth: 'auto'
   },
   customButton: {
@@ -357,15 +387,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row-reverse',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: 'green'
+    // borderWidth: 1,
+    // borderColor: 'green'
   },
   profilePic: {
     zIndex: 5,
-    height: 130,
-    width: 130,
+    height: 125,
+    width: 125,
     borderRadius: 70,
-    marginRight: 12,
+    marginRight: 15,
     borderWidth: 2,
     borderColor: '#242424'
     // objectFit: 'contain'
