@@ -423,7 +423,7 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 70,
     marginRight: 15,
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: 'black',
     // shadowOpacity: 1,
     // shadowColor: 'orange',
