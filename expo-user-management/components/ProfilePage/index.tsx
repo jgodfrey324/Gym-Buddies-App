@@ -26,6 +26,7 @@ export default function ProfilePage({ session }: { session: Session }) {
 
 
   const { height: windowHeight } = useWindowDimensions()
+  const { width: windowWidth } = useWindowDimensions()
 
 
   // animation settings for workout View
@@ -220,23 +221,26 @@ export default function ProfilePage({ session }: { session: Session }) {
           </Modal>
         </View>
 
-        <View style={styles.profileNameAndPic}>
-          <View style={styles.profileNameBox}>
+        <View style={[styles.profileNameAndPic]}>
+          <View style={[styles.profileNameBox, {width: windowWidth * .65}]}>
 
             <View style={styles.nameAndRankBox}>
 
               <View style={styles.profileFirstAndLast}>
                 <Text style={styles.profileName}>@{noCapitalLetters(nickname)}</Text>
+                <View style={styles.nicknameBox}>
+                    <Text style={styles.nickname}>{firstName}</Text>
+                    <Text style={styles.nickname}>{lastName}</Text>
+                </View>
               </View>
 
-              <Image style={styles.rankImage} source={{uri: 'https://i.imgur.com/XsQY0h4.png'}}></Image>
+              <View style={styles.rankBox}>
+                <Image style={styles.rankImage} source={{uri: 'https://i.imgur.com/XsQY0h4.png'}}></Image>
+                <Text style={styles.rankText}>Scarlett Rank</Text>
+              </View>
               {/* https://i.imgur.com/cnr5b2T.png?1 */}
             </View>
 
-            <View style={styles.nicknameBox}>
-                <Text style={styles.nickname}>{firstName}</Text>
-                <Text style={styles.nickname}>{lastName}</Text>
-            </View>
           </View>
 
           {imageUrl ? (
@@ -273,7 +277,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     paddingTop: '10%',
-    backgroundColor: '#3C3C3C',
+    backgroundColor: '#242424',
     paddingBottom: '27%'
   },
   rankImage: {
@@ -281,41 +285,58 @@ const styles = StyleSheet.create({
     width: 40,
     // borderWidth: 2,
     // borderColor: 'blue',
-    marginLeft: 25,
+    // marginLeft: 25,
     shadowColor: 'white',
     shadowOffset: {
       width: 2,
       height: 2
     },
     shadowRadius: 3,
-    shadowOpacity: 1
+    shadowOpacity: 1,
+  },
+  rankText: {
+    fontSize: 14,
+    color: '#C7C588',
+    marginTop: 2,
+    opacity: .6
+    // maxWidth: '50%'
+  },
+  rankBox: {
+    alignItems: 'center',
+    // justifyContent: 'center',
+    // borderWidth: 1,
+    // borderColor: 'pink',
+    // marginTop: 20
   },
   nameAndRankBox: {
     // borderWidth: 1,
     // borderColor: 'pink',
+    width: '100%',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
   profileFirstAndLast: {
     flexDirection: 'column'
   },
   settings: {
     alignItems: 'flex-end',
-    paddingBottom: '5%'
+    marginTop: 5
   },
   profileNameBox: {
-    width: '55%',
+    // width: '80%',
     // borderWidth: 1,
     // borderColor: 'orange',
     alignItems: 'flex-start',
+    // marginTop: 10
   },
   profileName: {
-    fontSize: 30,
+    fontSize: 25,
     color: '#C7C588',
     // borderWidth: 1,
     // borderColor: 'red',
     maxWidth: '100%',
-    fontWeight: 600
+    fontWeight: 600,
   },
   initials: {
     marginLeft: 'auto',
@@ -332,12 +353,17 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     // borderWidth: 1,
     // borderColor: 'orange',
-    marginTop: 15
+    marginTop: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 3,
   },
   nickname: {
+    color: '#C7C588',
+    opacity: .6,
     fontSize: 14,
-    fontStyle: 'italic',
-    color: 'white',
+    // fontStyle: 'italic',
+    // color: 'white',
     // borderWidth: 1,
     // borderColor: 'red',
     maxWidth: 'auto'
@@ -385,19 +411,23 @@ const styles = StyleSheet.create({
   },
   profileNameAndPic: {
     flexDirection: 'row-reverse',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
+    marginTop: 25
     // borderWidth: 1,
     // borderColor: 'green'
   },
   profilePic: {
-    zIndex: 5,
-    height: 125,
-    width: 125,
+    // zIndex: 5,
+    height: 100,
+    width: 100,
     borderRadius: 70,
     marginRight: 15,
-    borderWidth: 2,
-    borderColor: '#242424'
+    borderWidth: 3,
+    borderColor: 'black',
+    // shadowOpacity: 1,
+    // shadowColor: 'orange',
+    shadowRadius: 20,
     // objectFit: 'contain'
   },
 })
