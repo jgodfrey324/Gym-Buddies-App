@@ -30,7 +30,7 @@ export default function ProfilePage({ session }: { session: Session }) {
 
 
   // animation settings for workout View
-  const workoutTabHeight = windowHeight * .60
+  const workoutTabHeight = windowHeight * .62
   const start = new Animated.Value(-workoutTabHeight);
   const end = new Animated.Value(0)
   const decayValue = new Animated.Value(0)
@@ -261,15 +261,15 @@ export default function ProfilePage({ session }: { session: Session }) {
 
 
       {/* hard coded example exp bar --> use a package for making a graph later */}
-      <View>
-          <View>
-            <Text>Scarlett Exp</Text>
+      <View style={[styles.expBarBox, {top: -windowHeight + (windowHeight * .25)}]}>
+          <View style={styles.expTextBox}>
+            <Text style={[styles.expText, , {marginRight: 20}]}>Scarlett Exp</Text>
           </View>
-          <View>
+          <View style={styles.expBar}>
             {/* exp bar */}
           </View>
-          <View>
-            <Text>192/208</Text>
+          <View style={[styles.expPointsBox]}>
+            <Text style={[styles.expText, {fontWeight: '600'}]}>192/208</Text>
           </View>
       </View>
 
@@ -295,6 +295,42 @@ const styles = StyleSheet.create({
     paddingTop: '10%',
     backgroundColor: '#242424',
     paddingBottom: '27%'
+  },
+  expBarBox: {
+    borderWidth: 1,
+    borderColor: 'pink',
+    alignContent: 'flex-start',
+    flexDirection: 'row',
+    // justifyContent: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    // zIndex: 5,
+    marginHorizontal: 10,
+    height: 35
+  },
+  expTextBox: {
+
+  },
+  expBar: {
+    borderWidth: 2,
+    borderColor: '#C7C588',
+    width: 218,
+    height: '22%',
+    backgroundColor: '#C7C588',
+    opacity: .6
+    // justifyContent: 'center'
+  },
+  expPointsBox: {
+    borderWidth: 2,
+    borderColor: 'black',
+    padding: 5,
+    borderRadius: 20,
+    backgroundColor: 'black'
+  },
+  expText: {
+    color: '#C7C588',
+    fontSize: 16
+
   },
   rankImage: {
     height: 50,
