@@ -235,8 +235,10 @@ export default function ProfilePage({ session }: { session: Session }) {
               </View>
 
               <View style={styles.rankBox}>
-                <Image style={styles.rankImage} source={{uri: 'https://i.imgur.com/XsQY0h4.png'}}></Image>
-                <Text style={styles.rankText}>Scarlett Rank</Text>
+                <View style={styles.rankImageBox}>
+                  <Image style={styles.rankImage} source={{uri: 'https://i.imgur.com/XsQY0h4.png'}}></Image>
+                </View>
+                {/* <Text style={styles.rankText}>Scarlett Rank</Text> */}
               </View>
               {/* https://i.imgur.com/cnr5b2T.png?1 */}
             </View>
@@ -255,6 +257,20 @@ export default function ProfilePage({ session }: { session: Session }) {
           )}
 
         </View>
+      </View>
+
+
+      {/* hard coded example exp bar --> use a package for making a graph later */}
+      <View>
+          <View>
+            <Text>Scarlett Exp</Text>
+          </View>
+          <View>
+            {/* exp bar */}
+          </View>
+          <View>
+            <Text>192/208</Text>
+          </View>
       </View>
 
       {/* <Animated.View style={[{transform: [{translateY: animated}]}]}> */}
@@ -281,18 +297,30 @@ const styles = StyleSheet.create({
     paddingBottom: '27%'
   },
   rankImage: {
-    height: 40,
-    width: 40,
-    // borderWidth: 2,
-    // borderColor: 'blue',
-    // marginLeft: 25,
-    shadowColor: 'white',
-    shadowOffset: {
-      width: 2,
-      height: 2
-    },
-    shadowRadius: 3,
-    shadowOpacity: 1,
+    height: 50,
+    width: 50,
+    // shadowColor: 'white',
+    // shadowOffset: {
+    //   width: 2,
+    //   height: 2
+    // },
+    // shadowRadius: 3,
+    // shadowOpacity: 1,
+    // opacity: 1
+  },
+  rankImageBox: {
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 35,
+    // shadowColor: 'black',
+    // shadowOffset: {
+    //   width: 2,
+    //   height: 2
+    // },
+    // shadowRadius: 10,
+    // shadowOpacity: 1,
+    backgroundColor: 'white',
+    // opacity: .7
   },
   rankText: {
     fontSize: 14,
@@ -306,6 +334,8 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // borderWidth: 1,
     // borderColor: 'pink',
+    // padding: 5,
+    // borderRadius: 20,
     // marginTop: 20
   },
   nameAndRankBox: {
