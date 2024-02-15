@@ -10,6 +10,8 @@ import {
 } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import GroupCard from './GroupCard'
+import { useUserContext } from '../../context/context'
+import { colors } from '../../colors'
 
 
 export default function Groups() {
@@ -33,7 +35,7 @@ export default function Groups() {
           lightTheme
           round
           // inputStyle={{backgroundColor: 'white'}}
-          // containerStyle={{backgroundColor: ''}}
+          containerStyle={{backgroundColor: colors.background, borderBottomWidth: 0, padding: 20}}
         />
       </View>
       <View style={styles.groupsList}>

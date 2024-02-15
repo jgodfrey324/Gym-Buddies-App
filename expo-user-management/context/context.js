@@ -15,6 +15,10 @@ export const UserProvider = ({ children }) => {
   const [experienceLevel, setExperienceLevel] = useState(0)
   const [imageUrl, setImageUrl] = useState('')
 
+  const colors = {
+    background: '#F2F2F2'
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -36,6 +40,7 @@ export const UserProvider = ({ children }) => {
         setExperienceLevel,
         imageUrl,
         setImageUrl,
+        colors
       }}
     >
       {children}
