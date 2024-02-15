@@ -4,6 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {createNativeStackNavigator, } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useState, useEffect } from 'react'
+import { KeyboardAvoidingView, Platform, View } from 'react-native';
 
 
 import HomeScreen from './components/HomeScreen'
@@ -52,78 +53,48 @@ export default function App() {
 
 
   const Stack = createNativeStackNavigator();
-  const Tabs = AnimatedTabBarNavigator();
+  const Tab = createBottomTabNavigator();
 
 
 
 
   const BottomTabs = () => {
     return (
-      <Tabs.Navigator
-      appearance={{
-        whenInactiveShow: "icon-only",
-        whenActiveShow: 'label-only',
-        dotCornerRadius: 25,
-        floating: true,
-        // dotSize: 'large'
-        shadow: true,
-        tabBarBackground: '#242424',
-        // #3C3C3C
-        // activeColors: '#242424'
-        activeTabBackgrounds: '#c7c588',
-        activeColors: '#242424'
-      }}
-      screenOptions={{
+      <Tab.Navigator screenOptions={{
         tabBarStyle: {
           backgroundColor: '#c7c588',
-          height: "10%",
-          paddingBottom: 20,
-          shadowColor: "#242424",
-          shadowOpacity: 0.8,
-          shadowRadius: 10,
-          shadowOffset: {
-            height: 1,
-            width: 1
-          }
+          height: "8%",
+          paddingBottom: 10,
+          // borderRadius: 20,
+          // marginBottom: 10,
+          // width: "90%",
+          // alignSelf: "center",
         },
+        tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: 'white',
-        // #242424
-        tabBarLabelStyle: {
-          fontSize: 18,
-        },
-        tabBarItemStyle: {
-          borderLeftWidth: 1,
-          // borderRightWidth: 1,
-          // borderRightColor: 'blue',
-          borderLeftColor: '#D9D9D9',
-          marginTop: 6,
-          height: '100%',
-        }
       }}>
-        <Tabs.Screen name="Groups" component={Groups} options={{
+        <Tab.Screen name="Groups" component={Groups} options={{
+
           headerShown: false,
-          tabBarIcon: ({ focused, color, size }) => (
-            <MaterialCommunityIcons
-            name="account-group" color={'#c7c588'} size={35} />
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account-group" color={"white"} size={size} />
           ),
           // change button text color
           }
         }
         />
-        <Tabs.Screen name="Workouts" component={Workouts} options={{ headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => (
-          <MaterialCommunityIcons
-          name="weight-lifter" color={'#c7c588'} size={35} />
+        <Tab.Screen name="Workouts" component={Workouts} options={{ headerShown: false,
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="weight-lifter" color={"white"} size={size} />
         )}} />
-        <Tabs.Screen name="Profile" options={{ headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => (
-          <MaterialCommunityIcons
-          name="account" color={'#c7c588'} size={35} />
+        <Tab.Screen name="Profile" options={{ headerShown: false,
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="account" color={"white"} size={size} />
         )
         }}>
           { () => <ProfilePage session={session} /> }
-        </Tabs.Screen>
-      </Tabs.Navigator>
+        </Tab.Screen>
+      </Tab.Navigator>
     )
   }
 
