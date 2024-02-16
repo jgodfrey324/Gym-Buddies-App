@@ -1,5 +1,5 @@
 import 'react-native-url-polyfill/auto'
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createNativeStackNavigator, } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -71,7 +71,7 @@ export default function App() {
         // #3C3C3C
         // activeColors: '#242424'
         activeTabBackgrounds: '#c7c588',
-        activeColors: '#242424'
+        activeColors: '#242424',
       }}
       screenOptions={{
         tabBarStyle: {
@@ -100,6 +100,7 @@ export default function App() {
           height: '100%',
         }
       }}>
+
         <Tabs.Screen name="Groups" component={Groups} options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
