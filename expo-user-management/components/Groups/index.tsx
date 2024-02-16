@@ -6,7 +6,8 @@ import {
   StyleSheet,
   StatusBar,
   Platform,
-  TouchableOpacity
+  TouchableOpacity,
+  useWindowDimensions
 } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import GroupCard from './GroupCard'
@@ -15,6 +16,7 @@ import { colors } from '../../colors'
 
 
 export default function Groups() {
+  const { height: windowHeight } = useWindowDimensions()
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.upperNav}>
@@ -43,6 +45,19 @@ export default function Groups() {
         <GroupCard />
         <GroupCard />
       </View>
+      <TouchableOpacity style={{
+        position: 'absolute',
+        bottom: windowHeight * 0.15,
+        right: 20,
+        backgroundColor: "#c7c588",
+        padding: 20,
+        borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1
+      }}>
+        <Text>+</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   )
 }
@@ -53,6 +68,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  createGroup: {
+    position: 'absolute',
+    // bottom: height * 0.1,
+    right: 20,
+    backgroundColor: "#c7c588",
+    padding: 20,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1
   },
   upperNav: {
     display: 'flex',
