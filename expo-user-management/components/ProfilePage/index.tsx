@@ -30,7 +30,7 @@ export default function ProfilePage({ session }: { session: Session }) {
 
 
   // animation settings for workout View
-  const workoutTabHeight = windowHeight * .60
+  const workoutTabHeight = windowHeight * .62
   const start = new Animated.Value(-workoutTabHeight);
   const end = new Animated.Value(0)
   const decayValue = new Animated.Value(0)
@@ -235,8 +235,10 @@ export default function ProfilePage({ session }: { session: Session }) {
               </View>
 
               <View style={styles.rankBox}>
-                <Image style={styles.rankImage} source={{uri: 'https://i.imgur.com/XsQY0h4.png'}}></Image>
-                <Text style={styles.rankText}>Scarlett Rank</Text>
+                <View style={styles.rankImageBox}>
+                  <Image style={styles.rankImage} source={{uri: 'https://i.imgur.com/XsQY0h4.png'}}></Image>
+                </View>
+                {/* <Text style={styles.rankText}>Scarlett Rank</Text> */}
               </View>
               {/* https://i.imgur.com/cnr5b2T.png?1 */}
             </View>
@@ -255,6 +257,26 @@ export default function ProfilePage({ session }: { session: Session }) {
           )}
 
         </View>
+      </View>
+
+
+      {/* hard coded example exp bar --> use a package for making a graph later */}
+      <View style={[styles.expBarBox, {top: -windowHeight + (windowHeight * .25)}]}>
+          <View style={styles.expTextBox}>
+            <Text style={[styles.expText, , {marginRight: 20}]}>Scarlett Exp</Text>
+          </View>
+          <View style={styles.expBar}>
+            {/* exp bar */}
+            <View style={styles.completeExpBar}>
+              {/* exp bar completed */}
+            </View>
+            <View style={styles.currentMarker}>
+              {/* current marker dot */}
+            </View>
+          </View>
+          <View style={[styles.expPointsBox]}>
+            <Text style={[styles.expText, {fontWeight: '600'}]}>192/208</Text>
+          </View>
       </View>
 
       {/* <Animated.View style={[{transform: [{translateY: animated}]}]}> */}
@@ -280,19 +302,89 @@ const styles = StyleSheet.create({
     backgroundColor: '#242424',
     paddingBottom: '27%'
   },
-  rankImage: {
-    height: 40,
-    width: 40,
+  expBarBox: {
+    // borderWidth: 1,
+    // borderColor: 'pink',
+    alignContent: 'flex-start',
+    flexDirection: 'row',
+    // justifyContent: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    // zIndex: 5,
+    marginHorizontal: 10,
+    height: 35
+  },
+  completeExpBar: {
+    borderWidth: 1,
+    borderColor: 'black',
+    backgroundColor: 'black',
+    width: '90%',
+    height: '100%',
+    opacity: 1,
+    borderRadius: 5
+  },
+  currentMarker: {
     // borderWidth: 2,
     // borderColor: 'blue',
-    // marginLeft: 25,
-    shadowColor: 'white',
-    shadowOffset: {
-      width: 2,
-      height: 2
-    },
-    shadowRadius: 3,
-    shadowOpacity: 1,
+    width: 10,
+    padding: 7,
+    borderRadius: 5,
+    backgroundColor: '#C7C588',
+    // marginRight: 200
+  },
+  expTextBox: {
+
+  },
+  expBar: {
+    // borderWidth: 2,
+    borderColor: '#C7C588',
+    width: 218,
+    height: '22%',
+    backgroundColor: 'white',
+    opacity: .5,
+    // justifyContent: 'center'
+    flexDirection: 'row',
+    // justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5
+  },
+  expPointsBox: {
+    borderWidth: 2,
+    borderColor: 'black',
+    padding: 5,
+    borderRadius: 20,
+    backgroundColor: 'black'
+  },
+  expText: {
+    color: 'white',
+    fontSize: 16
+
+  },
+  rankImage: {
+    height: 50,
+    width: 50,
+    // shadowColor: 'white',
+    // shadowOffset: {
+    //   width: 2,
+    //   height: 2
+    // },
+    // shadowRadius: 3,
+    // shadowOpacity: 1,
+    // opacity: 1
+  },
+  rankImageBox: {
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 35,
+    // shadowColor: 'black',
+    // shadowOffset: {
+    //   width: 2,
+    //   height: 2
+    // },
+    // shadowRadius: 10,
+    // shadowOpacity: 1,
+    backgroundColor: 'white',
+    // opacity: .7
   },
   rankText: {
     fontSize: 14,
@@ -306,6 +398,8 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // borderWidth: 1,
     // borderColor: 'pink',
+    // padding: 5,
+    // borderRadius: 20,
     // marginTop: 20
   },
   nameAndRankBox: {
@@ -423,7 +517,7 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 70,
     marginRight: 15,
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: 'black',
     // shadowOpacity: 1,
     // shadowColor: 'orange',
