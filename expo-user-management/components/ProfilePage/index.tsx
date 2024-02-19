@@ -266,7 +266,7 @@ export default function ProfilePage({ session }: { session: Session }) {
 
 
       {/* hard coded example exp bar --> use a package for making a graph later */}
-      <View style={[styles.expBarBox, {top: -windowHeight + (windowHeight * .25)}]}>
+      <View style={[styles.expBarBox, {maxWidth: windowWidth}, {top: -windowHeight + (windowHeight * .25)}]}>
           <View style={styles.expTextBox}>
             <Text style={[styles.expText, , {marginRight: 20}]}>Scarlett Exp</Text>
           </View>
