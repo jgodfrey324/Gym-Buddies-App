@@ -167,7 +167,12 @@ export default function ProfilePage({ session }: { session: Session }) {
 
 
   const noCapitalLetters = (nickname: string) => {
-    let lowerNickname = nickname[0].toLowerCase() + nickname.slice(1, nickname.length)
+    let lowerNickname = ''
+
+    if (nickname) {
+      lowerNickname = nickname[0].toLowerCase() + nickname.slice(1, nickname.length)
+    }
+
 
     return lowerNickname
   }
