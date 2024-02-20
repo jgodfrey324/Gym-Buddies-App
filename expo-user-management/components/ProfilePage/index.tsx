@@ -14,7 +14,9 @@ import { NavigationContainer } from '@react-navigation/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Settings from '../Settings'
 import RecentWorkouts from '../Workouts/RecentWorkouts'
+
 import Carousel from 'react-native-carousel-view';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 
 
@@ -25,6 +27,7 @@ export default function ProfilePage({ session }: { session: Session }) {
   const [loading, setLoading] = useState(true)
   // const [image, setImage] = useState('')
   const [ animationStarted, setAnimationStarted ] = useState(false)
+  const [ progressAnimation, setProgressAnimation ] = useState(false)
 
 
   const { height: windowHeight } = useWindowDimensions()
@@ -38,6 +41,8 @@ export default function ProfilePage({ session }: { session: Session }) {
   const decayValue = new Animated.Value(0)
 
 
+  // let animationStarted = false
+
   useEffect(() => {
     if (session) {
       getProfile()
@@ -47,6 +52,7 @@ export default function ProfilePage({ session }: { session: Session }) {
     setTimeout(() => {
       setLoading(!loading)
       setAnimationStarted(!animationStarted)
+      // animationStarted = true
     }, 1000)
 
   }, [session])
@@ -81,6 +87,8 @@ export default function ProfilePage({ session }: { session: Session }) {
       // )
     ])
     .start();
+
+    // setAnimationStarted(!animationStarted)
   }
 
 
@@ -238,6 +246,7 @@ export default function ProfilePage({ session }: { session: Session }) {
             animate={false}
             indicatorSize={12}
             indicatorSpace={15}
+            onPageChange={() => console.log('page was changed')}
             >
             <View style={[styles.profileNameAndPic]}>
               <View style={[styles.profileNameBox, {width: windowWidth * .65}]}>
@@ -268,22 +277,22 @@ export default function ProfilePage({ session }: { session: Session }) {
 
 
             {/* hard coded example exp bar --> use a package for making a graph later */}
-            <View style={[styles.expBarBox, {maxWidth: windowWidth}]}>
-                <View style={styles.expTextBox}>
-                  <Text style={[styles.expText, , {marginRight: 20}]}>Scarlett Exp</Text>
-                </View>
-                <View style={styles.expBar}>
-                  {/* exp bar */}
-                  <View style={styles.completeExpBar}>
-                    {/* exp bar completed */}
-                  </View>
-                  <View style={styles.currentMarker}>
-                    {/* current marker dot */}
-                  </View>
-                </View>
-                <View style={[styles.expPointsBox]}>
-                  <Text style={[styles.expText, {fontWeight: '600'}]}>192/208</Text>
-                </View>
+            <View>
+              {
+                progressAnimation &&
+                (<AnimatedCircularProgress
+                  size={120}
+                  width={15}
+                  fill={85}
+                  tintColor="#00e0ff"
+                  backgroundColor="#3d5875"
+                  rotation={0}
+                  delay={1000}
+                  duration={2000}
+                  onAnimationComplete={() => console.log('circle animation done')}
+                />)
+              }
+
             </View>
           </Carousel>
         </View>
