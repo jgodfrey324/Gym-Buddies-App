@@ -13,10 +13,25 @@ import { SearchBar } from 'react-native-elements'
 import GroupCard from './GroupCard'
 import { useUserContext } from '../../context/context'
 import { colors } from '../../colors'
+import { supabase } from '../../lib/supabase'
 
 
 export default function Groups() {
   const { height: windowHeight } = useWindowDimensions()
+
+  const addGroup = async () => {
+
+      const { data, error } = await supabase
+      .from('groups')
+      .insert([
+        { group_name: 'newgroup'}
+      ])
+      .select()
+
+      if (error) console.log('error', error)
+      else console.log('group data', data)
+
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.upperNav}>
@@ -45,7 +60,9 @@ export default function Groups() {
         <GroupCard />
         <GroupCard />
       </View>
-      <TouchableOpacity style={{
+      <TouchableOpacity
+      onPress={addGroup}
+      style={{
         position: 'absolute',
         bottom: windowHeight * 0.15,
         right: 20,
