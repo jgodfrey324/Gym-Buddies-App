@@ -14,6 +14,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Settings from '../Settings'
 import RecentWorkouts from '../Workouts/RecentWorkouts'
+import Carousel from 'react-native-carousel-view';
+
 
 
 export default function ProfilePage({ session }: { session: Session }) {
@@ -193,12 +195,10 @@ export default function ProfilePage({ session }: { session: Session }) {
 
   return (
     <View>
+
+
+
       <View style={[styles.container, { height: windowHeight }]}>
-
-        <View>
-          <FinishSignUp session={session} reloadProfile={reloadProfile} />
-        </View>
-
         <View style={styles.settings}>
           <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
             <MaterialCommunityIcons
@@ -207,6 +207,11 @@ export default function ProfilePage({ session }: { session: Session }) {
             />
           </TouchableOpacity>
         </View>
+
+        <View>
+          <FinishSignUp session={session} reloadProfile={reloadProfile} />
+        </View>
+
 
         <View>
           <Modal
@@ -226,63 +231,69 @@ export default function ProfilePage({ session }: { session: Session }) {
           </Modal>
         </View>
 
-        <View style={[styles.profileNameAndPic]}>
-          <View style={[styles.profileNameBox, {width: windowWidth * .65}]}>
 
-            <View style={styles.nameAndRankBox}>
+        <View style={styles.carouselBox}>
+          <Carousel
+            loop={false}
+            animate={false}
+            indicatorSize={12}
+            indicatorSpace={15}
+            >
+            <View style={[styles.profileNameAndPic]}>
+              <View style={[styles.profileNameBox, {width: windowWidth * .65}]}>
 
-              <View style={styles.profileFirstAndLast}>
-                <Text style={styles.profileName}>@{noCapitalLetters(nickname)}</Text>
-                <View style={styles.nicknameBox}>
-                    <Text style={styles.nickname}>{firstName}</Text>
-                    <Text style={styles.nickname}>{lastName}</Text>
+                <View style={styles.nameAndRankBox}>
+
+                  <View style={styles.profileFirstAndLast}>
+                    <Text style={styles.profileName}>@{noCapitalLetters(nickname)}</Text>
+                    <View style={styles.nicknameBox}>
+                        <Text style={styles.nickname}>{firstName}</Text>
+                        <Text style={styles.nickname}>{lastName}</Text>
+                    </View>
+                  </View>
                 </View>
               </View>
 
-              <View style={styles.rankBox}>
-                <View style={styles.rankImageBox}>
-                  <Image style={styles.rankImage} source={{uri: 'https://i.imgur.com/XsQY0h4.png'}}></Image>
+              {imageUrl ? (
+                <Image style={styles.profilePic} source={{ uri: imageUrl }}></Image>
+              )
+            :
+              (
+                <View style={styles.profilePic}>
+                  <Text style={styles.initials}>
+                    {getInitials(firstName, lastName)}</Text>
                 </View>
-                {/* <Text style={styles.rankText}>Scarlett Rank</Text> */}
-              </View>
-              {/* https://i.imgur.com/cnr5b2T.png?1 */}
+              )}
             </View>
 
-          </View>
 
-          {imageUrl ? (
-            <Image style={styles.profilePic} source={{ uri: imageUrl }}></Image>
-          )
-        :
-          (
-            <View style={styles.profilePic}>
-              <Text style={styles.initials}>
-                {getInitials(firstName, lastName)}</Text>
+            {/* hard coded example exp bar --> use a package for making a graph later */}
+            <View style={[styles.expBarBox, {maxWidth: windowWidth}]}>
+                <View style={styles.expTextBox}>
+                  <Text style={[styles.expText, , {marginRight: 20}]}>Scarlett Exp</Text>
+                </View>
+                <View style={styles.expBar}>
+                  {/* exp bar */}
+                  <View style={styles.completeExpBar}>
+                    {/* exp bar completed */}
+                  </View>
+                  <View style={styles.currentMarker}>
+                    {/* current marker dot */}
+                  </View>
+                </View>
+                <View style={[styles.expPointsBox]}>
+                  <Text style={[styles.expText, {fontWeight: '600'}]}>192/208</Text>
+                </View>
             </View>
-          )}
-
+          </Carousel>
         </View>
-      </View>
 
 
-      {/* hard coded example exp bar --> use a package for making a graph later */}
-      <View style={[styles.expBarBox, {maxWidth: windowWidth}, {top: -windowHeight + (windowHeight * .25)}]}>
-          <View style={styles.expTextBox}>
-            <Text style={[styles.expText, , {marginRight: 20}]}>Scarlett Exp</Text>
-          </View>
-          <View style={styles.expBar}>
-            {/* exp bar */}
-            <View style={styles.completeExpBar}>
-              {/* exp bar completed */}
-            </View>
-            <View style={styles.currentMarker}>
-              {/* current marker dot */}
-            </View>
-          </View>
-          <View style={[styles.expPointsBox]}>
-            <Text style={[styles.expText, {fontWeight: '600'}]}>192/208</Text>
-          </View>
+
+
+
       </View>
+
 
       {/* <Animated.View style={[{transform: [{translateY: animated}]}]}> */}
         <Animated.View style={[{transform: [{translateY: end}]}, styles.whiteScrollContainer]}>
@@ -305,7 +316,11 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: '10%',
     backgroundColor: '#242424',
-    paddingBottom: '27%'
+    paddingBottom: '27%',
+    // alignItems: 'center'
+  },
+  carouselBox: {
+    alignItems: 'center'
   },
   expBarBox: {
     // borderWidth: 1,
@@ -317,7 +332,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // zIndex: 5,
     marginHorizontal: 10,
-    height: 35
+    height: 35,
+    zIndex: 5,
+
   },
   completeExpBar: {
     borderWidth: 1,

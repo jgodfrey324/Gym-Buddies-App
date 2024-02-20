@@ -25,6 +25,7 @@
     "react-native-animatable": "^1.4.0",
     "react-native-animated-nav-tab-bar": "^3.1.10",
     "react-native-animated-spinkit": "^1.5.2",
+    "react-native-carousel-view": "^0.5.1",
     "react-native-dropdown-select-list": "^2.0.5",
     "react-native-elements": "^3.4.3",
     "react-native-get-random-values": "~1.9.0",
