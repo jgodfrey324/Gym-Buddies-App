@@ -17,6 +17,7 @@ import RecentWorkouts from '../Workouts/RecentWorkouts'
 
 import Carousel from 'react-native-carousel-view';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import * as Progress from 'react-native-progress';
 
 
 
@@ -27,7 +28,7 @@ export default function ProfilePage({ session }: { session: Session }) {
   const [loading, setLoading] = useState(true)
   // const [image, setImage] = useState('')
   const [ animationStarted, setAnimationStarted ] = useState(false)
-  const [ progressAnimation, setProgressAnimation ] = useState(false)
+  // const [ progressAnimation, setProgressAnimation ] = useState(false)
 
 
   const { height: windowHeight } = useWindowDimensions()
@@ -41,7 +42,7 @@ export default function ProfilePage({ session }: { session: Session }) {
   const decayValue = new Animated.Value(0)
 
 
-  // let animationStarted = false
+
 
   useEffect(() => {
     if (session) {
@@ -49,13 +50,15 @@ export default function ProfilePage({ session }: { session: Session }) {
       getProfilePic()
     }
 
+
     setTimeout(() => {
       setLoading(!loading)
       setAnimationStarted(!animationStarted)
       // animationStarted = true
     }, 1000)
-
   }, [session])
+
+
 
 
 
@@ -246,7 +249,7 @@ export default function ProfilePage({ session }: { session: Session }) {
             animate={false}
             indicatorSize={12}
             indicatorSpace={15}
-            onPageChange={() => console.log('page was changed')}
+            // onPageChange={() => setProgressAnimation(!progressAnimation)}
             >
             <View style={[styles.profileNameAndPic]}>
               <View style={[styles.profileNameBox, {width: windowWidth * .65}]}>
@@ -277,10 +280,8 @@ export default function ProfilePage({ session }: { session: Session }) {
 
 
             {/* hard coded example exp bar --> use a package for making a graph later */}
-            <View>
-              {
-                progressAnimation &&
-                (<AnimatedCircularProgress
+            <View style={styles.progressBarBox}>
+                {/* <AnimatedCircularProgress
                   size={120}
                   width={15}
                   fill={85}
@@ -290,8 +291,19 @@ export default function ProfilePage({ session }: { session: Session }) {
                   delay={1000}
                   duration={2000}
                   onAnimationComplete={() => console.log('circle animation done')}
-                />)
-              }
+                /> */}
+                {/* {progressAnimation && (
+
+                )} */}
+                <Progress.Circle
+                  animated={true}
+                  size={140}
+                  indeterminate={false}
+                  progress={.8}
+                  strokeCap={'round'}
+                  thickness={3}
+                 />
+
 
             </View>
           </Carousel>
@@ -330,6 +342,10 @@ const styles = StyleSheet.create({
   },
   carouselBox: {
     alignItems: 'center'
+  },
+  progressBarBox: {
+    alignItems: 'center',
+    marginTop: 20
   },
   expBarBox: {
     // borderWidth: 1,
