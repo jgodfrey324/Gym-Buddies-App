@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import {
   Text,
   View,
@@ -7,7 +7,8 @@ import {
   StatusBar,
   Platform,
   TouchableOpacity,
-  useWindowDimensions
+  useWindowDimensions,
+  TextInput
 } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import GroupCard from './GroupCard'
@@ -17,21 +18,48 @@ import { supabase } from '../../lib/supabase'
 
 
 export default function Groups() {
-  const { height: windowHeight } = useWindowDimensions()
+  const { height: windowHeight } = useWindowDimensions();
+  const [groupName, setGroupName] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
+  const renderModal = () => {
+    if (showModal) {
+      return (
+        <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'absolute', width: '100%', height: '100%', zIndex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <View style={{backgroundColor: 'white', padding: 20, borderRadius: 10, width: '80%'}}>
+            <Text style={{width: 15, position: 'absolute', right: 15, top: 5, fontSize: 20}} onPress={() => setShowModal(false)}>X</Text>
+            <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 20}}>Create a Group</Text>
+            <View style={{marginBottom: 20}}>
+              <Text style={{marginBottom: 10}}>Group Name</Text>
+              <TextInput
+                style={{borderWidth: 1, borderColor: 'black', padding: 10, borderRadius: 5}}
+                onChangeText={text => setGroupName(text)}
+                value={groupName}
+              />
+            </View>
+            <TouchableOpacity
+              onPress={addGroup}
+              style={{backgroundColor: 'black', padding: 10, borderRadius: 5, alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{color: 'white'}}>Create Group</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )
+    }
+  }
 
   const addGroup = async () => {
+    const { data, error } = await supabase
+    .from('groups')
+    .insert([
+      { group_name: groupName}
+    ])
+    .select()
 
-      const { data, error } = await supabase
-      .from('groups')
-      .insert([
-        { group_name: 'newgroup'}
-      ])
-      .select()
-
-      if (error) console.log('error', error)
-      else console.log('group data', data)
-
+    if (error) console.log('error', error)
+    else setShowModal(false)
   }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.upperNav}>
@@ -61,7 +89,7 @@ export default function Groups() {
         <GroupCard />
       </View>
       <TouchableOpacity
-      onPress={addGroup}
+      onPress={() => setShowModal(true)}
       style={{
         position: 'absolute',
         bottom: windowHeight * 0.15,
@@ -75,6 +103,7 @@ export default function Groups() {
       }}>
         <Text>+</Text>
       </TouchableOpacity>
+      {renderModal()}
     </SafeAreaView>
   )
 }
