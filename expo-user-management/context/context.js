@@ -14,10 +14,7 @@ export const UserProvider = ({ children }) => {
   const [athleteType, setAthleteType] = useState(0)
   const [experienceLevel, setExperienceLevel] = useState(0)
   const [imageUrl, setImageUrl] = useState('')
-
-  const colors = {
-    background: '#F2F2F2'
-  }
+  const [groups, setGroups] = useState([])
 
   return (
     <UserContext.Provider
@@ -40,7 +37,8 @@ export const UserProvider = ({ children }) => {
         setExperienceLevel,
         imageUrl,
         setImageUrl,
-        colors
+        groups,
+        setGroups
       }}
     >
       {children}

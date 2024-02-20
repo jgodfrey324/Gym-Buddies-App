@@ -1,13 +1,14 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 
-export default function GroupCard() {
+export default function GroupCard({ group }) {
+  const { group_name } = group
   return (
     <View style={styles.container}>
       <Image style={styles.groupImage} source={{
         uri: 'https://reactnative.dev/img/tiny_logo.png',
       }} />
-      <Text style={styles.groupName}>Group Name</Text>
+      <Text style={styles.groupName}>{group_name}</Text>
     </View>
   )
 }

@@ -19,6 +19,7 @@ import { supabase } from '../../lib/supabase'
 
 export default function Groups() {
   const { height: windowHeight } = useWindowDimensions();
+  const { groups, setGroups } = useUserContext();
   const [groupName, setGroupName] = useState('');
   const [showModal, setShowModal] = useState(false);
 
@@ -57,7 +58,10 @@ export default function Groups() {
     .select()
 
     if (error) console.log('error', error)
-    else setShowModal(false)
+    else {
+      setGroups([...groups, data[0]])
+      setShowModal(false)
+    }
   }
 
   return (
@@ -84,9 +88,9 @@ export default function Groups() {
         />
       </View>
       <View style={styles.groupsList}>
-        <GroupCard />
-        <GroupCard />
-        <GroupCard />
+        {groups.map((group, index) => (
+          <GroupCard key={index} group={group} />
+        ))}
       </View>
       <TouchableOpacity
       onPress={() => setShowModal(true)}
