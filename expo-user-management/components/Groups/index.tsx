@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Text,
   View,
@@ -22,6 +22,10 @@ export default function Groups({ session }) {
   const { groups, setGroups } = useUserContext();
   const [groupName, setGroupName] = useState('');
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    fetchGroupsProfiles()
+  }, [])
 
   const renderModal = () => {
     if (showModal) {
@@ -49,6 +53,31 @@ export default function Groups({ session }) {
     }
   }
 
+  const fetchGroups = async (groupId) => {
+    const { data, error } = await supabase
+    .from('groups')
+    .select('*')
+    .in('id', groupId)
+
+    if (error) console.log('error', error)
+    else {
+      setGroups(data)
+    }
+  }
+
+  const fetchGroupsProfiles = async () => {
+    const { data, error } = await supabase
+    .from('groups_profiles')
+    .select('group_id')
+    .eq('user_id', session.user.id)
+
+    if (error) console.log('error', error)
+    else {
+      const groupIds = data.map(group => group.group_id)
+      fetchGroups(groupIds)
+    }
+  }
+
   const addGroup = async () => {
     const { data, error } = await supabase
     .from('groups')
@@ -60,13 +89,14 @@ export default function Groups({ session }) {
     if (error) console.log('error', error)
     else {
       setGroups([...groups, data[0]])
-      addGroupProfileAssociation(data[0].id)
+      addGroupProfile(data[0].id)
       setShowModal(false)
+      setGroupName('')
     }
   }
 
 
-  const addGroupProfileAssociation = async (groupId) => {
+  const addGroupProfile = async (groupId) => {
      const { data, error } = await supabase
       .from('groups_profiles')
       .insert([
@@ -75,8 +105,6 @@ export default function Groups({ session }) {
 
       if (error) console.log('group association error', error)
   }
-
-  // need to style modal
 
   return (
     <SafeAreaView style={styles.container}>
