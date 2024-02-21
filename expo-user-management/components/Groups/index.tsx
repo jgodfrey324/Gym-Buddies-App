@@ -60,6 +60,8 @@ export default function Groups() {
     else setShowModal(false)
   }
 
+  // need to style modal
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.upperNav}>
