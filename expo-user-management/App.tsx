@@ -101,16 +101,16 @@ export default function App() {
         }
       }}>
 
-        <Tabs.Screen name="Groups" component={Groups} options={{
+        <Tabs.Screen name="Groups" options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
             <MaterialCommunityIcons
             name="account-group" color={'#c7c588'} size={35} />
           ),
           // change button text color
-          }
-        }
-        />
+          }}>
+          { () => <Groups session={session} /> }
+        </Tabs.Screen>
         <Tabs.Screen name="Workouts" component={Workouts} options={{ headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
           <MaterialCommunityIcons

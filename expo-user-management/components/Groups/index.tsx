@@ -17,7 +17,7 @@ import { colors } from '../../colors'
 import { supabase } from '../../lib/supabase'
 
 
-export default function Groups() {
+export default function Groups({ session }) {
   const { height: windowHeight } = useWindowDimensions();
   const { groups, setGroups } = useUserContext();
   const [groupName, setGroupName] = useState('');
@@ -60,8 +60,20 @@ export default function Groups() {
     if (error) console.log('error', error)
     else {
       setGroups([...groups, data[0]])
+      addGroupProfileAssociation(data[0].id)
       setShowModal(false)
     }
+  }
+
+
+  const addGroupProfileAssociation = async (groupId) => {
+     const { data, error } = await supabase
+      .from('groups_profiles')
+      .insert([
+        { group_id: groupId, user_id: session.user.id }
+      ])
+
+      if (error) console.log('group association error', error)
   }
 
   // need to style modal
