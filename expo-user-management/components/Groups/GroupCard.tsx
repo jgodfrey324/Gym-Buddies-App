@@ -1,16 +1,16 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
 export default function GroupCard({ group }: { group: object }) {
   const { group_name } = group
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <Image style={styles.groupImage} source={{
         uri: 'https://reactnative.dev/img/tiny_logo.png',
       }} />
         <Text style={styles.groupName}>{group_name}</Text>
-    </View>
+    </TouchableOpacity>
   )
 }
 
