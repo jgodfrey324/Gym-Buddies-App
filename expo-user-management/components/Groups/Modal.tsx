@@ -15,8 +15,7 @@ const RenderModal = ({showModal, addGroup, groupName, setGroupName, setShowModal
       <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'absolute', width: '100%', height: '105%', zIndex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View style={{backgroundColor: 'white', padding: 20, borderRadius: 10, width: '80%'}}>
           <TouchableOpacity style={styles.closeModal} onPress={() => setShowModal(false)}>
-            {/* <Text style={{ fontSize: 20 }}>X</Text> */}
-            <Icon name="close" type="ionicon" color="grey" />
+            <Icon name="close" type="ionicon" />
           </TouchableOpacity>
           <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 20}}>Create a Group</Text>
           <View style={{marginBottom: 20}}>
