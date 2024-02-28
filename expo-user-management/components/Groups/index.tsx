@@ -13,6 +13,7 @@ import {
 import { SearchBar } from 'react-native-elements'
 import GroupCard from './GroupCard'
 import RenderModal from './Modal'
+import GroupModal from './GroupModal'
 import { useUserContext } from '../../context/context'
 import { colors } from '../../colors'
 import { supabase } from '../../lib/supabase'
@@ -23,36 +24,12 @@ export default function Groups({ session }) {
   const { groups, setGroups } = useUserContext();
   const [groupName, setGroupName] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [closeGroupModal, setCloseGroupModal] = useState(false);
+  const [currentGroup, setCurrentGroup] = useState({});
 
   useEffect(() => {
     fetchGroupsProfiles()
   }, [])
-
-  // const renderModal = () => {
-  //   if (showModal) {
-  //     return (
-  //       <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'absolute', width: '100%', height: '100%', zIndex: 1, justifyContent: 'center', alignItems: 'center'}}>
-  //         <View style={{backgroundColor: 'white', padding: 20, borderRadius: 10, width: '80%'}}>
-  //           <Text style={{width: 15, position: 'absolute', right: 15, top: 5, fontSize: 20}} onPress={() => setShowModal(false)}>X</Text>
-  //           <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 20}}>Create a Group</Text>
-  //           <View style={{marginBottom: 20}}>
-  //             <Text style={{marginBottom: 10}}>Group Name</Text>
-  //             <TextInput
-  //               style={{borderWidth: 1, borderColor: 'black', padding: 10, borderRadius: 5}}
-  //               onChangeText={text => setGroupName(text)}
-  //               value={groupName}
-  //             />
-  //           </View>
-  //           <TouchableOpacity
-  //             onPress={addGroup}
-  //             style={{backgroundColor: 'black', padding: 10, borderRadius: 5, alignItems: 'center', justifyContent: 'center'}}>
-  //             <Text style={{color: 'white'}}>Create Group</Text>
-  //           </TouchableOpacity>
-  //         </View>
-  //       </View>
-  //     )
-  //   }
-  // }
 
   const fetchGroups = async (groupId) => {
     const { data, error } = await supabase
@@ -132,7 +109,12 @@ export default function Groups({ session }) {
       </View>
       <View style={styles.groupsList}>
         {groups.map((group, index) => (
-          <GroupCard key={index} group={group} />
+          <GroupCard
+            key={index}
+            group={group}
+            setCloseGroupModal={setCloseGroupModal}
+            setCurrentGroup={setCurrentGroup}
+          />
         ))}
       </View>
       <TouchableOpacity
@@ -150,13 +132,20 @@ export default function Groups({ session }) {
       }}>
         <Text>+</Text>
       </TouchableOpacity>
-      {/* {renderModal()} */}
+
       <RenderModal
         showModal={showModal}
         addGroup={addGroup}
         groupName={groupName}
         setGroupName={setGroupName}
         setShowModal={setShowModal}
+      />
+
+      <GroupModal
+        closeGroupModal={closeGroupModal}
+        setCloseGroupModal={setCloseGroupModal}
+        currentGroup={currentGroup}
+        setCurrentGroup={setCurrentGroup}
       />
     </SafeAreaView>
   )
