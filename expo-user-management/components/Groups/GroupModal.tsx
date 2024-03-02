@@ -1,6 +1,7 @@
 import { useState, useEffect} from 'react'
 import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput, Platform, ScrollView, KeyboardAvoidingView, SafeAreaView, StatusBar } from 'react-native';
 import { Icon } from 'react-native-elements'
+import UserSearch from '../UserSearch';
 interface GroupModalProps {
   currentGroup: object,
   closeGroupModal: boolean,
@@ -11,6 +12,8 @@ interface GroupModalProps {
 const statusBarHeight = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight
 
 export default function GroupModal({ currentGroup, closeGroupModal, setCloseGroupModal, setCurrentGroup }: GroupModalProps) {
+  const [showModal, setShowModal] = useState(false)
+
   const { group_name } = currentGroup
 
   const handleCloseModal = () => {
@@ -28,6 +31,23 @@ export default function GroupModal({ currentGroup, closeGroupModal, setCloseGrou
         <Icon name='close' type='ionicon' style={styles.closeModal}/>
       </TouchableOpacity>
       <Text style={styles.groupName}>{group_name}</Text>
+      <TouchableOpacity
+      onPress={() => setShowModal(true)}
+      style={{
+        width: 100,
+        backgroundColor: "#c7c588",
+        padding: 20,
+        borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1
+      }}>
+        <Text>invite</Text>
+      </TouchableOpacity>
+      <UserSearch
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
     </SafeAreaView>
   )
 }

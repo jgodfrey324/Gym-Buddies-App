@@ -31,7 +31,7 @@ export default function Groups({ session }) {
     fetchGroupsProfiles()
   }, [])
 
-  const fetchGroups = async (groupId) => {
+  const fetchGroups = async (groupId:readonly unknown[]) => {
     const { data, error } = await supabase
     .from('groups')
     .select('*')
@@ -117,6 +117,7 @@ export default function Groups({ session }) {
           />
         ))}
       </View>
+      {/* TODO: make this into a reusable component */}
       <TouchableOpacity
       onPress={() => setShowModal(true)}
       style={{
