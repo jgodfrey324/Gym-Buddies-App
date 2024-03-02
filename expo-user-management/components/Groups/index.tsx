@@ -24,7 +24,7 @@ export default function Groups({ session }) {
   const { groups, setGroups } = useUserContext();
   const [groupName, setGroupName] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [closeGroupModal, setCloseGroupModal] = useState(false);
+  const [closeGroupModal, setCloseGroupModal] = useState(true);
   const [currentGroup, setCurrentGroup] = useState({});
 
   useEffect(() => {
