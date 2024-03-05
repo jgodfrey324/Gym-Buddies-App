@@ -7,18 +7,19 @@ export default function UserSearch({ showModal, setShowModal}) {
   const [input, setInput] = useState('')
   const [users, setUsers] = useState([])
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const { data, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .ilike('first_name', `%${input}%`)
+  const fetchUsers = async () => {
+    const { data, error } = await supabase
+    .from('profiles')
+    .select('*')
+    .ilike('first_name', `%${input}%`)
 
-      if (error) console.log('error', error)
-      else {
-        setUsers(data)
-      }
+    if (error) console.log('error', error)
+    else {
+      setUsers(data)
     }
+  }
+
+  useEffect(() => {
     if (input.length > 0) fetchUsers()
   }, [input])
 
