@@ -12,7 +12,7 @@ import {
 } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import GroupCard from './GroupCard'
-import RenderModal from './Modal'
+import CreateGroupModalProps from './CreateGroupModal'
 import GroupModal from './GroupModal'
 import { useUserContext } from '../../context/context'
 import { colors } from '../../colors'
@@ -134,7 +134,7 @@ export default function Groups({ session }) {
         <Text>+</Text>
       </TouchableOpacity>
 
-      <RenderModal
+      <CreateGroupModalProps
         showModal={showModal}
         addGroup={addGroup}
         groupName={groupName}

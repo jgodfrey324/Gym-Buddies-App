@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 import { Icon } from 'react-native-elements'
-interface RenderModalProps {
+
+interface CreateGroupModalProps {
   showModal: boolean
   addGroup: () => void
   groupName: string
@@ -9,7 +10,7 @@ interface RenderModalProps {
   setShowModal: Function
 }
 
-const RenderModal = ({showModal, addGroup, groupName, setGroupName, setShowModal}: RenderModalProps) => {
+const CreateGroupModal = ({showModal, addGroup, groupName, setGroupName, setShowModal}: CreateGroupModalProps) => {
   if (showModal) {
     return (
       <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'absolute', width: '100%', height: '105%', zIndex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -49,4 +50,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default RenderModal
+export default CreateGroupModal
