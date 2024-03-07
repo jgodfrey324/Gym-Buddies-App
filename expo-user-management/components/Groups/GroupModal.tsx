@@ -18,7 +18,7 @@ export default function GroupModal({ currentGroup, closeGroupModal, setCloseGrou
 
   useEffect(() => {
     fetchMembers()
-  }, [])
+  }, [currentGroup])
 
   const fetchMembers = async () => {
     const { data, error } = await supabase
@@ -26,7 +26,7 @@ export default function GroupModal({ currentGroup, closeGroupModal, setCloseGrou
     .select('user_id')
     .eq('group_id', currentGroup.id)
 
-    if (error) console.log('error', error)
+    if (error) console.log('error in fetch members', error)
     else {
       const userIds = data.map(user => user.user_id)
       fetchUsers(userIds)
